@@ -17,5 +17,8 @@ module.exports = (webpackConfigEnv, argv) => {
         process: 'process/browser'
       })
     ],
+    devServer: {
+      port: 10000
+    }
   });
 };
