@@ -1,6 +1,8 @@
 const { merge } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const dotenv = require("dotenv-webpack")
+const ProvidePlugin = require("webpack").ProvidePlugin
 
 module.exports = (webpackConfigEnv, argv) => {
   const orgName = "TachMonShop";
@@ -15,6 +17,7 @@ module.exports = (webpackConfigEnv, argv) => {
   return merge(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
     plugins: [
+      new dotenv(),
       new HtmlWebpackPlugin({
         inject: false,
         template: "src/index.ejs",
@@ -23,6 +26,9 @@ module.exports = (webpackConfigEnv, argv) => {
           orgName,
         },
       }),
+      new ProvidePlugin({
+        process: 'process/browser'
+      })
     ],
   });
 };
