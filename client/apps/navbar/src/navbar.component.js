@@ -26,17 +26,17 @@ export default function NavBar(props) {
     <nav className="relative items-stretch box-border flex flex-col shrink-0 m-0 p-0">
       <BrowserRouter>
         <div className="h-16"></div>
-        <div className="fixed flex flex-col h-16 top-0 items-center w-full border-gray-400 border-b bg-white">
+        <div className="fixed flex flex-col h-16 top-0 items-center w-full border-gray-400 border-b bg-white px-2.5">
           <div
             id="navbar-container"
             className="items-center box-border flex flex-row h-16 justify-between w-full max-w-5xl z-50 m-0 p-0"
           >
-            <div id="logo" className="text-2xl josefin-sans-bold inline-block">
+            <div id="logo" className="text-2xl inter-bold inline-block">
               TachMonShop
             </div>
             <div
               id="tabs"
-              className="flex flex-row justify-between max-w-md grow"
+              className="flex flex-row justify-between max-w-md grow px-1"
             >
               {tabs.map((e) => (
                 <Link key={e.name} to={e.to}>

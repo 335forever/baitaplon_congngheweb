@@ -18,5 +18,6 @@
   --color-white: #fdfffc;
   --color-black: #171817;
   --color-overlay: rgba(253, 255, 252, 0.8);
-  font-family: "Josefin Sans", san-serif;
+  font-family: "Inter", san-serif;
+  font-weight: 400;
 }

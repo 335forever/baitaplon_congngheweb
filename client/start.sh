@@ -1,12 +1,13 @@
 #!/usr/bin/bash
 
-ls -l | grep -E -o "^d.+" | awk '{print $NF}'| while read FOLDER
+cat modules.csv | while IFS="," read FOLDER PORT
 do
+    echo "Running $FOLDER"
     cd $FOLDER
     if [[ -f package.json ]]
     then
         yarn install
-        pm2 start "yarn start" --name $FOLDER
+        pm2 start yarn --name $FOLDER -- start:standalone 
     fi
     cd ..
 done

@@ -1,48 +1,48 @@
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&display=swap");
-.josefin-sans-thin {
-  font-family: "Josefin Sans", sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+.inter-thin {
+  font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 100;
   font-style: normal;
 }
 
-.josefin-sans-extralight {
-  font-family: "Josefin Sans", sans-serif;
+.inter-extralight {
+  font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 200;
   font-style: normal;
 }
 
-.josefin-sans-light {
-  font-family: "Josefin Sans", sans-serif;
+.inter-light {
+  font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
 }
 
-.josefin-sans-regular {
-  font-family: "Josefin Sans", sans-serif;
+.inter-regular {
+  font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
 
-.josefin-sans-semibold {
-  font-family: "Josefin Sans", sans-serif;
+.inter-semibold {
+  font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
 }
 
-.josefin-sans-bold {
-  font-family: "Josefin Sans", sans-serif;
+.inter-bold {
+  font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
 }
 
-.josefin-sans-extrabold {
-  font-family: "Josefin Sans", sans-serif;
+.inter-extrabold {
+  font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
