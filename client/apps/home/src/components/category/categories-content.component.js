@@ -3,21 +3,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "react-query";
 
 import { getCategories } from "../../controllers/categories.controller";
+import "./styles/category.css";
 export function CategoriesContent(props) {
   const query = useQuery([], getCategories, { suspense: true });
 
   return (
-    <div>
+    <>
       {query.data.map((e) => (
         <div className="category">
           <p>{e.name}</p>
-          {e.sub.length && (
+          {e.sub.length !== 0 && (
             <button>
               <FontAwesomeIcon className="h-auto" icon={faAngleRight} />
             </button>
           )}
         </div>
       ))}
-    </div>
+    </>
   );
 }

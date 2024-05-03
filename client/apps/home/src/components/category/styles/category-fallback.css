@@ -1,0 +1,23 @@
+@keyframes loading {
+    0% {
+        background-image: linear-gradient(to right, var(--color-primary), var(--color-secondary) 5%);
+    }
+
+    100% {
+        background-image: linear-gradient(to right, var(--color-secondary), var(--color-primary) 95% 100%);
+    }
+}
+
+.loading-line {
+    display: block;
+    height: 36px;
+    width: auto;
+    background-image: linear-gradient(to right, black 0 5%, gray 5%);
+    animation-name: loading;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    border: 1px solid grey;
+    border-radius: 18px;
+}

@@ -19,6 +19,7 @@ module.exports = (webpackConfigEnv) => {
     devServer: {
       port: 11000
     },
+    externals: [/@TachMonShop\/.+/],
     // customize the webpack config here
     module: {
       rules: [

@@ -1,0 +1,15 @@
+.category {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.category button {
+    height: 100%;
+    aspect-ratio: 1;
+    padding: 6px;
+}

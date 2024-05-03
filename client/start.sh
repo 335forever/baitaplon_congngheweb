@@ -6,7 +6,7 @@ do
     cd $FOLDER
     if [[ -f package.json ]]
     then
-        pm2 start "yarn start" --name $FOLDER 
+        pm2 start yarn --interpreter bash --name $FOLDER -- start
     fi
     cd $CURRENT_LOCATION
 done

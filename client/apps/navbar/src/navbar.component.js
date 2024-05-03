@@ -26,7 +26,7 @@ export default function NavBar(props) {
     <nav className="relative items-stretch box-border flex flex-col shrink-0 m-0 p-0">
       <BrowserRouter>
         <div className="h-16"></div>
-        <div className="fixed flex flex-col h-16 top-0 items-center w-full border-gray-400 border-b bg-white px-2.5">
+        <div className="fixed flex flex-col h-16 top-0 items-center w-full border-bottom border-b bg-white px-2.5">
           <div
             id="navbar-container"
             className="items-center box-border flex flex-row h-16 justify-between w-full max-w-5xl z-50 m-0 p-0"

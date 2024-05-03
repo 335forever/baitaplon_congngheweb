@@ -17,7 +17,7 @@
   --color-onSecondary: #000000;
   --color-white: #fdfffc;
   --color-black: #171817;
-  --color-overlay: rgba(253, 255, 252, 0.8);
+  --color-overlay: #b3b3b3;
   font-family: "Inter", san-serif;
   font-weight: 400;
 }

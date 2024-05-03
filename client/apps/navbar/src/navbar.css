@@ -37,3 +37,7 @@ input:focus {
 .search-box:focus-within {
     outline: 2px solid var(--color-primary);
 }
+
+.border-bottom {
+    border-bottom: 1px solid var(--color-overlay);
+}
