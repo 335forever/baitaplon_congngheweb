@@ -1,15 +1,14 @@
 #!/usr/bin/bash
-
+CURRENT_LOCATION=$(pwd)
 cat modules.csv | while IFS="," read FOLDER PORT
 do
     echo "Running $FOLDER"
     cd $FOLDER
     if [[ -f package.json ]]
     then
-        yarn install
-        pm2 start yarn --name $FOLDER -- start:standalone 
+        pm2 start "yarn start" --name $FOLDER 
     fi
-    cd ..
+    cd $CURRENT_LOCATION
 done
 
 function handler(){

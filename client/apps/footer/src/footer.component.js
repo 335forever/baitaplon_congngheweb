@@ -14,7 +14,7 @@ import qr from "../assets/qr.png";
 
 export default function Footer(props) {
   return (
-    <div id="footer" className="flex flex-col w-full bg-black items-center">
+    <div id="footer" className="flex flex-col w-full bg-black items-center py-2">
       <div className="max-w-5xl">
         <div id="content" className="flex flex-row py-12 gap-4">
           <BrowserRouter>
@@ -58,26 +58,30 @@ export default function Footer(props) {
             <div className="flex flex-col grow gap-2.5">
               <h2>Tải ứng dụng</h2>
               <div className="flex flex-col gap-1"><em>Tiết kiệm 100.000đ cho người mới</em>
-              <div className="flex flex-row max-h-40 flex-nowrap">
-                <div className="h-auto">
+              <div className="flex flex-row h-20 flex-nowrap gap-1">
+                <div className="h-auto min-w-max">
                   <img
                     className="block w-full h-full object-contain"
                     src={qr}
                   />
                 </div>
-                <div className="flex flex-col h-auto">
+                <div className="flex flex-col h-auto ">
                   <div className="h-1/2 grow">
+                  <Link to="/404">
                     <img
                       className="block w-full h-full object-contain"
                       src={googleBadge}
                     />
+                    </Link>
                   </div>
-                  <div className="grow">
+                  <div className="grow min-w-max">
+                    <Link to="/404">
                     <img src={appleBadge} />
+                    </Link>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-row justify-between">
+              <div className="flex flex-row gap-4">
                 <Link to="/404">
                   <FontAwesomeIcon icon={faFacebookF} />
                 </Link>
