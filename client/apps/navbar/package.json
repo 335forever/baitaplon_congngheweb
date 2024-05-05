@@ -1,7 +1,7 @@
 {
   "name": "@TachMonShop/navbar",
   "scripts": {
-    "start": "webpack serve --port 10000",
+    "start": "webpack serve",
     "start:standalone": "webpack serve --env standalone",
     "build": "concurrently yarn:build:*",
     "build:webpack": "webpack --mode=production",

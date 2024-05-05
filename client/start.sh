@@ -6,14 +6,8 @@ do
     cd $FOLDER
     if [[ -f package.json ]]
     then
-        pm2 start yarn --interpreter bash --name $FOLDER -- start
+        yarn install
+        yarn start &
     fi
     cd $CURRENT_LOCATION
 done
-
-function handler(){
-    pm2 kill
-}
-
-# Assign the handler function to the SIGINT signal
-trap handler SIGINT

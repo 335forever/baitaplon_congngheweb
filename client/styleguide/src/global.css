@@ -14010,15 +14010,15 @@ video {
 }
 
 .stroke-0{
-  stroke-width: 0;
+  strokeWidth: 0;
 }
 
 .stroke-1{
-  stroke-width: 1;
+  strokeWidth: 1;
 }
 
 .stroke-2{
-  stroke-width: 2;
+  strokeWidth: 2;
 }
 
 .object-contain{
@@ -31717,15 +31717,15 @@ video {
   }
 
   .sm\:stroke-0{
-    stroke-width: 0;
+    strokeWidth: 0;
   }
 
   .sm\:stroke-1{
-    stroke-width: 1;
+    strokeWidth: 1;
   }
 
   .sm\:stroke-2{
-    stroke-width: 2;
+    strokeWidth: 2;
   }
 
   .sm\:object-contain{
@@ -49356,15 +49356,15 @@ video {
   }
 
   .md\:stroke-0{
-    stroke-width: 0;
+    strokeWidth: 0;
   }
 
   .md\:stroke-1{
-    stroke-width: 1;
+    strokeWidth: 1;
   }
 
   .md\:stroke-2{
-    stroke-width: 2;
+    strokeWidth: 2;
   }
 
   .md\:object-contain{
@@ -66995,15 +66995,15 @@ video {
   }
 
   .lg\:stroke-0{
-    stroke-width: 0;
+    strokeWidth: 0;
   }
 
   .lg\:stroke-1{
-    stroke-width: 1;
+    strokeWidth: 1;
   }
 
   .lg\:stroke-2{
-    stroke-width: 2;
+    strokeWidth: 2;
   }
 
   .lg\:object-contain{
@@ -84634,15 +84634,15 @@ video {
   }
 
   .xl\:stroke-0{
-    stroke-width: 0;
+    strokeWidth: 0;
   }
 
   .xl\:stroke-1{
-    stroke-width: 1;
+    strokeWidth: 1;
   }
 
   .xl\:stroke-2{
-    stroke-width: 2;
+    strokeWidth: 2;
   }
 
   .xl\:object-contain{
@@ -102273,15 +102273,15 @@ video {
   }
 
   .\32xl\:stroke-0{
-    stroke-width: 0;
+    strokeWidth: 0;
   }
 
   .\32xl\:stroke-1{
-    stroke-width: 1;
+    strokeWidth: 1;
   }
 
   .\32xl\:stroke-2{
-    stroke-width: 2;
+    strokeWidth: 2;
   }
 
   .\32xl\:object-contain{

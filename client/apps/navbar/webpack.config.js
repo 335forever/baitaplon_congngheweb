@@ -11,6 +11,9 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   return merge(defaultConfig, {
+    devServer: {
+      port: 10000
+    },
     // modify the webpack config however you'd like to by adding to this object
     plugins: [
       new ProvidePlugin({

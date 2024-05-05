@@ -4,6 +4,7 @@ import singleSpaReact from "single-spa-react";
 import HomePage from "./home.component";
 
 const lifecycles = singleSpaReact({
+  renderType: "createRoot",
   React,
   ReactDOM,
   rootComponent: HomePage,
