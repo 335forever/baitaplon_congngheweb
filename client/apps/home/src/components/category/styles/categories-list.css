@@ -1,7 +1,6 @@
 .categories-list {
     display: flex;
     flex-direction: column;
-    border-right: 1px solid var(--color-overlay);
     padding-top: 40px;
     min-width: 200px;
 }

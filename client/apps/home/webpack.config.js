@@ -10,6 +10,7 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   return merge(defaultConfig, {
+    watch: true,
     // modify the webpack config however you'd like to by adding to this object
     devServer: {
       port: 10002

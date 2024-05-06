@@ -40,6 +40,7 @@ function BannerContent() {
   }, [index]);
 
   return (
+    <section className="banner">
     <div ref={bannerRef} className="slideshow">
       <div
         className="slideshow-slider"
@@ -65,5 +66,6 @@ function BannerContent() {
         ))}
       </div>
     </div>
+    </section>
   );
 }

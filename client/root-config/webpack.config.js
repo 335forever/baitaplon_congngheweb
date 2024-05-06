@@ -15,6 +15,7 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   return merge(defaultConfig, {
+    watch: true,
     devServer: {
       port: 9000
     },

@@ -11,17 +11,17 @@ import { CategoriesContent } from "./categories-content.component";
 import "./styles/categories-list.css";
 
 export default function CategoriesList(props) {
-  const isSmall = useMediaQuery({query: '(max-width: 800px)'})
+  const isSmall = useMediaQuery({query: '(max-width: 1000px)'})
 
   console.log(isSmall, "Hello categories")
 
   return (
     <BrowserRouter>
-      <div className={clsx("categories-list", isSmall && "hidden")}>
+      <section className={clsx("categories-list", isSmall && "hidden")}>
         <Suspense fallback={<CategoriesFallback />}>
           <CategoriesContent />
         </Suspense>
-      </div>
+      </section>
     </BrowserRouter>
   );
 }

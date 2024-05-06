@@ -16,6 +16,7 @@ module.exports = (webpackConfigEnv) => {
       },
     },
   })(defaultConfig, {
+    watch: true,
     devServer: {
       port: 11000
     },

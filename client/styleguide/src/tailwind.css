@@ -21,3 +21,32 @@
   font-family: "Inter", san-serif;
   font-weight: 400;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  background: transparent;
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  color: transparent;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 0px;
+}

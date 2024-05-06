@@ -14010,15 +14010,15 @@ video {
 }
 
 .stroke-0{
-  strokeWidth: 0;
+  stroke-width: 0;
 }
 
 .stroke-1{
-  strokeWidth: 1;
+  stroke-width: 1;
 }
 
 .stroke-2{
-  strokeWidth: 2;
+  stroke-width: 2;
 }
 
 .object-contain{
@@ -18331,6 +18331,38 @@ video {
   --color-overlay: #b3b3b3;
   font-family: "Inter", san-serif;
   font-weight: 400;
+}
+
+/* width */
+
+::-webkit-scrollbar {
+  width: 5px;
+  background: transparent;
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  color: transparent;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 0px;
 }
 
 @media (min-width: 640px){
@@ -31717,15 +31749,15 @@ video {
   }
 
   .sm\:stroke-0{
-    strokeWidth: 0;
+    stroke-width: 0;
   }
 
   .sm\:stroke-1{
-    strokeWidth: 1;
+    stroke-width: 1;
   }
 
   .sm\:stroke-2{
-    strokeWidth: 2;
+    stroke-width: 2;
   }
 
   .sm\:object-contain{
@@ -49356,15 +49388,15 @@ video {
   }
 
   .md\:stroke-0{
-    strokeWidth: 0;
+    stroke-width: 0;
   }
 
   .md\:stroke-1{
-    strokeWidth: 1;
+    stroke-width: 1;
   }
 
   .md\:stroke-2{
-    strokeWidth: 2;
+    stroke-width: 2;
   }
 
   .md\:object-contain{
@@ -66995,15 +67027,15 @@ video {
   }
 
   .lg\:stroke-0{
-    strokeWidth: 0;
+    stroke-width: 0;
   }
 
   .lg\:stroke-1{
-    strokeWidth: 1;
+    stroke-width: 1;
   }
 
   .lg\:stroke-2{
-    strokeWidth: 2;
+    stroke-width: 2;
   }
 
   .lg\:object-contain{
@@ -84634,15 +84666,15 @@ video {
   }
 
   .xl\:stroke-0{
-    strokeWidth: 0;
+    stroke-width: 0;
   }
 
   .xl\:stroke-1{
-    strokeWidth: 1;
+    stroke-width: 1;
   }
 
   .xl\:stroke-2{
-    strokeWidth: 2;
+    stroke-width: 2;
   }
 
   .xl\:object-contain{
@@ -102273,15 +102305,15 @@ video {
   }
 
   .\32xl\:stroke-0{
-    strokeWidth: 0;
+    stroke-width: 0;
   }
 
   .\32xl\:stroke-1{
-    strokeWidth: 1;
+    stroke-width: 1;
   }
 
   .\32xl\:stroke-2{
-    strokeWidth: 2;
+    stroke-width: 2;
   }
 
   .\32xl\:object-contain{

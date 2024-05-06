@@ -1,0 +1,9 @@
+#best-selling-btn {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    width: 160px;
+    height: 55px;
+    border-radius: 4px;
+    text-align: center;
+    vertical-align: center;
+}

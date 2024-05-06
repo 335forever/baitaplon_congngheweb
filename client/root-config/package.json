@@ -2,6 +2,7 @@
   "name": "@TachMonShop/root-config",
   "scripts": {
     "start": "webpack serve --env isLocal",
+    "start:standalone": "webpack serve --env isLocal",
     "lint": "eslint src --ext js",
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
     "format": "prettier --write .",
