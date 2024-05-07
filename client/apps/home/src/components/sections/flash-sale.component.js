@@ -1,7 +1,9 @@
+import { useState } from "react";
+
+
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Section } from "@TachMonShop/styleguide";
-import { useState } from "react";
+import { Section, Product } from "@TachMonShop/styleguide";
 
 import "./styles/flash-sale.css"
 export function FlashSale() {
@@ -16,7 +18,7 @@ export function FlashSale() {
     }
 
     return (<Section title="Siêu giảm giá" subtitle="Hôm nay" controller={<FlashSaleController />}>
-        Hello world
+        h
     </Section>);
 }
 
