@@ -18,7 +18,7 @@ export function FlashSale() {
     }
 
     return (<Section title="Siêu giảm giá" subtitle="Hôm nay" controller={<FlashSaleController />}>
-        h
+        roduct 
     </Section>);
 }
 

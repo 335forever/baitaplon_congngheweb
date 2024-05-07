@@ -1,0 +1,9 @@
+{
+    "imports": {
+      "@TachMonShop/root-config": "//localhost:9000/TachMonShop-root-config.js",
+      "@TachMonShop/navbar": "//localhost:10000/TachMonShop-navbar.js",
+      "@TachMonShop/styleguide": "//localhost:11000/TachMonShop-styleguide.js",
+      "@TachMonShop/footer": "//localhost:10001/TachMonShop-footer.js",
+      "@TachMonShop/home": "//localhost:10002/TachMonShop-home.js"
+    }
+}

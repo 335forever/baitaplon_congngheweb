@@ -16,11 +16,8 @@ const applications = constructApplications({
 const layoutEngine = constructLayoutEngine({
   routes,
   applications,
-  active: false,
 });
 
 applications.forEach(registerApplication);
-System.import("@TachMonShop/styleguide").then(() => {
-  layoutEngine.activate();
-  start();
-});
+layoutEngine.activate();
+start();
