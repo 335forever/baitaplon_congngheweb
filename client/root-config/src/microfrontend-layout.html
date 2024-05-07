@@ -1,0 +1,30 @@
+<single-spa-router>
+  <!--
+
+    This is the single-spa Layout Definition for your microfrontends.
+    See https://single-spa.js.org/docs/layout-definition/ for more information.
+
+  -->
+
+  <!-- Example layouts you might find helpful:
+
+  <nav>
+    <application name="@org/navbar"></application>
+  </nav>
+  <route path="settings">
+    <application name="@org/settings"></application>
+  </route>
+
+  -->
+  <header>
+    <application name="@TachMonShop-navbar"></application>
+  </header>
+  <main class="m-auto max-w-5xl">
+    <route default>
+      <application name="@TachMonShop-home"></application>
+    </route>
+  </main>
+  <footer>
+    <application name="@TachMonShop-footer"></application>
+  </footer>
+</single-spa-router>

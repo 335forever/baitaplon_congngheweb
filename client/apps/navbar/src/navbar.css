@@ -1,0 +1,39 @@
+div {
+    display: block;
+}
+
+#tabs {
+    flex-grow: 3;
+}
+
+input:focus {
+    outline: none;
+}
+
+.search-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    padding: 7px 12px 7px 12px;
+    height: 34px;
+    font-size: 0.75rem;
+    font-style: normal; 
+    border-radius: 4px;
+    vertical-align: text-top;
+    background-color: var(--color-secondary);
+}
+
+.search-box * {
+    background-color: transparent;
+    vertical-align: middle;
+}
+
+.search-box input {
+    text-align: justify;
+    vertical-align: middle;
+}
+
+.search-box:focus-within {
+    outline: 2px solid var(--color-primary);
+}

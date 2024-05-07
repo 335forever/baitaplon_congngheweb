@@ -1,0 +1,49 @@
+div {
+    display: block;
+}
+
+#footer * {
+    color: var(--color-white);
+}
+
+#content > div {
+    flex: 1;
+    padding: 10px;
+}
+
+#content h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#content h2 {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+#content em {
+    font-size: 12px;
+    font-weight: normal;
+    opacity: 50%;
+}
+
+#credit {
+    color: #ADADAD;
+    text-align: center;
+}
+
+.input-box {
+    border: 1.5px solid var(--color-white);
+    border-radius: 4px;
+    padding: 16px 8px 12px 12px;
+    width: fit-content;
+}
+
+.input-box > input {
+    background-color: transparent;
+    width: 180px;
+}
+
+.input-box > input :focus {
+    border: none;
+}
