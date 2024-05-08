@@ -18,7 +18,7 @@ export function ProductList() {
     }
 
     return (<Section title="Mọi người tin dùng" subtitle="Sản phẩm" controller={<ProductListController />}>
-        <div style={{display: 'flex', gap: '30px', margin: '40px 0px', flexWrap: 'wrap', overflow: 'scroll'}}>
+        <div style={{display: 'flex', gap: '30px', margin: '40px 0px', flexWrap: 'wrap', overflow: 'scroll', justifyContent: 'center'}}>
             {Array(10).fill(<Parcel config={Product}></Parcel>)}
         </div>
         <div className="view-more-btn">

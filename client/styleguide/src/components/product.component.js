@@ -9,7 +9,10 @@ function _Product(props) {
   return (
     <div className="product">
       <div className="product-content">
-        <img className="product-img" src="https://www.tncstore.vn/media/product/250-9016-may-choi-game-sony-playstation-5-standard-edition-nhap-khau-japan-2.jpg" />
+        <div className="product-img-container">
+          <img className="product-img" src="https://www.tncstore.vn/media/product/250-9016-may-choi-game-sony-playstation-5-standard-edition-nhap-khau-japan-2.jpg" />
+          <button className="add-to-cart-btn">Thêm vào giỏ</button>
+        </div>
         <div className="product-info">
         <h5>Gaming Console</h5>
         <div className="product-price">
