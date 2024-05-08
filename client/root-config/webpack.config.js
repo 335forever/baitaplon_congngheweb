@@ -29,6 +29,7 @@ module.exports = (webpackConfigEnv, argv) => {
           isLocal: webpackConfigEnv && webpackConfigEnv.isLocal,
           orgName,
         },
+        favicon: "./public/icon-logo.png",
       }),
       // new ProvidePlugin({
       //   process: 'process/browser'

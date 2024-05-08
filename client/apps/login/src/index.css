@@ -17,7 +17,7 @@
     justify-content: flex-end;
 }
 
-input {
+.login-input {
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
     font-family: 'Quicksand';
@@ -25,7 +25,7 @@ input {
     padding-bottom: 10px;
 }
 
-input:focus {
+.login-input:focus {
     border: none;
     border-bottom: 1px solid black;
     outline: none;

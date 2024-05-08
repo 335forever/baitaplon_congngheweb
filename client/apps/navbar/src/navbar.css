@@ -32,6 +32,8 @@ input:focus {
 .search-box input {
     text-align: justify;
     vertical-align: middle;
+    text-decoration: none;
+    outline: none;
 }
 
 .search-box:focus-within {

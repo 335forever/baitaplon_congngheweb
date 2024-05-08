@@ -83,20 +83,20 @@ export default function Login(props) {
                         <div id='title'>{mode == 0 ? 'Đăng nhập' : 'Đăng ký'}</div>
                         <p>{mode == 0 ? 'Nhập tài khoản và mật khẩu' : 'Điền các thông tin của bạn'}</p>
                         <div>
-                            <input type='text' placeholder='Tên đăng nhập' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, username: e.target.value })} onKeyDown={(e) => e.key === 'Enter' ? sign() : null} />
+                            <input className="login-input"  type='text' placeholder='Tên đăng nhập' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, username: e.target.value })} onKeyDown={(e) => e.key === 'Enter' ? sign() : null} />
                         </div>
                         <div>
-                            <input type='password' placeholder='Mật khẩu' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, password: e.target.value })} onKeyDown={(e) => e.key === 'Enter' ? sign() : null} />
+                            <input className="login-input"  type='password' placeholder='Mật khẩu' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, password: e.target.value })} onKeyDown={(e) => e.key === 'Enter' ? sign() : null} />
                         </div>
                         <div style={{ display: mode === 0 ? 'none' : 'flex' }}>
-                            <input type='password' placeholder='Xác nhận mật khẩu' style={{ width: '100%' }} onChange={(e) => setConfirm(e.target.value == form.password)} />
+                            <input className="login-input"  type='password' placeholder='Xác nhận mật khẩu' style={{ width: '100%' }} onChange={(e) => setConfirm(e.target.value == form.password)} />
                         </div>
                         <p style={{ color: 'red', fontFamily: 'Roboto', fontSize: '12px' }}>{confirm ? '' : 'Không khớp'}</p>
                         <div style={{ display: mode === 0 ? 'none' : 'flex', marginBottom: '10px' }}>
-                            <input type='text' placeholder='Họ tên' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+                            <input className="login-input"  type='text' placeholder='Họ tên' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, name: e.target.value })} />
                         </div>
                         <div style={{ display: mode === 0 ? 'none' : 'flex' }}>
-                            <input type='text' placeholder='Ngày sinh' style={{ width: '100%' }}
+                            <input className="login-input"  type='text' placeholder='Ngày sinh' style={{ width: '100%' }}
                                 onFocus={(e) => {
                                     e.target.type = 'date';
                                     e.target.placeholder = '';
@@ -111,13 +111,13 @@ export default function Login(props) {
                             />
                         </div>
                         <div style={{ display: mode === 0 ? 'none' : 'flex' }}>
-                            <input type='text' placeholder='Số điện thoại' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                            <input className="login-input" type='text' placeholder='Số điện thoại' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
                         </div>
                         <div style={{ display: mode === 0 ? 'none' : 'flex' }}>
-                            <input type='text' placeholder='Địa chỉ' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, address: e.target.value })} />
+                            <input className="login-input" type='text' placeholder='Địa chỉ' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, address: e.target.value })} />
                         </div>
                         <div style={{ display: mode === 0 ? 'none' : 'flex' }}>
-                            <input type='text' placeholder='Email' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                            <input className="login-input"  type='text' placeholder='Email' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, email: e.target.value })} />
                         </div>
                         <div style={{ display: mode === 0 ? 'none' : 'flex', paddingTop: 10 }}>
                             <label>Là người bán?</label>
@@ -125,7 +125,7 @@ export default function Login(props) {
                         </div>
 
                         <div style={{ display: mode === 0 || !isSeller ? 'none' : 'flex' }}>
-                            <input type='text' placeholder='Mã số thuế' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, taxid: e.target.value })} />
+                            <input className="login-input" type='text' placeholder='Mã số thuế' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, taxid: e.target.value })} />
                         </div>
                     </div>
                     <div className='option' id='signUpSuggest'>
