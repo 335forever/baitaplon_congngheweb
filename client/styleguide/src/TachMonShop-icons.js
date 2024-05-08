@@ -12,6 +12,7 @@ import GOOGLE from "./../public/icons/Icon-Google.svg";
 import headphone from "./../public/icons/icon-headphone.svg";
 import secure from "./../public/icons/icon-secure.svg";
 import arrowUp from "./../public/icons/icons_arrow-up.svg";
+import visibility from "../public/icons/Quick View.svg"
 
 const Icons = {
   cart,
@@ -27,7 +28,8 @@ const Icons = {
   GOOGLE,
   headphone,
   secure,
-  arrowUp
+  arrowUp,
+  visibility
 };
 
 Object.freeze(Icons);

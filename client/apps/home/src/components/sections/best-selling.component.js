@@ -1,6 +1,5 @@
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Section } from "@TachMonShop/styleguide";
+import Parcel from "single-spa-react/parcel"
+import { Section, Product } from "@TachMonShop/styleguide";
 import { useState } from "react";
 
 import "./styles/best-selling.css"
@@ -16,6 +15,8 @@ export function BestSelling() {
     }
 
     return (<Section title="Sản phẩm bán chạy" subtitle="Tháng này" controller={<button id="best-selling-btn">Xem tất cả</button>}>
-        Hello world
+        <div style={{display: 'flex', gap: '30px', margin: '40px 0px', overflow: 'scroll'}}>
+            {Array(10).fill(<Parcel config={Product}></Parcel>)}
+        </div>
     </Section>);
 }

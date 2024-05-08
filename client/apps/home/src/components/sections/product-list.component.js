@@ -1,7 +1,9 @@
+import { useState } from "react";
+import Parcel from "single-spa-react/parcel";
+
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Section } from "@TachMonShop/styleguide";
-import { useState } from "react";
+import { Section, Product} from "@TachMonShop/styleguide";
 
 import "./styles/product-list.css"
 export function ProductList() {
@@ -16,7 +18,12 @@ export function ProductList() {
     }
 
     return (<Section title="Mọi người tin dùng" subtitle="Sản phẩm" controller={<ProductListController />}>
-        Hello world
+        <div style={{display: 'flex', gap: '30px', margin: '40px 0px', flexWrap: 'wrap', overflow: 'scroll'}}>
+            {Array(10).fill(<Parcel config={Product}></Parcel>)}
+        </div>
+        <div className="view-more-btn">
+            <button>Xem tất cả</button>
+        </div>
     </Section>);
 }
 

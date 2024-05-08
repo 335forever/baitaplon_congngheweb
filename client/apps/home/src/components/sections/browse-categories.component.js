@@ -1,4 +1,4 @@
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Section } from "@TachMonShop/styleguide";
 import { useState } from "react";
@@ -16,7 +16,12 @@ export function BrowseCategories() {
     }
 
     return (<Section title="Chọn danh mục" subtitle="Danh mục" controller={<BrowseCategoriesController />}>
-        Hello world
+        <div style={{display: 'flex', gap: '30px', margin: '40px 0px', overflow: 'scroll'}}>
+            {Array(10).fill(<button className="category-browser">
+                <FontAwesomeIcon icon={faCamera} />
+                <p>Camera</p>
+            </button>)}
+        </div>
     </Section>);
 }
 

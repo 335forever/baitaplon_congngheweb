@@ -15,7 +15,7 @@ import qr from "../assets/qr.png";
 export default function Footer(props) {
   return (
     <div id="footer" className="flex flex-col w-full bg-black items-center py-2">
-      <div className="max-w-5xl">
+      <div style={{maxWidth: "1180px"}}>
         <div id="content" className="flex flex-row py-12 gap-4">
           <BrowserRouter>
             <div className="flex flex-col grow gap-1">
@@ -99,7 +99,7 @@ export default function Footer(props) {
           </BrowserRouter>
         </div>
         <p className="inter-light" id="credit">
-          &copy;Copyright Rimel 2022. All right reserved
+          &copy;Copyright TachMonShop 2024. All right reserved
         </p>
       </div>
     </div>

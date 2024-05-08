@@ -29,7 +29,8 @@ export default function NavBar(props) {
         <div className="fixed flex flex-col h-16 top-0 items-center w-full border-bottom border-b bg-white px-2.5">
           <div
             id="navbar-container"
-            className="items-center box-border flex flex-row h-16 justify-between w-full max-w-5xl z-50 m-0 p-0"
+            className="items-center box-border flex flex-row h-16 justify-between w-full z-50 m-0 p-0"
+            style={{maxWidth: "1180px"}}
           >
             <div id="logo" className="text-2xl inter-bold inline-block">
               TachMonShop

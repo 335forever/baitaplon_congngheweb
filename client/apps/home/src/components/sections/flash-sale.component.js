@@ -4,6 +4,7 @@ import { useState } from "react";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Section, Product } from "@TachMonShop/styleguide";
+import Parcel from "single-spa-react/parcel"
 
 import "./styles/flash-sale.css"
 export function FlashSale() {
@@ -18,7 +19,12 @@ export function FlashSale() {
     }
 
     return (<Section title="Siêu giảm giá" subtitle="Hôm nay" controller={<FlashSaleController />}>
-        roduct 
+        <div style={{display: 'flex', gap: '30px', margin: '40px 0px', overflow: 'scroll'}}>
+            {Array(10).fill(<Parcel config={Product}></Parcel>)}
+        </div>
+        <div className="view-more-btn">
+            <button>Xem tất cả</button>
+        </div>
     </Section>);
 }
 
