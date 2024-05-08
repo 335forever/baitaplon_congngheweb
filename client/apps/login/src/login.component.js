@@ -41,6 +41,11 @@ export default function Login(props) {
                 toast({ title: mode === 0 ? "Đăng nhập thành công!" : "Đăng ký thành công!", duration: 1000, isClosable: false, status: 'success' })
                 console.log(res);
             }).catch(err => {
+                if (mode === 0) {
+                    toast({ title: 'Tài khoản hoặc mật khẩu chưa chính xác', duration: 3000, isClosable: true, status: 'error' })
+                } else {
+                    toast({ title: 'Lỗi', description: err, duration: 3000, isClosable: true, status: 'warning' })
+                }
                 console.log(err);
             });
         }
@@ -51,9 +56,13 @@ export default function Login(props) {
             toast({ title: "Lỗi", description: "Bạn chưa nhập username", status: 'error', duration: 3000, isClosable: true });
             return false;
         } else if (!form.password) {
+
             toast({ title: "Lỗi", description: "Bạn chưa nhập mật khẩu", status: 'error', duration: 3000, isClosable: true });
             return false;
+        } else if (form.password.length < 8) {
+            toast({ title: 'Cảnh báo', description: 'Mật khẩu phải có ít nhất 8 ký tự', status: 'warning', duration: 3000, isClosable: true });
         }
+
         if (mode === 1) {
             if (!form.name) {
                 toast({ title: "Lỗi", description: "Bạn chưa nhập họ tên", status: 'error', duration: 3000, isClosable: true });
