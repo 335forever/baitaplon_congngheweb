@@ -23,8 +23,13 @@
     <route default>
       <application name="@TachMonShop/home"></application>
     </route>
-    <route path="login">
-      <application name="@TachMonShop/login"></application>
+    <route path="v1">
+      <route path="sign-in">
+        <application name="@TachMonShop/login"></application>
+      </route>
+      <route path="sign-up">
+        <application name="@TachMonShop/login"></application>
+      </route>
     </route>
   </main>
   <footer>

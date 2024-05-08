@@ -4,7 +4,7 @@ SETLOCAL EnableDelayedExpansion
 set "CURRENT_LOCATION=%cd%"
 for /F "tokens=1,2 delims=," %%A in (modules.csv) do (
     echo Running %%A
-    cd "./%%A"
+    cd /d "./%%A"
     echo %cd%
     if exist package.json (
         yarn install

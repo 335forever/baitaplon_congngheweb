@@ -2,16 +2,12 @@ import './index.css'
 import React from 'react'
 import axios from 'axios'
 import brand from '../assets/images/brand.svg'
-import { Button, ChakraProvider, Link, useToast } from '@chakra-ui/react'
+import { Button, ChakraProvider, useToast } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
-const actions = ['signin', 'signup']
-
-export default function Login(props) {
-    const [confirm, setConfirm] = React.useState(true)
-    const [mode, setMode] = React.useState(0);
-    const [isSeller, setSeller] = React.useState(false);
+export function Login(props) {
     const [form, setForm] = React.useState({
-        action: actions[mode],
+        action: 'signin',
         username: null,
         password: null,
         name: null,
@@ -27,7 +23,6 @@ export default function Login(props) {
 
     const logout = () => {
         localStorage.removeItem('token');
-        setMode(0);
     }
 
     const sign = async () => {
@@ -35,10 +30,10 @@ export default function Login(props) {
             setMessage(null);
             await axios.post('https://ducquan.id.vn/congngheweb/santhuongmai/api.php', {
                 ...form,
-                action: actions[mode]
+                action: 'signin'
             }).then(res => {
                 localStorage.setItem('token', res.data.token)
-                toast({ title: mode === 0 ? "Đăng nhập thành công!" : "Đăng ký thành công!", duration: 1000, isClosable: false, status: 'success' })
+                toast({title: "Đăng nhập thành công!", duration: 1000, isClosable: false, status: 'success' })
                 console.log(res);
             }).catch(err => {
                 console.log(err);
@@ -54,22 +49,7 @@ export default function Login(props) {
             toast({ title: "Lỗi", description: "Bạn chưa nhập mật khẩu", status: 'error', duration: 3000, isClosable: true });
             return false;
         }
-        if (mode === 1) {
-            if (!form.name) {
-                toast({ title: "Lỗi", description: "Bạn chưa nhập họ tên", status: 'error', duration: 3000, isClosable: true });
-                return false;
-            } else if (!form.dob) {
-                toast({ title: "Lỗi", description: "Bạn chưa nhập ngày sinh", status: 'error', duration: 3000, isClosable: true });
-                return false;
-            } else if (!form.phone) {
-                toast({ title: "Lỗi", description: "Bạn chưa nhập số điện thoại", status: 'error', duration: 3000, isClosable: true });
-                return false;
-            } else if (!form.address) {
-                toast({ title: "Lỗi", description: "Bạn chưa nhập địa chỉ", status: 'error', duration: 3000, isClosable: true });
-                return false;
-            }
-        }
-
+        
         return true;
     }
 
@@ -80,22 +60,22 @@ export default function Login(props) {
 
                 <div id='account' >
                     <div id='sign'>
-                        <div id='title'>{mode == 0 ? 'Đăng nhập' : 'Đăng ký'}</div>
-                        <p>{mode == 0 ? 'Nhập tài khoản và mật khẩu' : 'Điền các thông tin của bạn'}</p>
+                        <div id='title'>{'Đăng nhập'}</div>
+                        <p>{'Nhập tài khoản và mật khẩu'}</p>
                         <div>
                             <input className="login-input"  type='text' placeholder='Tên đăng nhập' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, username: e.target.value })} onKeyDown={(e) => e.key === 'Enter' ? sign() : null} />
                         </div>
                         <div>
                             <input className="login-input"  type='password' placeholder='Mật khẩu' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, password: e.target.value })} onKeyDown={(e) => e.key === 'Enter' ? sign() : null} />
                         </div>
-                        <div style={{ display: mode === 0 ? 'none' : 'flex' }}>
+                        <div style={{display: 'none'}}>
                             <input className="login-input"  type='password' placeholder='Xác nhận mật khẩu' style={{ width: '100%' }} onChange={(e) => setConfirm(e.target.value == form.password)} />
                         </div>
                         <p style={{ color: 'red', fontFamily: 'Roboto', fontSize: '12px' }}>{confirm ? '' : 'Không khớp'}</p>
-                        <div style={{ display: mode === 0 ? 'none' : 'flex', marginBottom: '10px' }}>
+                        <div style={{ display: 'none', marginBottom: '10px' }}>
                             <input className="login-input"  type='text' placeholder='Họ tên' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, name: e.target.value })} />
                         </div>
-                        <div style={{ display: mode === 0 ? 'none' : 'flex' }}>
+                        <div style={{ display: 'none' }}>
                             <input className="login-input"  type='text' placeholder='Ngày sinh' style={{ width: '100%' }}
                                 onFocus={(e) => {
                                     e.target.type = 'date';
@@ -110,30 +90,13 @@ export default function Login(props) {
                                 onChange={(e) => setForm({ ...form, dob: e.target.value })}
                             />
                         </div>
-                        <div style={{ display: mode === 0 ? 'none' : 'flex' }}>
-                            <input className="login-input" type='text' placeholder='Số điện thoại' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-                        </div>
-                        <div style={{ display: mode === 0 ? 'none' : 'flex' }}>
-                            <input className="login-input" type='text' placeholder='Địa chỉ' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, address: e.target.value })} />
-                        </div>
-                        <div style={{ display: mode === 0 ? 'none' : 'flex' }}>
-                            <input className="login-input"  type='text' placeholder='Email' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                        </div>
-                        <div style={{ display: mode === 0 ? 'none' : 'flex', paddingTop: 10 }}>
-                            <label>Là người bán?</label>
-                            <input type='checkbox' onChange={(e) => { setForm({ ...form, isShoper: e.target.checked }); setSeller(e.target.checked); }} style={{ marginLeft: 16 }} />
-                        </div>
-
-                        <div style={{ display: mode === 0 || !isSeller ? 'none' : 'flex' }}>
-                            <input className="login-input" type='text' placeholder='Mã số thuế' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, taxid: e.target.value })} />
-                        </div>
                     </div>
                     <div className='option' id='signUpSuggest'>
                         <label>Bạn chưa có tài khoản?</label>
-                        <Link color='red' onClick={() => setMode(prev => 1 - prev)}>{mode === 0 ? 'Đăng ký' : 'Đăng nhập'}</Link>
+                        <Link color='red' to="/register">Đăng ký</Link>
                     </div>
-                    <div className='option' display={mode === 0 ? 'none' : 'flex'} >
-                        <Button colorScheme='red' color='white' fontFamily='Quicksand' fontWeight='500' onClick={sign} padding='2rem 2.5rem' variant='solid'>{mode === 0 ? 'Đăng nhập' : 'Đăng ký'}</Button>
+                    <div className='option' display={'none' } >
+                        <Button colorScheme='red' color='white' fontFamily='Quicksand' fontWeight='500' onClick={sign} padding='2rem 2.5rem' variant='solid'>Đăng nhập</Button>
                         <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', width: '50%' }}><Link color='red'>Quên mật khẩu?</Link></div>
                     </div>
                 </div>
