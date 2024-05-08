@@ -98,7 +98,7 @@ export default function Footer(props) {
             </div></div>
           </BrowserRouter>
         </div>
-        <p className="inter-light" id="credit">
+        <p className="quicksand-light" id="credit">
           &copy;Copyright TachMonShop 2024. All right reserved
         </p>
       </div>

@@ -32,7 +32,7 @@ export default function NavBar(props) {
             className="items-center box-border flex flex-row h-16 justify-between w-full z-50 m-0 p-0"
             style={{maxWidth: "1180px"}}
           >
-            <div id="logo" className="text-2xl inter-bold inline-block">
+            <div id="logo" className="text-2xl quicksand-bold inline-block">
               TachMonShop
             </div>
             <div
