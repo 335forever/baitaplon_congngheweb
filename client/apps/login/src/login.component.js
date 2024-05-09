@@ -93,7 +93,7 @@ export function Login(props) {
                     </div>
                     <div className='option' id='signUpSuggest'>
                         <label>Bạn chưa có tài khoản?</label>
-                        <Link color='red' to="/register">Đăng ký</Link>
+                        <Link color='red' to="/signup">Đăng ký</Link>
                     </div>
                     <div className='option' display={'none' } >
                         <Button colorScheme='red' color='white' fontFamily='Quicksand' fontWeight='500' onClick={sign} padding='2rem 2.5rem' variant='solid'>Đăng nhập</Button>

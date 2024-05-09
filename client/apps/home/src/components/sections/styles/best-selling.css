@@ -7,3 +7,11 @@
     text-align: center;
     vertical-align: center;
 }
+
+#best-selling-btn:hover {
+    background-color: hsl(from var(--color-danger) h s calc(0.8*l));
+}
+
+#best-selling-btn:focus {
+    background-color: hsl(from var(--color-danger) h s calc(0.5*l));
+}

@@ -8,3 +8,5 @@ export { Section } from "./components/section.component";
 export { Product } from "./components/product.component";
 
 export { Icons } from "./TachMonShop-icons.js";
+
+export { NavRoute } from "./components/nav-route.component";

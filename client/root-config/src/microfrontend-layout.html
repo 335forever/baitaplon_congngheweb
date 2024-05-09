@@ -20,16 +20,18 @@
     <application name="@TachMonShop/navbar"></application>
   </header>
   <main class="m-auto" style="max-width: 1180px;">
-    <route default>
+    <route path="/" exact>
       <application name="@TachMonShop/home"></application>
     </route>
-    <route path="v1">
-      <route path="sign-in">
-        <application name="@TachMonShop/login"></application>
-      </route>
-      <route path="sign-up">
-        <application name="@TachMonShop/login"></application>
-      </route>
+    <route path="signin">
+      <application name="@TachMonShop/login"></application>
+    </route>
+    <route path="signup">
+      <application name="@TachMonShop/login"></application>
+    </route>
+
+    <route default>
+      <application name="@TachMonShop/404"></application>
     </route>
   </main>
   <footer>

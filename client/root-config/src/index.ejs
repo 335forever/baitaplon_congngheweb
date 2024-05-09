@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>TachMonShop</title>
+  <title><%= htmlWebpackPlugin.options.title %></title>
   <link rel="icon" type="image/x-icon" href="//localhost:9000/icon-logo.png">
   <!--
     Remove this if you only support browsers that support async/await.
@@ -62,7 +62,8 @@
       {
         "imports": {
           "@TachMonShop/home": "//localhost:10002/TachMonShop-home.js",
-          "@TachMonShop/login": "//localhost:10003/TachMonShop-login.js"
+          "@TachMonShop/login": "//localhost:10003/TachMonShop-login.js",
+          "@TachMonShop/404": "//localhost:404/TachMonShop-not-found.js"
         }
       }
     </script>
