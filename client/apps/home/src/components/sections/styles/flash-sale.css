@@ -36,4 +36,12 @@
         border-radius: 4px;
         text-align: center;
     }
+
+    >button:hover {
+        background-color: hsl(from var(--color-danger) h s calc(0.8*l));
+    }
+    
+    >button:focus {
+        background-color: hsl(from var(--color-danger) h s calc(0.5*l));
+    }
 }

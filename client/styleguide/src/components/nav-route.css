@@ -1,0 +1,15 @@
+.nav-route {
+    color: var(--color-overlay);
+    font-size: 14px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    a:hover {
+        text-decoration: dashed;
+    }
+
+    .current-route {
+        color: var(--color-primary);
+    }
+}

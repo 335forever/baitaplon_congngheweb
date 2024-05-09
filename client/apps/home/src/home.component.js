@@ -14,7 +14,6 @@ import CategoriesList from "./components/category/categories-list.component";
 import "./home.css";
 import { Warranty } from "./components/sections/warranty.component";
 
-
 export default function HomePage(props) {
   const queryClient = new QueryClient({
     defaultOptions: {

@@ -237,7 +237,7 @@ export function Register(props) {
           </div>
           <div className="option" id="signUpSuggest">
             <label>Bạn đã có tài khoản?</label>
-            <Link color="red" to="/login">
+            <Link color="red" to="/signin">
               {"Đăng nhập"}
             </Link>
           </div>
