@@ -10,6 +10,12 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   return merge(defaultConfig, {
+    devServer: {
+      port: 404,
+    },
+    externals: {
+      "@TachMonShop/styleguide": "//localhost:11000/TachMonShop-styleguide.js",
+    },
     // modify the webpack config however you'd like to by adding to this object
   });
 };
