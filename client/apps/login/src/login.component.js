@@ -17,10 +17,8 @@ export default function Login(props) {
         name: null,
         email: null,
         dob: null,
-        isShoper: false,
         phone: null,
-        address: null,
-        taxid: null
+        address: null
     })
     const [message, setMessage] = React.useState();
     const toast = useToast();
@@ -41,15 +39,25 @@ export default function Login(props) {
                 toast({ title: mode === 0 ? "Đăng nhập thành công!" : "Đăng ký thành công!", duration: 1000, isClosable: false, status: 'success' })
                 console.log(res);
             }).catch(err => {
-                if (mode === 0) {
-                    toast({ title: 'Tài khoản hoặc mật khẩu chưa chính xác', duration: 3000, isClosable: true, status: 'error' })
+                if (err.response) {
+                    switch (err.response.status) {
+                        case 409:
+                            toast({ title: 'Lỗi', description: 'Tên đăng nhập đã tồn tại', duration: 3000, isClosable: true, status: 'error' })
+                            break;
+                        default:
+                            toast({ title: 'Lỗi', description: err.message, duration: 3000, isClosable: true, status: 'warning' })
+                    }
+                } else if (err.request) {
+                    // The request was made but no response was received
+                    toast({ title: 'Lỗi', description: 'Không nhận được phản hồi từ máy chủ', duration: 3000, isClosable: true, status: 'error' })
                 } else {
-                    toast({ title: 'Lỗi', description: err, duration: 3000, isClosable: true, status: 'warning' })
+                    // Something happened in setting up the request that triggered an Error
+                    toast({ title: 'Lỗi', description: 'Lỗi khi thiết lập yêu cầu', duration: 3000, isClosable: true, status: 'error' })
                 }
-                console.log(err);
             });
         }
     }
+
 
     const validate = () => {
         if (!form.username) {
@@ -127,14 +135,6 @@ export default function Login(props) {
                         </div>
                         <div style={{ display: mode === 0 ? 'none' : 'flex' }}>
                             <input type='text' placeholder='Email' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                        </div>
-                        <div style={{ display: mode === 0 ? 'none' : 'flex', paddingTop: 10 }}>
-                            <label>Là người bán?</label>
-                            <input type='checkbox' onChange={(e) => { setForm({ ...form, isShoper: e.target.checked }); setSeller(e.target.checked); }} style={{ marginLeft: 16 }} />
-                        </div>
-
-                        <div style={{ display: mode === 0 || !isSeller ? 'none' : 'flex' }}>
-                            <input type='text' placeholder='Mã số thuế' style={{ width: '100%' }} onChange={(e) => setForm({ ...form, taxid: e.target.value })} />
                         </div>
                     </div>
                     <div className='option' id='signUpSuggest'>
