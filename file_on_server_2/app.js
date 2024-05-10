@@ -58,9 +58,9 @@ const verifyToken = async (token) => {
         );
         
         connection.release();
-        
+
         if (rows && rows.length > 0) {
-            return rows[0].username;
+            return rows[0].accountid;
         } else {
             return false;
         }
@@ -76,12 +76,13 @@ const authenticate = async (req, res, next) => {
         res.status(401).json({ status: 'error', message: 'Unauthorized' });
         return;
     }
-    const username = await verifyToken(token.replace('Bearer ', ''));
-    if (!username) {
+    const accountid = await verifyToken(token.replace('Bearer ', ''));
+    if (!accountid) {
         res.status(401).json({ status: 'error', message: 'Unauthorized' });
         return;
     }
-    req.username = username;
+    req.accountid = accountid;
+    
     next();
 }
 
@@ -197,7 +198,7 @@ app.put('/api/update', authenticate, async (req, res) => {
 
     if (Object.keys(newData).length > 0) {
         try {
-            const username = req.username;
+            const accountid = req.accountid;
 
             let updateQuery = 'UPDATE m_account SET';
             const updateValues = [];
@@ -218,8 +219,8 @@ app.put('/api/update', authenticate, async (req, res) => {
                 }
             });
 
-            updateQuery = updateQuery.slice(0, -1) + ' WHERE username = ?';
-            updateValues.push(username);
+            updateQuery = updateQuery.slice(0, -1) + ' WHERE accountid = ?';
+            updateValues.push(accountid);
 
             const connection = await pool.getConnection();
         
@@ -244,13 +245,13 @@ app.put('/api/update', authenticate, async (req, res) => {
 
 // Lấy thông tin người dùng
 app.get('/api/getuserinfo', authenticate, async (req, res) => {
-    const username = req.username;
+    const accountid = req.accountid;
     try {
         const connection = await pool.getConnection();
 
         const [rows, fields] = await connection.execute(
-            "SELECT username, name, email, phone, address, birthday, isShoper FROM m_account WHERE username = ?",
-            [username]
+            "SELECT username, name, email, phone, address, birthday, isShoper FROM m_account WHERE accountid = ?",
+            [accountid]
         );
 
         if (rows.length === 1) 
@@ -261,6 +262,125 @@ app.get('/api/getuserinfo', authenticate, async (req, res) => {
     } catch (error) {
         console.error('Get infor fail:', error);
         res.status(500).json({ error: 'Get infor fail' });
+    }
+});
+
+// Lấy thông tin tất cả loại sản phẩm
+app.get('/api/getproductcategory', async (req, res) => {
+    try {
+        const connection = await pool.getConnection();
+
+        const [rows, fields] = await connection.execute(
+            "SELECT * FROM m_productCategory"
+        );
+
+        res.status(200).json( rows );
+
+        connection.release();
+    } catch (error) {
+        console.error('Get category fail:', error);
+        res.status(500).json({ error: 'Get category fail' });
+    }
+});
+
+// Tìm thông tin sản phẩm theo tên hoặc loại
+app.get('/api/findproduct', async (req, res) => {
+    try {
+        const categoryId = req.query.categoryId;
+        const productName = req.query.name;
+        
+        if (categoryId) {
+            const connection = await pool.getConnection();
+
+            const [rows, fields] = await connection.execute(
+                "SELECT * FROM m_product WHERE categoryID = ?",
+                [categoryId]
+            );
+
+            res.status(200).json( rows );
+
+            connection.release();  
+        } 
+        else if (productName) {
+            const connection = await pool.getConnection();
+
+            const [rows, fields] = await connection.execute(
+                'SELECT * FROM m_product WHERE name LIKE ?',
+                [`%${productName}%`]
+            );
+
+            res.status(200).json( rows );
+
+            connection.release();  
+        } 
+        else {
+            res.status(400).json({ error: 'Missing categoryId or name' });
+        }
+    } catch (error) {
+        console.error('Get product fail:', error);
+        res.status(500).json({ error: 'Get product fail' });
+    }
+});
+
+// Thêm thông tin sản phẩm
+app.post('/api/addproduct', authenticate, async (req, res) => {
+    const accountid = req.accountid;
+    try {
+        const connection = await pool.getConnection();
+
+        const [rows, fields] = await connection.execute(
+            "SELECT * FROM m_shoper WHERE accountid = ?",
+            [accountid]
+        );
+
+        if (rows.length === 1) {
+            const shoperId= rows[0].shoperID;
+            
+            const productData = req.body;
+            const name = productData.name ;
+            const quantity = productData.quantity;
+            const price = productData.price;
+            const categoryId = productData.categoryId;
+            
+            const images = productData.images;
+            
+            if (name && quantity && price && Object.keys(images).length > 0 && categoryId)   {
+                
+                const [result, fields] = await connection.execute(
+                    `INSERT INTO m_product (name, quantity, price, categoryId, shoperId) VALUES (?, ?, ?, ?, ?)`,
+                    [name, quantity, price, categoryId, shoperId]
+                );
+                
+                if (handleInsertResult(result).success) {
+                    const productId = result.insertId; 
+                    let imageValues = [];
+                
+                    for (let i = 1; i <= 6; i++) {
+                        const imageURL = images[`image${i}`];
+                        imageValues.push(imageURL || null); // Nếu không có giá trị imageURL, đưa vào null
+                    }
+                
+                    const sql = `INSERT INTO m_productImage (productID, image1, image2, image3, image4, image5, image6) VALUES (?,?,?,?,?,?,?)`;
+                    const insertValues = [productId, ...imageValues];
+                
+                    // Thực hiện INSERT
+                    await connection.execute(sql, insertValues);
+                
+                    res.status(200).json({ success: true, productId: productId });
+                } else {
+                    res.status(500).json({ error: 'Add product fail' });
+                }
+                
+            } else {
+                res.status(400).json({ error: 'Not enough info to add a product' , images: images.length > 0});
+            }
+        }
+        else res.status(403).json({ error: 'Unauthorized to add a product' });
+
+        connection.release();
+    } catch (error) {
+        console.error('Add product fail:', error);
+        res.status(500).json({ error: 'Add product fail' });
     }
 });
 
