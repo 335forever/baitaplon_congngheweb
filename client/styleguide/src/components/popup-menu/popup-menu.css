@@ -1,0 +1,10 @@
+.popup-menu {
+    background-color: var(--color-white);
+    border-radius: 4px;
+    width: max-content;
+    position: absolute;
+    padding: 10px;
+    padding: 0;
+    color: var(--color-primary);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}

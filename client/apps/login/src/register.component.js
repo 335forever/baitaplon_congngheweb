@@ -4,6 +4,7 @@ import axios from "axios";
 import brand from "../assets/images/brand.svg";
 import { Button, ChakraProvider, useToast } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { signUp, isSignedIn, logout } from "@TachMonShop/api";
 
 export function Register(props) {
   const [confirm, setConfirm] = React.useState(true);
@@ -25,12 +26,9 @@ export function Register(props) {
   const sign = async () => {
     if (validate()) {
       setMessage(null);
-      await axios
-        .post("https://ducquan.id.vn/congngheweb/santhuongmai/api.php", {
-          ...form,
-          action: "signup",
-        })
-        .then((res) => {
+      await signUp(
+        form,
+        (res) => {
           localStorage.setItem("token", res.data.token);
           toast({
             title: "Đăng ký thành công!",
@@ -39,10 +37,11 @@ export function Register(props) {
             status: "success",
           });
           console.log(res);
-        })
-        .catch((err) => {
+        },
+        (err) => {
           console.log(err);
-        });
+        }
+      );
     }
   };
 
@@ -116,9 +115,7 @@ export function Register(props) {
         <div id="account">
           <div id="sign">
             <div id="title">{"Đăng ký"}</div>
-            <p>
-              {"Điền các thông tin của bạn"}
-            </p>
+            <p>{"Điền các thông tin của bạn"}</p>
             <div>
               <input
                 className="login-input"
@@ -211,9 +208,7 @@ export function Register(props) {
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
               />
             </div>
-            <div
-              style={{ display: "flex", paddingTop: 10 }}
-            >
+            <div style={{ display: "flex", paddingTop: 10 }}>
               <label>Là người bán?</label>
               <input
                 type="checkbox"

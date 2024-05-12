@@ -1,7 +1,7 @@
 import singleSpaReact from "single-spa-react";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { Icons } from "../TachMonShop-icons";
+import { Icons } from "../../TachMonShop-icons";
 import "./product.css";
 
 function _Product(props) {

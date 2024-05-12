@@ -1,4 +1,4 @@
-import { Leading } from "./leading.component";
+import { Leading } from "../leading/leading.component";
 import "./section.css"
 
 export function Section({subtitle, title, controller, children, countdown}) {
