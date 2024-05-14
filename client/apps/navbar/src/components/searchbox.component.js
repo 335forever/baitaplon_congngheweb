@@ -23,10 +23,10 @@ export default function SearchBox(props) {
     setInput(event.target.value);
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(_event) {
     setShowSuggestion(false);
     setSuggestions([]);
-    navigateToUrl(`/search?q=${input}`);
+    if (input) navigateToUrl(`/search?q=${input}`);
   }
 
   function handleChooseSuggestion(suggestion) { 
@@ -56,7 +56,11 @@ export default function SearchBox(props) {
           type="text"
           onFocus={handleClick}
           onChange={handleChange}
-          onSubmit={handleSubmit}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              handleSubmit();
+            }
+          }}
           value={input}
           placeholder="Bạn muốn tìm gì?"
         />

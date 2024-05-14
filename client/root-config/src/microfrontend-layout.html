@@ -29,6 +29,9 @@
     <route path="signup">
       <application name="@TachMonShop/login"></application>
     </route>
+    <route path=":shoperId/:productId">
+      <application name="@TachMonShop/product"></application>
+    </route>
 
     <route default>
       <application name="@TachMonShop/404"></application>

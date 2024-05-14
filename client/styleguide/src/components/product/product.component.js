@@ -1,4 +1,5 @@
 import singleSpaReact from "single-spa-react";
+import  {navigateToUrl} from "single-spa";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Icons } from "../../TachMonShop-icons";
@@ -14,7 +15,7 @@ function _Product(props) {
           <button className="add-to-cart-btn">Thêm vào giỏ</button>
         </div>
         <div className="product-info">
-        <h5>Gaming Console</h5>
+        <a onClick={() => {navigateToUrl('/cua-hang-nao-do/do-nao-do')}}>Gaming Console</a>
         <div className="product-price">
           <cite>12.000.000đ</cite>
           <em>15.000.000đ</em>

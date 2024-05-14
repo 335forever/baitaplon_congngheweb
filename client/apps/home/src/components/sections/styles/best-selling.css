@@ -12,6 +12,6 @@
     background-color: hsl(from var(--color-danger) h s calc(0.8*l));
 }
 
-#best-selling-btn:focus {
+#best-selling-btn:active {
     background-color: hsl(from var(--color-danger) h s calc(0.5*l));
 }

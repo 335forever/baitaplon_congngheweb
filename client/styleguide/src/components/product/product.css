@@ -98,6 +98,18 @@
     border-radius: 4px;
 }
 
+.product a {
+    cursor: pointer;
+}
+
+.product a:hover {
+    text-decoration: underline;
+}
+
+.product a:active {
+    text-decoration: none;
+}
+
 .product-img-container:hover {
     .add-to-cart-btn {
         display: block;

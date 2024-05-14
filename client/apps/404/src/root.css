@@ -26,7 +26,7 @@
         background-color: hsl(from var(--color-danger) h s calc(0.8*l));
     }
 
-    section>a:focus {
+    section>a:active {
         background-color: hsl(from var(--color-danger) h s calc(0.5*l));
     }
 }

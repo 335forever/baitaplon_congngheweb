@@ -9,10 +9,15 @@ import { isSignedIn } from "@TachMonShop/api";
 
 import "../navbar.css";
 
-function SignInPopUp() {
+function SignInPopUp({onClickOnPopup}) {
+    function goTo(url) {
+      navigateToUrl(url);
+      onClickOnPopup(false);
+    }
+
     return (<ul id="login-popup">
-        <li onClick={() => navigateToUrl('/signin')}>Đăng nhập</li>
-        <li onClick={() => navigateToUrl('/signup')}>Đăng ký</li>
+        <li onClick={() => goTo('/signin')}>Đăng nhập</li>
+        <li onClick={() => goTo('/signup')}>Đăng ký</li>
     </ul>)
 }
 
@@ -36,7 +41,7 @@ export default function AccountButton() {
         trigger={accountButton}
         setOpenState={setIsOpenAccount}
       >
-        {isSignedIn() ? localStorage.getItem('token') : <SignInPopUp />}
+        {isSignedIn() ? localStorage.getItem('token') : <SignInPopUp onClickOnPopup={setIsOpenAccount} />}
       </Parcel>
     </div>
   );

@@ -22,7 +22,7 @@ export default function Footer(props) {
       id="footer"
       className="flex flex-col w-full bg-black items-center py-2"
     >
-      <div style={{ maxWidth: "1180px" }}>
+      <div style={{ maxWidth: "1280px" }}>
         <div id="content" className="flex flex-row py-12 gap-4">
           <BrowserRouter>
             <div className="flex flex-col grow gap-1">

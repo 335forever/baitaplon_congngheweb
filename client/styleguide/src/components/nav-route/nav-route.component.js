@@ -10,22 +10,19 @@ function _NavRoute({names }) {
   console.log(link);
   const linkPatitions = link.split("/");
   console.log(linkPatitions);
-  if (linkPatitions.length !== names.length) { 
-    throw Error("Link and names must be the same length!");
-  }
   return (
     <div className="nav-route">
       <BrowserRouter>
-        {names.reduce((prev, name, i) => {
-          if (i !== linkPatitions.length - 1) {
+        {linkPatitions.reduce((prev, linkPatition, i, a) => {
+          if (i !== a.length - 1) {
             prev.push(
-                <Link to={linkPatitions.slice(0, i + 1).join("/")}>{name}</Link>
+                <Link to={a.slice(0, i + 1).join("/")}>{names[i]}</Link>
             );
             prev.push(<p>/</p>)
           }
           else {
             prev.push(
-                <p className="current-route">{name}</p>
+                <p className="current-route">{names[i] || linkPatition}</p>
             );
           }
           return prev;

@@ -41,7 +41,7 @@
         background-color: hsl(from var(--color-danger) h s calc(0.8*l));
     }
     
-    >button:focus {
+    >button:active {
         background-color: hsl(from var(--color-danger) h s calc(0.5*l));
     }
 }
