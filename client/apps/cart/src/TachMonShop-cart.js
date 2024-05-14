@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import singleSpaReact from "single-spa-react";
-import Root from "./root.component";
+import Cart from "./cart.component";
 
 const lifecycles = singleSpaReact({
   React,
   ReactDOM,
-  rootComponent: Root,
+  rootComponent: Cart,
   errorBoundary(err, info, props) {
     // Customize the root error boundary for your microfrontend here.
     return null;
