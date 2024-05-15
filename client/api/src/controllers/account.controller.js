@@ -1,7 +1,8 @@
 import axios from "axios";
 export async function signIn(form, onResolve, onReject) {
+    console.log(form);
     try {
-        const res = await axios.post(process.env.AUTH_API_ENDPOINT, {
+        const res = await axios.post(process.env.SERVER_API_ENDPOINT, {
                 ...form,
                 action: 'signin'});
         if (res.status === 200) onResolve(res);
@@ -13,10 +14,10 @@ export async function signIn(form, onResolve, onReject) {
 }
 
 export async function signUp(form, onResolve, onReject) {
-    try { const res = await axios.post(process.env.AUTH_API_ENDPOINT, {
+    try { const res = await axios.post(process.env.SERVER_API_ENDPOINT, {
                 ...form,
                 action: 'signup'});
-        if (res.status === 200) onResolve(res);
+        if (res.status === 201) onResolve(res);
         else onReject(res);           
     }
     catch (err) {
@@ -24,8 +25,9 @@ export async function signUp(form, onResolve, onReject) {
     }
 }
 
-export function isSignedIn() {
-    return localStorage.getItem('token') != null;
+export function isSignedIn() {   
+    const result = localStorage.getItem('token')?.length > 0 || false;
+    return result;
 }
 
 export function logout() {

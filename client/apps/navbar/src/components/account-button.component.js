@@ -1,24 +1,50 @@
-import { useRef, useState } from "react";
+import { useRef, useState, createElement } from "react";
 import Parcel from "single-spa-react/parcel";
 import { PopupMenu } from "@TachMonShop/styleguide";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { clsx } from "clsx";
 import { navigateToUrl } from "single-spa";
-
-import { isSignedIn } from "@TachMonShop/api";
+import { isSignedIn, logout } from "@TachMonShop/api";
 
 import "../navbar.css";
 
-function SignInPopUp({onClickOnPopup}) {
-    function goTo(url) {
-      navigateToUrl(url);
-      onClickOnPopup(false);
-    }
+function SignInPopUp({ onClickOnPopup }) {
+  function goTo(url) {
+    navigateToUrl(url);
+    onClickOnPopup(false);
+  }
 
-    return (<ul id="login-popup">
-        <li onClick={() => goTo('/signin')}>Đăng nhập</li>
-        <li onClick={() => goTo('/signup')}>Đăng ký</li>
-    </ul>)
+  return (
+    <ul id="login-popup">
+      <li onClick={() => goTo("/signin")}>Đăng nhập</li>
+      <li onClick={() => goTo("/signup")}>Đăng ký</li>
+    </ul>
+  );
+}
+
+function AccountPopup({ onClickOnPopup }) {
+  function funcPopout(callback, ...args) {
+    return (...args) => {
+      callback(...args);
+      onClickOnPopup(false);
+    };
+  }
+
+  function handleLogout() {
+    logout();
+    location.reload();
+  }
+
+  return (
+    <ul id="login-popup">
+      <li
+        onClick={funcPopout(handleLogout)}
+        style={{ color: "var(--color-danger)" }}
+      >
+        Đăng xuất
+      </li>
+    </ul>
+  );
 }
 
 export default function AccountButton() {
@@ -41,7 +67,15 @@ export default function AccountButton() {
         trigger={accountButton}
         setOpenState={setIsOpenAccount}
       >
-        {isSignedIn() ? localStorage.getItem('token') : <SignInPopUp onClickOnPopup={setIsOpenAccount} />}
+        {/* {isSignedIn() ? (
+          localStorage.getItem("token")
+        ) : (
+          <SignInPopUp onClickOnPopup={setIsOpenAccount} />
+        )} */}
+        {createElement(
+          isSignedIn() ? AccountPopup : SignInPopUp,
+          {onClickOnPopup : setIsOpenAccount}
+        )}
       </Parcel>
     </div>
   );

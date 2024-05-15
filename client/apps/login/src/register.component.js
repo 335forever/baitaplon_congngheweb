@@ -1,38 +1,31 @@
 import "./index.css";
 import React from "react";
-import axios from "axios";
 import brand from "../assets/images/brand.svg";
-import { Button, ChakraProvider, useToast } from "@chakra-ui/react";
+import { Provider, useDispatch, useSelector } from "react-redux"
+import { navigateToUrl } from "single-spa";
+import { Button, ChakraProvider, useToast, CircularProgress } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { signUp, isSignedIn, logout } from "@TachMonShop/api";
+import { signUp } from "@TachMonShop/api";
+import { signUpFormStore } from "./controllers/signup/signup.store";
+import { signUpFormActions } from "./controllers/signup/signup.slice";
 
-export function Register(props) {
-  const [confirm, setConfirm] = React.useState(true);
-  const [isSeller, setSeller] = React.useState(false);
-  const [form, setForm] = React.useState({
-    username: null,
-    password: null,
-    name: null,
-    email: null,
-    dob: null,
-    isShoper: false,
-    phone: null,
-    address: null,
-    taxid: null,
-  });
-  const [message, setMessage] = React.useState();
+function RegisterContent(props) {
+  const [isLogging, setIsLogging] = React.useState(false)
   const toast = useToast();
+  const dispatch = useDispatch();
+  const form = useSelector((state) => state.signUpForm)
 
   const sign = async () => {
     if (validate()) {
-      setMessage(null);
+      setIsLogging(true);
       await signUp(
         form,
         (res) => {
-          localStorage.setItem("token", res.data.token);
+          //localStorage.setItem("token", res.data.token);
+          navigateToUrl("/");
           toast({
             title: "Đăng ký thành công!",
-            duration: 1000,
+            duration: 5000,
             isClosable: false,
             status: "success",
           });
@@ -42,69 +35,13 @@ export function Register(props) {
           console.log(err);
         }
       );
+      setIsLogging(false);
     }
   };
 
   const validate = () => {
-    if (!form.username) {
-      toast({
-        title: "Lỗi",
-        description: "Bạn chưa nhập username",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return false;
-    } else if (!form.password) {
-      toast({
-        title: "Lỗi",
-        description: "Bạn chưa nhập mật khẩu",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return false;
-    }
-
-    if (!form.name) {
-      toast({
-        title: "Lỗi",
-        description: "Bạn chưa nhập họ tên",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return false;
-    } else if (!form.dob) {
-      toast({
-        title: "Lỗi",
-        description: "Bạn chưa nhập ngày sinh",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return false;
-    } else if (!form.phone) {
-      toast({
-        title: "Lỗi",
-        description: "Bạn chưa nhập số điện thoại",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return false;
-    } else if (!form.address) {
-      toast({
-        title: "Lỗi",
-        description: "Bạn chưa nhập địa chỉ",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return false;
-    }
-
-    return true;
+    dispatch(signUpFormActions.validate())
+    return form.isValid;
   };
 
   return (
@@ -122,9 +59,9 @@ export function Register(props) {
                 type="text"
                 placeholder="Tên đăng nhập"
                 style={{ width: "100%" }}
-                onChange={(e) => setForm({ ...form, username: e.target.value })}
-                onKeyDown={(e) => (e.key === "Enter" ? sign() : null)}
+                onChange={(e) => dispatch(signUpFormActions.setUsername(e.target.value))}
               />
+              <p style={{ color: "red", fontSize: "12px" }}>{form.nameError}</p>
             </div>
             <div>
               <input
@@ -132,9 +69,9 @@ export function Register(props) {
                 type="password"
                 placeholder="Mật khẩu"
                 style={{ width: "100%" }}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
-                onKeyDown={(e) => (e.key === "Enter" ? sign() : null)}
+                onChange={(e) => dispatch(signUpFormActions.setPassword(e.target.value))}
               />
+              <p style={{ color: "red", fontSize: "12px" }}>{form.passwordError}</p>
             </div>
             <div style={{ display: "flex" }}>
               <input
@@ -142,11 +79,11 @@ export function Register(props) {
                 type="password"
                 placeholder="Xác nhận mật khẩu"
                 style={{ width: "100%" }}
-                onChange={(e) => setConfirm(e.target.value == form.password)}
+                onChange={(e) => dispatch(signUpFormActions.setRetypePassword(e.target.value))}
               />
             </div>
-            <p style={{ color: "red", fontFamily: "Roboto", fontSize: "12px" }}>
-              {confirm ? "" : "Không khớp"}
+            <p style={{ color: "red", fontSize: "12px" }}>
+              {form.retypeError}
             </p>
             <div
               style={{
@@ -159,7 +96,7 @@ export function Register(props) {
                 type="text"
                 placeholder="Họ tên"
                 style={{ width: "100%" }}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                onChange={(e) => dispatch(signUpFormActions.setName(e.target.value))}
               />
             </div>
             <div style={{ display: "flex" }}>
@@ -178,7 +115,7 @@ export function Register(props) {
                     e.target.placeholder = "Ngày sinh";
                   }
                 }}
-                onChange={(e) => setForm({ ...form, dob: e.target.value })}
+                onChange={(e) => dispatch(signUpFormActions.setDob(e.target.value))}
               />
             </div>
             <div style={{ display: "flex" }}>
@@ -187,7 +124,7 @@ export function Register(props) {
                 type="text"
                 placeholder="Số điện thoại"
                 style={{ width: "100%" }}
-                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                onChange={(e) => dispatch(signUpFormActions.setPhoneNumber(e.target.value))}
               />
             </div>
             <div style={{ display: "flex" }}>
@@ -196,7 +133,7 @@ export function Register(props) {
                 type="text"
                 placeholder="Địa chỉ"
                 style={{ width: "100%" }}
-                onChange={(e) => setForm({ ...form, address: e.target.value })}
+                onChange={(e) => dispatch(signUpFormActions.setAddress(e.target.value))}
               />
             </div>
             <div style={{ display: "flex" }}>
@@ -205,28 +142,8 @@ export function Register(props) {
                 type="text"
                 placeholder="Email"
                 style={{ width: "100%" }}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-              />
-            </div>
-            <div style={{ display: "flex", paddingTop: 10 }}>
-              <label>Là người bán?</label>
-              <input
-                type="checkbox"
-                onChange={(e) => {
-                  setForm({ ...form, isShoper: e.target.checked });
-                  setSeller(e.target.checked);
-                }}
-                style={{ marginLeft: 16 }}
-              />
-            </div>
-
-            <div style={{ display: !isSeller ? "none" : "flex" }}>
-              <input
-                className="login-input"
-                type="text"
-                placeholder="Mã số thuế"
-                style={{ width: "100%" }}
-                onChange={(e) => setForm({ ...form, taxid: e.target.value })}
+                onChange={(e) => dispatch(signUpFormActions.setEmail(e.target.value))}
+                onKeyDown={(e) => (e.key === "Enter" ? sign() : null)}
               />
             </div>
           </div>
@@ -246,7 +163,7 @@ export function Register(props) {
               padding="2rem 2.5rem"
               variant="solid"
             >
-              {"Đăng ký"}
+              {isLogging ? <CircularProgress isIndeterminate color="white"/> : "Đăng ký"}
             </Button>
             <div
               style={{
@@ -263,4 +180,10 @@ export function Register(props) {
       </div>
     </ChakraProvider>
   );
+}
+
+export function Register(props) {
+  return (<Provider store={signUpFormStore}>
+    <RegisterContent />
+  </Provider>)
 }

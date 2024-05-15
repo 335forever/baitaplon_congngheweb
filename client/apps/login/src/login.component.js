@@ -1,30 +1,29 @@
 import "./index.css";
-import React from "react";
+import React, {useRef} from "react";
 import brand from "../assets/images/brand.svg";
-import { Button, ChakraProvider, useToast } from "@chakra-ui/react";
+import { Button, ChakraProvider, CircularProgress, useToast } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import { signIn, isSignedIn, logout } from "@TachMonShop/api";
+import { signIn } from "@TachMonShop/api";
+import { navigateToUrl } from "single-spa";
 
 export function Login(props) {
   const [form, setForm] = React.useState({
     action: "signin",
     username: null,
     password: null,
-    name: null,
-    email: null,
-    dob: null,
-    isShoper: false,
-    phone: null,
-    address: null,
-    taxid: null,
   });
-  const [message, setMessage] = React.useState();
+  const [isLogging, setIsLogging] = React.useState(false)
+
+  const urlParams = new URLSearchParams(window.location.search);
+
   const toast = useToast();
+  const usernameInput = useRef();
+  const passwordInput = useRef();
 
   const sign = async () => {
     if (validate()) {
-      setMessage(null);
+      setIsLogging(true);
       await signIn(
         form,
         (res) => {
@@ -35,10 +34,12 @@ export function Login(props) {
             isClosable: false,
             status: "success",
           });
+          navigateToUrl(urlParams.get("redirect") || '/');
           console.log(res);
         },
         (res) => console.log(res)
       );
+      setIsLogging(false);
     }
   };
 
@@ -51,6 +52,7 @@ export function Login(props) {
         duration: 3000,
         isClosable: true,
       });
+      usernameInput.current.focus()
       return false;
     } else if (!form.password) {
       toast({
@@ -60,23 +62,24 @@ export function Login(props) {
         duration: 3000,
         isClosable: true,
       });
+      passwordInput.current.focus();
       return false;
     }
 
     return true;
   };
 
-  return !isSignedIn() ? (
+  return (
     <ChakraProvider>
       <div id="wrapper">
         <img src={brand} id="brand" />
-
         <div id="account">
           <div id="sign">
             <div id="title">{"Đăng nhập"}</div>
             <p>{"Nhập tài khoản và mật khẩu"}</p>
             <div>
               <input
+                ref={usernameInput}
                 className="login-input"
                 type="text"
                 placeholder="Tên đăng nhập"
@@ -87,6 +90,7 @@ export function Login(props) {
             </div>
             <div>
               <input
+                ref={passwordInput}
                 className="login-input"
                 type="password"
                 placeholder="Mật khẩu"
@@ -151,8 +155,9 @@ export function Login(props) {
               onClick={sign}
               padding="2rem 2.5rem"
               variant="solid"
+              disabled={isLogging}
             >
-              Đăng nhập
+              {isLogging ? <CircularProgress isIndeterminate color="white"/> : "Đăng nhập"}
             </Button>
             <div
               style={{
@@ -168,10 +173,5 @@ export function Login(props) {
         </div>
       </div>
     </ChakraProvider>
-  ) : (
-    <div>
-      <p>Bạn đã đăng nhập</p>
-      <button onClick={logout}>Đăng xuất</button>
-    </div>
-  );
+  )
 }
