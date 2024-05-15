@@ -9,7 +9,6 @@ const actions = ['signin', 'signup']
 export default function Login(props) {
     const [confirm, setConfirm] = React.useState(true)
     const [mode, setMode] = React.useState(0);
-    const [isSeller, setSeller] = React.useState(false);
     const [form, setForm] = React.useState({
         action: actions[mode],
         username: null,
@@ -31,7 +30,7 @@ export default function Login(props) {
     const sign = async () => {
         if (validate()) {
             setMessage(null);
-            await axios.post('https://ducquan.id.vn/congngheweb/santhuongmai/api.php', {
+            await axios.post('http://54.255.138.133/api/' + actions[mode], {
                 ...form,
                 action: actions[mode]
             }).then(res => {
@@ -41,6 +40,9 @@ export default function Login(props) {
             }).catch(err => {
                 if (err.response) {
                     switch (err.response.status) {
+                        case 404:
+                            toast({ title: 'Lỗi', description: 'Không tìm thấy tài khoản mật khẩu', duration: 3000, isClosable: true, status: 'error' })
+                            break;
                         case 409:
                             toast({ title: 'Lỗi', description: 'Tên đăng nhập đã tồn tại', duration: 3000, isClosable: true, status: 'error' })
                             break;
