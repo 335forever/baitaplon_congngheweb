@@ -6,9 +6,6 @@ import { Link } from "react-router-dom";
 
 import { signIn } from "@TachMonShop/api";
 import { navigateToUrl } from "single-spa";
-import { theme } from "./root.component";
-
-
 
 export default function Login(props) {
   const [confirm, setConfirm] = React.useState(true)
@@ -110,7 +107,7 @@ export default function Login(props) {
     }
 
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider>
       <div id="wrapper">
         <img src={brand} id="brand" />
         <div id="account">

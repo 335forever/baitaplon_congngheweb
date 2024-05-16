@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { signUp } from "@TachMonShop/api";
 import { signUpFormStore } from "./controllers/signup/signup.store";
 import { signUpFormActions } from "./controllers/signup/signup.slice";
-import { theme } from "./root.component";
 
 function RegisterContent(props) {
   const [isLogging, setIsLogging] = React.useState(false)
@@ -46,7 +45,7 @@ function RegisterContent(props) {
   };
 
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider>
       <div id="wrapper">
         <img src={brand} id="brand" />
 
