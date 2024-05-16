@@ -16,3 +16,13 @@ export default function Root() {
     </BrowserRouter>
   );
 }
+
+export const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        fontFamily: "Quicksand, sans-serif",
+      }
+    }
+  } 
+})
