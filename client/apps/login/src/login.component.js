@@ -25,7 +25,6 @@ export default function Login(props) {
 
   const urlParams = new URLSearchParams(window.location.search);
 
-  const toast = useToast();
   const usernameInput = useRef();
   const passwordInput = useRef();
 
