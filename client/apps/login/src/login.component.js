@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 
 import { signIn } from "@TachMonShop/api";
 import { navigateToUrl } from "single-spa";
+import { theme } from "./root.component";
+
+
 
 export function Login(props) {
   const [form, setForm] = React.useState({
@@ -70,7 +73,7 @@ export function Login(props) {
   };
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <div id="wrapper">
         <img src={brand} id="brand" />
         <div id="account">

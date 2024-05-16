@@ -35,9 +35,9 @@ export function setAddress(state, action) {
 }
 
 export function validate(state) {
-    state.nameError = /^\w{6,}$/.test(state.username) ? null : "Tên đăng nhập phải dài từ 6 ký tự trở lên"
-    state.passwordError = state.password.match(/^.{8,26}/) ? null : "Mật khẩu dài từ 8 ký tự trở lên"
+    state.nameError = /^\w{6,}$/.test(state.username ?? "") ? null : "Tên đăng nhập phải dài từ 6 ký tự trở lên"
+    state.passwordError = (/^.{8,26}/).test(state.password ?? "") ? null : "Mật khẩu dài từ 8 ký tự trở lên"
     checkPassword(state)
     state.retypeError = state.validPassword ? null : "Mật khẩu không khớp"
-    state.isValid = !(state.nameError && state.passwordError && state.retypeError)
+    state.isValid = !(state.nameError || state.passwordError || state.retypeError)
 }
