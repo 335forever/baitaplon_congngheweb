@@ -68,7 +68,7 @@
     justify-content: space-between;
 }
 
-#wrapper {
+#wrapper-wishlist {
     display: flex;
     font-family: 'Quicksand';
     flex-direction: column;

@@ -53,6 +53,19 @@ input:active {
     button:hover {
         background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
     }
+
+    a:hover {
+        background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
+    }
+
+    a:active {
+        background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
+    }
+
+    button:active {
+        background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
+    }
+
 }
 
 .button-show-popup {

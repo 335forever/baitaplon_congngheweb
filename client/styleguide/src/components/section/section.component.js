@@ -1,9 +1,9 @@
 import { Leading } from "../leading/leading.component";
 import "./section.css"
 
-export function Section({subtitle, title, controller, children, countdown}) {
+export function Section({subtitle, title, controller, children, countdown,style}) {
     return (
-        <section>
+        <section style={style}>
             <div className="heading">
                 <div className="title">
                     <div className="subtitle">
