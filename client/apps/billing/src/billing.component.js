@@ -86,7 +86,7 @@ export default function Billing(props) {
           <input
             type="text"
             className=" bg-gray-200 h-10"
-            onKeyPress={(event) => {
+            onKeyDown={(event) => {
               if (!/[0-9]/.test(event.key)) {
                 event.preventDefault();
               }

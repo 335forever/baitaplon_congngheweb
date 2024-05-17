@@ -29,10 +29,13 @@
     <route path="signup">
       <application name="@TachMonShop/login"></application>
     </route>
-    <route path="cart">
+    <route path="cart" exact>
       <application name="@TachMonShop/cart"></application>
     </route>
-    <route path=":shoperId/:productId">
+    <route path="cart/billing" exact>
+      <application name="@TachMonShop/billing"></application>
+    </route>
+    <route path="shop-:shoperId/product-:productId">
       <application name="@TachMonShop/product"></application>
     </route>
     <route path="wishlist">

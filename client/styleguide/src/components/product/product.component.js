@@ -15,7 +15,7 @@ function _Product(props) {
           <button className="add-to-cart-btn">Thêm vào giỏ</button>
         </div>
         <div className="product-info">
-        <a onClick={() => {navigateToUrl('/cua-hang-nao-do/do-nao-do')}}>Gaming Console</a>
+        <a onClick={() => {navigateToUrl('/shop-cua-hang-nao-do/product-do-nao-do')}}>Gaming Console</a>
         <div className="product-price">
           <cite>12.000.000đ</cite>
           <em>15.000.000đ</em>
