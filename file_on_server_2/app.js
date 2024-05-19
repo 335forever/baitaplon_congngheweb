@@ -283,11 +283,21 @@ app.get('/api/getproductcategory', async (req, res) => {
     }
 });
 
-// Tìm thông tin sản phẩm theo tên hoặc loại
+// Tìm thông tin sản phẩm theo tên hoặc loại hoặc shop
 app.get('/api/findproduct', async (req, res) => {
     try {
         const categoryId = req.query.categoryId;
+        const shopId = req.query.shopId;
         const productName = req.query.name;
+        
+        const getImagesByProductId =  async (productId) => {
+            const connection = await pool.getConnection();
+            const [rows, fields] = await connection.execute(
+                "SELECT * FROM m_productImage WHERE productId = ?",
+                [productId]
+            );
+            if (rows.length === 1) return rows;
+        }
         
         if (categoryId) {
             const connection = await pool.getConnection();
@@ -297,7 +307,10 @@ app.get('/api/findproduct', async (req, res) => {
                 [categoryId]
             );
 
-            res.status(200).json( rows );
+            if (rows.length===0) 
+                res.status(404).json( {msg:"No product found"} );
+            else 
+                res.status(200).json( rows );
 
             connection.release();  
         } 
@@ -309,16 +322,36 @@ app.get('/api/findproduct', async (req, res) => {
                 [`%${productName}%`]
             );
 
-            res.status(200).json( rows );
+            if (rows.length===0) 
+                res.status(404).json( {msg:"No product found"} );
+            else
+                res.status(200).json( rows );
 
             connection.release();  
-        } 
+        }
+        else if (shopId) {
+            const connection = await pool.getConnection();
+
+            const [rows, fields] = await connection.execute(
+                'SELECT * FROM m_product WHERE shoperID = ?',
+                [shopId]
+            );
+
+            if (rows.length===0) 
+                res.status(404).json( {msg:"No product found"} );
+            else {
+                res.status(200).json( rows );
+            }
+                
+
+            connection.release();  
+        }
         else {
-            res.status(400).json({ error: 'Missing categoryId or name' });
+            res.status(400).json({ error: 'Missing categoryId or name or shopId' });
         }
     } catch (error) {
         console.error('Get product fail:', error);
-        res.status(500).json({ error: 'Get product fail' });
+        res.status(500).json({ error: error });
     }
 });
 
@@ -383,6 +416,10 @@ app.post('/api/addproduct', authenticate, async (req, res) => {
         res.status(500).json({ error: 'Add product fail' });
     }
 });
+
+
+
+
 
 // Khởi động server
 const port = process.env.PORT || 3000;
