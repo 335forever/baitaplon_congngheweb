@@ -290,60 +290,87 @@ app.get('/api/findproduct', async (req, res) => {
         const shopId = req.query.shopId;
         const productName = req.query.name;
         
-        const getImagesByProductId =  async (productId) => {
+        const getImagesByProductId = async (productId) => {
             const connection = await pool.getConnection();
-            const [rows, fields] = await connection.execute(
+            const [images] = await connection.execute(
                 "SELECT * FROM m_productImage WHERE productId = ?",
                 [productId]
             );
-            if (rows.length === 1) return rows;
-        }
+            connection.release();
+            if (images.length === 1) {
+                const { image1, image2, image3, image4, image5, image6 } = images[0];
+                const result = {};
+                if (image1) result.image1 = image1;
+                if (image2) result.image2 = image2;
+                if (image3) result.image3 = image3;
+                if (image4) result.image4 = image4;
+                if (image5) result.image5 = image5;
+                if (image6) result.image6 = image6;
+                return { images: result };
+            }
+            return { images: {} }; // Trả về object rỗng nếu không có hình ảnh
+        };
         
         if (categoryId) {
             const connection = await pool.getConnection();
 
-            const [rows, fields] = await connection.execute(
+            const [products] = await connection.execute(
                 "SELECT * FROM m_product WHERE categoryID = ?",
                 [categoryId]
             );
 
-            if (rows.length===0) 
+            if (products.length===0) 
                 res.status(404).json( {msg:"No product found"} );
-            else 
-                res.status(200).json( rows );
-
+            else {
+                for (let product of products) {
+                    const images = await getImagesByProductId(product.productID);
+                    console.log(images);
+                    product.images = images.images;
+                }
+                res.status(200).json( products );
+            }
             connection.release();  
         } 
+        
         else if (productName) {
             const connection = await pool.getConnection();
 
-            const [rows, fields] = await connection.execute(
+            const [products] = await connection.execute(
                 'SELECT * FROM m_product WHERE name LIKE ?',
                 [`%${productName}%`]
             );
 
-            if (rows.length===0) 
+            if (products.length===0) 
                 res.status(404).json( {msg:"No product found"} );
-            else
-                res.status(200).json( rows );
-
+            else {
+                for (let product of products) {
+                    const images = await getImagesByProductId(product.productID);
+                    console.log(images);
+                    product.images = images.images;
+                }
+                res.status(200).json( products );
+            }
             connection.release();  
         }
+        
         else if (shopId) {
             const connection = await pool.getConnection();
 
-            const [rows, fields] = await connection.execute(
+            const [products] = await connection.execute(
                 'SELECT * FROM m_product WHERE shoperID = ?',
                 [shopId]
             );
 
-            if (rows.length===0) 
+            if (products.length===0) 
                 res.status(404).json( {msg:"No product found"} );
             else {
-                res.status(200).json( rows );
+                for (let product of products) {
+                    const images = await getImagesByProductId(product.productID);
+                    console.log(images);
+                    product.images = images.images;
+                }
+                res.status(200).json( products );
             }
-                
-
             connection.release();  
         }
         else {
