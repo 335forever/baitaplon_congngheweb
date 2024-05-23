@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -163,7 +163,7 @@ CREATE TABLE `m_product` (
 
 LOCK TABLES `m_product` WRITE;
 /*!40000 ALTER TABLE `m_product` DISABLE KEYS */;
-INSERT INTO `m_product` VALUES (34,'Set bß╗Ö nß╗» Banamo Fashion set ├ío t╞í ─æ┼⌐i hai lß╗¢p d├óy ├ío bß║ún chun to 128',301,128000,9,6),(40,'Set bß╗Ö nß╗» Banamo Fashion set ├ío t╞í ─æ┼⌐i hai lß╗¢p d├óy ├ío bß║ún chun to 129',253,129000,9,12),(41,'Set bß╗Ö nß╗» Banamo Fashion set ├ío t╞í ─æ┼⌐i hai lß╗¢p d├óy ├ío bß║ún chun to 129',0,129000,9,13),(42,'B├║t M├áu 12/24/36/48/60 Acrylic Marker Vß║╜ Tr├¬n Mß╗ìi Chß║Ñt Liß╗çu C├│ Thß╗â Vß║╜ Chß╗ông M├áu, M├áu Sß║»c T╞░╞íi S├íng Dß╗à Sß╗¡ Dß╗Ñng',2548,25000,14,13),(43,'B├║t M├áu 12/24/36/48/60 Acrylic Marker Vß║╜ Tr├¬n Mß╗ìi Chß║Ñt Liß╗çu C├│ Thß╗â Vß║╜ Chß╗ông M├áu, M├áu Sß║»c T╞░╞íi S├íng Dß╗à Sß╗¡ Dß╗Ñng',2548,25000,14,14),(46,'B├║t M├áu 12/24/36/48/60 Acrylic Marker Vß║╜ Tr├¬n Mß╗ìi Chß║Ñt Liß╗çu C├│ Thß╗â Vß║╜ Chß╗ông M├áu, M├áu Sß║»c T╞░╞íi S├íng Dß╗à Sß╗¡ Dß╗Ñng',2548,25000,14,6);
+INSERT INTO `m_product` VALUES (34,'Set bộ nữ Banamo Fashion set áo tơ đũi hai lớp dây áo bản chun to 128',301,128000,9,6),(40,'Set bộ nữ Banamo Fashion set áo tơ đũi hai lớp dây áo bản chun to 129',253,129000,9,12),(41,'Set bộ nữ Banamo Fashion set áo tơ đũi hai lớp dây áo bản chun to 129',0,129000,9,13),(42,'Bút Màu 12/24/36/48/60 Acrylic Marker Vẽ Trên Mọi Chất Liệu Có Thể Vẽ Chồng Màu, Màu Sắc Tươi Sáng Dễ Sử Dụng',2548,25000,14,13),(43,'Bút Màu 12/24/36/48/60 Acrylic Marker Vẽ Trên Mọi Chất Liệu Có Thể Vẽ Chồng Màu, Màu Sắc Tươi Sáng Dễ Sử Dụng',2548,25000,14,14),(46,'Bút Màu 12/24/36/48/60 Acrylic Marker Vẽ Trên Mọi Chất Liệu Có Thể Vẽ Chồng Màu, Màu Sắc Tươi Sáng Dễ Sử Dụng',2548,25000,14,6);
 /*!40000 ALTER TABLE `m_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,4 +287,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-23 15:10:47
+-- Dump completed on 2024-05-23 15:24:40
