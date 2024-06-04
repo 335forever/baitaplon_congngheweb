@@ -150,8 +150,8 @@ function RegisterContent(props) {
           </div>
           <div className="option" id="signUpSuggest">
             <label>Bạn đã có tài khoản?</label>
-            <Link color="red" to="/signin">
-              {"Đăng nhập"}
+            <Link to="/signin">
+              <div style={{ color: "#db4444", fontWeight: "700" }}>Đăng nhập</div>
             </Link>
           </div>
           <div className="option" display={"flex"}>
@@ -164,7 +164,7 @@ function RegisterContent(props) {
               padding="2rem 2.5rem"
               variant="solid"
             >
-              {isLogging ? <CircularProgress isIndeterminate color="white"/> : "Đăng ký"}
+              {isLogging ? <CircularProgress isIndeterminate color="white" /> : "Đăng ký"}
             </Button>
             <div
               style={{
@@ -179,7 +179,7 @@ function RegisterContent(props) {
           </div>
         </div>
       </div>
-    </ChakraProvider>
+    </ChakraProvider >
   );
 }
 

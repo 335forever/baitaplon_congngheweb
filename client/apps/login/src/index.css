@@ -4,6 +4,7 @@
     flex-wrap: wrap;
     gap: 10px;
     margin-left: 9.4%;
+    margin-right: 9.4%;
     justify-content: center;
     flex-grow: 1;
 
@@ -22,6 +23,13 @@
     display: flex;
     gap: 10px;
     justify-content: flex-end;
+}
+
+#otp {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
 }
 
 .login-input {
@@ -63,12 +71,12 @@
     width: 100%;
     margin: 40px 0px;
     padding: 0px 10px;
-    
+
     label {
         font-family: 'Quicksand';
         font-size: 1rem;
     }
-    
+
     p {
         font-family: 'Quicksand';
         font-size: 16px;
