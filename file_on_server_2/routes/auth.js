@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const pool = require('../db');
 const bcrypt = require('bcrypt');
-const pool = require('../db'); 
-const { generateToken, authenticate } = require('../func');
+const { generateToken, authenticate, hashPassword} = require('../func');
 require('dotenv').config();
 
 // Đăng nhập
@@ -80,7 +80,7 @@ router.post('/signup', async (req, res) => {
         const address = req.body.address || null;
 
         // Tạo user mới
-        const hashedPassword = bcrypt.hashSync(password, parseInt(process.env.password_salt_rounds, 10)); 
+        const hashedPassword = hashPassword(password); 
         await connection.execute(
             `INSERT INTO m_account (username, password, name, email, phone, address, birthday) VALUES (?, ?, ?, ?, ?, ?, ?)`,
             [username, hashedPassword, name, email, phone, address, dob]
@@ -112,7 +112,7 @@ router.put('/update', authenticate, async (req, res) => {
         Object.keys(newData).forEach(key => {
             if (key === 'password') {
                 updateQuery += ` ${key} = ?,`;
-                updateValues.push(bcrypt.hashSync(newData[key], parseInt(process.env.password_salt_rounds, 10)));
+                updateValues.push(hashPassword(newData[key]));
             } 
             else if (key === 'name' || key === 'email' || key === 'phone' || key === 'address' || key === 'birthday'){
                 updateQuery += ` ${key} = ?,`;
@@ -161,6 +161,37 @@ router.get('/getuserinfo', authenticate, async (req, res) => {
         return res.status(200).json({msg:'success',userInfo});
     } catch (error) {
         console.error('Get infor fail:', error);
+        return res.status(500).json({ error: error.message });
+    }
+});
+
+
+// Quên mật khẩu
+router.post('/forgotpassword/otp',async (req, res) => {
+    const username = req.body.username;
+    if (!username) return res.status(400).json({error:'Missing username'});
+    try {
+        const connection = await pool.getConnection();
+     
+        const [user] = await connection.execute(
+            'SELECT * FROM m_account WHERE username = ?',
+            [username]
+        );
+
+        if (user.length === 0) {
+            connection.release();
+            return res.status(404).json({error:'Invalid username'});
+        }
+
+        if (!user[0].email) {
+            connection.release();
+            return res.status(404).json({error:'No information about secure email'});
+        }
+        
+        connection.release();
+        return res.status(200).json({msg:'success', user});
+    } catch (error) {
+        console.error('Get OTP fail:', error);
         return res.status(500).json({ error: error.message });
     }
 });

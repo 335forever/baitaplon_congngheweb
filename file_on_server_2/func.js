@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const pool = require('./db');  // Import pool kết nối từ file db.js
+const nodemailer = require('nodemailer');
+const bcrypt = require('bcrypt');
 
 // Nếu sử dụng tệp .env để quản lý biến môi trường
 require('dotenv').config();
@@ -102,6 +104,36 @@ function checkImagesFields(images, numberOfFields) {
         }
     }
     return false;  // Không tìm thấy trường hợp lệ nào
+};
+
+function hashPassword(password) {
+    return bcrypt.hashSync(password, parseInt(process.env.password_salt_rounds, 10)); 
 }
 
-module.exports = { generateToken, authenticate, getImagesByProductId, checkImagesFields};
+const sendEmail = async (toEmail, htmlContent) => {
+    // Tạo transporter với thông tin tài khoản email của bạn
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.APP_PASSWORD
+        }
+      });
+
+    // Tạo email options
+    let mailOptions = {
+        from: process.env.EMAIL,
+        to: toEmail,
+        subject: 'Kính chào quý khách',
+        html: htmlContent
+    };
+
+    // Gửi email
+    try {
+        let info = await transporter.sendMail(mailOptions);
+        console.log('Email sent: ' + info.response);
+    } catch (error) {
+        console.log('Error: ' + error.message);
+    }
+};
+module.exports = { generateToken, authenticate, getImagesByProductId, checkImagesFields, sendEmail, hashPassword};
