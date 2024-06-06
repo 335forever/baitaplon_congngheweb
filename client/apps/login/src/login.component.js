@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import brand from "../assets/images/brand.svg";
 import { Button, ChakraProvider, CircularProgress, useToast } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -30,13 +30,13 @@ export function Login(props) {
         form,
         (res) => {
           localStorage.setItem("token", res.data.token);
-          toast({
-            title: "Đăng nhập thành công!",
-            duration: 1000,
-            isClosable: false,
-            status: "success",
-          });
-          navigateToUrl(urlParams.get("redirect") || '/');
+          // toast({
+          //   title: "Đăng nhập thành công!",
+          //   duration: 1000,
+          //   isClosable: false,
+          //   status: "success",
+          // });
+          navigateToUrl(urlParams.get("redirect") || '/otp');
           console.log(res);
         },
         (res) => console.log(res)
@@ -145,7 +145,7 @@ export function Login(props) {
           <div className="option" id="signUpSuggest">
             <label>Bạn chưa có tài khoản?</label>
             <Link color="red" to="/signup">
-              Đăng ký
+              <div style={{ color: "#db4444", fontWeight: "700" }}>Đăng ký</div>
             </Link>
           </div>
           <div className="option" display={"none"}>
@@ -159,7 +159,7 @@ export function Login(props) {
               variant="solid"
               disabled={isLogging}
             >
-              {isLogging ? <CircularProgress isIndeterminate color="white"/> : "Đăng nhập"}
+              {isLogging ? <CircularProgress isIndeterminate color="white" /> : "Đăng nhập"}
             </Button>
             <div
               style={{
