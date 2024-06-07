@@ -1,10 +1,15 @@
-import { faArrowLeft, faArrowRight, faCamera } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faCamera, faShop, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Section } from "@TachMonShop/styleguide";
 import { useState } from "react";
+import { useQuery } from "react-query";
+
+import { getCategories } from "../../controllers/categories.controller";
 
 import "./styles/browse-categories.css"
 export function BrowseCategories() {
+    
+    const {data, error, isLoading} = useQuery(["categories"], getCategories);
     const [index, setIndex] = useState(0);
 
     function decrease() {
@@ -17,9 +22,9 @@ export function BrowseCategories() {
 
     return (<Section title="Chọn danh mục" subtitle="Danh mục" controller={<BrowseCategoriesController />}>
         <div style={{display: 'flex', gap: '30px', margin: '40px 0px', overflow: 'scroll'}}>
-            {Array(10).fill(<button className="category-browser">
-                <FontAwesomeIcon icon={faCamera} />
-                <p>Camera</p>
+            {!isLoading && !error && data.map(e => <button className="category-browser">
+                <FontAwesomeIcon icon={faShoppingBag} />
+                <p>{e.name}</p>
             </button>)}
         </div>
     </Section>);

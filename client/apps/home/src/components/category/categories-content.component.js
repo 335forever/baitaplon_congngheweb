@@ -5,13 +5,13 @@ import { CategoryItem } from "./category-item.component";
 import "./styles/category.css";
 
 export function CategoriesContent() {
-  const query = useQuery(['categories'], getCategories, { suspense: true });
-
+  const {data, error} = useQuery(["categories"], getCategories, { suspense: true });
+ 
   return (
     <>
-      {query.data.map((e) => (
-        <CategoryItem key={e.name} category={e} />
-      ))}
+      {data
+        .map((e) => <CategoryItem key={e.name} category={e} />)
+        .slice(0, 10)}
     </>
   );
 }
