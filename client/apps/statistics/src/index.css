@@ -1,0 +1,20 @@
+.wrapepr {
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    margin-left: 7%;
+    width: 1000px;
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url('../assets/fonts/Quicksand.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media (min-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
