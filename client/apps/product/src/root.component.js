@@ -1,12 +1,14 @@
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
+import { QueryClientProvider, QueryClient } from "react-query";
 import "./root.css";
 import { productStore } from "./controllers/product.store";
-import { ProductPage } from './components/product.component';
+import { ProductPage } from "./components/product.component";
 // :shopId/:productId
 export default function Root(props) {
   const product = {
     name: "PlayStation PS5 Hàng chính hãng Trung Quốc nội địa",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus arcu eleifend nunc fermentum scelerisque. Phasellus imperdiet pellentesque nisi egestas lobortis. In pharetra enim sed maximus porttitor. Duis aliquam congue egestas. Fusce gravida justo et porta gravida. Integer venenatis sapien in leo interdum, ut lobortis sem consequat. In porttitor, mauris quis dapibus cursus, sapien mauris cursus neque, sit amet rhoncus ante sem bibendum tellus. Vivamus condimentum velit sed eros mattis fringilla. Nam venenatis tristique orci, at sollicitudin lorem interdum sit amet. Aliquam eu commodo nibh, non luctus odio. Aliquam vitae risus ante. Maecenas volutpat non tellus sed luctus. Vestibulum nec neque consequat, tempus leo sit amet, sollicitudin nisi. In laoreet sagittis elit. Curabitur efficitur, mi nec pulvinar dignissim, velit metus varius urna, ac ultrices justo lectus eu lacus. Duis et lacus dictum, consequat tellus at, maximus orci.",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus arcu eleifend nunc fermentum scelerisque. Phasellus imperdiet pellentesque nisi egestas lobortis. In pharetra enim sed maximus porttitor. Duis aliquam congue egestas. Fusce gravida justo et porta gravida. Integer venenatis sapien in leo interdum, ut lobortis sem consequat. In porttitor, mauris quis dapibus cursus, sapien mauris cursus neque, sit amet rhoncus ante sem bibendum tellus. Vivamus condimentum velit sed eros mattis fringilla. Nam venenatis tristique orci, at sollicitudin lorem interdum sit amet. Aliquam eu commodo nibh, non luctus odio. Aliquam vitae risus ante. Maecenas volutpat non tellus sed luctus. Vestibulum nec neque consequat, tempus leo sit amet, sollicitudin nisi. In laoreet sagittis elit. Curabitur efficitur, mi nec pulvinar dignissim, velit metus varius urna, ac ultrices justo lectus eu lacus. Duis et lacus dictum, consequat tellus at, maximus orci.",
     isInStock: true,
     reviewCount: 150,
     images: [
@@ -17,13 +19,23 @@ export default function Root(props) {
       "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/may-choi-game-sony-playstation-5-slim.png",
     ],
     colors: ["white", "yellow", "green"],
-    sizes: ["XS", "S", "M", "L", "XL"]
-  }
+    sizes: ["XS", "S", "M", "L", "XL"],
+  };
 
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+      },
+    },
+  });
 
   return (
-    <Provider store={productStore}>
-      <ProductPage product={product}/>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={productStore}>
+        <ProductPage />
+      </Provider>
+    </QueryClientProvider>
   );
 }

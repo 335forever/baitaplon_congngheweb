@@ -7,7 +7,7 @@ import "./product.css";
 
 function _Product({product}) {
   function handleNavigate() {
-    navigateToUrl("/shop-cua-hang-nao-do/product-do-nao-do");
+    navigateToUrl(`/shop-${product.shoperID}/product-${product.productID}`);
   }
   return (
     <div className="product">

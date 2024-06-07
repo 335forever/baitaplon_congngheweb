@@ -5,23 +5,15 @@ const instance = axios.create({
   timeout: 3000,
 });
 
-export async function addProductToCart(
-  { productId, quantity },
-  onResolve,
-  onReject
-) {
-  try {
-    const form = { productId, quantity };
-    const res = await instance.post("/add", form, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-    if ([200, 201].indexOf(res.status) != -1) onResolve(res);
-    else onReject(res);
-  } catch (err) {
-    onReject(err);
-  }
+export async function addProductToCart({ productId, quantity }) {
+  const form = { productId, quantity };
+  const res = await instance.post("/add", form, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  });
+  if ([200, 201].indexOf(res.status) != -1) return res;
+  else throw res;
 }
 
 export async function getCart(onReject, onResolve) {
@@ -36,21 +28,17 @@ export async function getCart(onReject, onResolve) {
   }
 }
 
-export async function updateCart(
-    { productId, quantity },
-    onResolve,
-    onReject
-  ) {
-    try {
-      const form = { productId, quantity };
-      const res = await instance.put("/update", form, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
-      if ([200, 201].indexOf(res.status) != -1) onResolve(res);
-      else onReject(res);
-    } catch (err) {
-      onReject(err);
-    }
+export async function updateCart({ productId, quantity }, onResolve, onReject) {
+  try {
+    const form = { productId, quantity };
+    const res = await instance.put("/update", form, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    if ([200, 201].indexOf(res.status) != -1) onResolve(res);
+    else onReject(res);
+  } catch (err) {
+    onReject(err);
   }
+}
