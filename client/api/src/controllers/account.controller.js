@@ -6,7 +6,7 @@ const instance = axios.create({
 export async function signIn(form, onResolve, onReject) {
   console.log(form);
   try {
-    const res = await axios.post(process.env.SERVER_API_ENDPOINT, {
+    const res = await instance.post('/login', {
       ...form,
       action: "signin",
     });
@@ -19,7 +19,7 @@ export async function signIn(form, onResolve, onReject) {
 
 export async function signUp(form, onResolve, onReject) {
   try {
-    const res = await axios.post(process.env.SERVER_API_ENDPOINT, {
+    const res = await instance.post('/signup', {
       ...form,
       action: "signup",
     });
