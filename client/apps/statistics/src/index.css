@@ -1,14 +1,151 @@
-.wrapepr {
-    background-color: gray;
+.best-seller {
+    align-items: center;
+    display: flex;
+    font-family: 'Inter';
+    font-size: 14px;
+    padding: 24px 0px;
+}
+
+#best-sellers {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    flex-grow: 806;
+    max-height: 525px;
+    padding: 24px;
+}
+
+#detail {
+    display: flex;
+    gap: 20px;
+}
+
+.detail-label {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    color: #3b4758;
+    display: flex;
+    font-family: 'Quicksand';
+    font-size: 16px;
+    font-weight: 700;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.detail-property {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    color: #7d8fa9;
+    display: flex;
+    font-family: 'Quicksand';
+    font-size: 12px;
+    padding-bottom: 7px;
+    padding-top: 7px;
+}
+
+.order {
+    align-items: center;
+    display: flex;
+    font-family: 'Inter';
+    padding: 8px 0px;
+}
+
+.order-customer {
+    font-family: 'Inter';
+}
+
+.order-status {
+    align-items: center;
+    border-radius: 9px;
+    display: flex;
+    flex: 1 0 19.14%;
+    flex-grow: 74;
+    gap: 4px;
+    padding: 3px 8px;
+}
+
+#overall {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.prop-receipt {
+    flex: 1 0 29.26%
+}
+
+.range-date {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.range-label {
+    font-family: 'Inter';
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#recent-order {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    flex-grow: 474;
+    max-height: 392px;
+    padding: 24px;
+}
+
+.summarize {
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+.summarize-icon {
+    align-items: center;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    height: 36px;
+    width: 36px;
+}
+
+.summarize-label {
+    color: #586ab4;
+    font-size: 14px;
+}
+
+.summarize-total {
+    font-family: 'Inter';
+    font-size: 24px;
+    font-weight: 700;
+}
+
+th {
+    font-family: 'Quicksand';
+    font-size: 12px;
+    font-weight: 500;
+    text-align: start;
+}
+
+#wrapper {
     display: flex;
     flex-direction: column;
-    margin-left: 7%;
-    width: 1000px;
+    font-family: 'Quicksand';
+    gap: 24px;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-top: 32px;
 }
 
 @font-face {
     font-family: 'Quicksand';
     src: url('../assets/fonts/Quicksand.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
