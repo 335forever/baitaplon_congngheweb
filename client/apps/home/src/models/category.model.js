@@ -1,10 +1,11 @@
 export default class Category {
-    constructor(name, sub) {
+    constructor(id, name, sub) {
+        this.id = id;
         this.name = name;
         this.sub = sub ?? [];
     }
 
     get getLink() {
-        return `/category?name=${encodeURIComponent(this.name)}`
+        return `/search?categoryID=${encodeURIComponent(this.id)}`
     }
 }

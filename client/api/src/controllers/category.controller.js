@@ -7,8 +7,8 @@ const instance = axios.create({
 export async function getCategories() {
   const response = await instance.get("/get/categories");
   if (response.status === 200) {
-  return response.data['categories'];
-   }
+    return response.data['categories'];
+  }
   else throw new AxiosError(response.data.message, response.data.status);
   
 }
