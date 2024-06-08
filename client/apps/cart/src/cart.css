@@ -1,0 +1,17 @@
+.btn {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    padding: 10px;
+    width: fit-content;
+    border-radius: 4px;
+    text-align: center;
+    vertical-align: center;
+}
+
+.btn:hover {
+    background-color: hsl(from var(--color-danger) h s calc(0.8*l));
+}
+
+.btn:active {
+    background-color: hsl(from var(--color-danger) h s calc(0.5*l));
+}
