@@ -10,6 +10,7 @@ import { theme } from "./root.component";
 import "./index.css";
 
 export function Login(props) {
+  document.title = "TachMonShop | Đăng nhập"
   const [form, setForm] = React.useState({
     action: "signin",
     username: null,

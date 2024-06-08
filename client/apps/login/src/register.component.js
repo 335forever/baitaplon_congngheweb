@@ -15,6 +15,7 @@ function RegisterContent(props) {
   const toast = useToast();
   const dispatch = useDispatch();
   const form = useSelector((state) => state.signUpForm)
+  document.title = "TachMonShop | Đăng ký"
 
   const sign = async () => {
     if (validate()) {

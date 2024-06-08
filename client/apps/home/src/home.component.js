@@ -15,6 +15,7 @@ import "./home.css";
 import { Warranty } from "./components/sections/warranty.component";
 
 export default function HomePage(props) {
+  document.title = "TachMonShop | Trang chủ";
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {

@@ -73,6 +73,7 @@ function ProductListController({ decrease, increase }) {
 }
 
 export default function Root() {
+  document.title = "TachMonShop | Tìm kiếm"
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {

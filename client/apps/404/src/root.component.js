@@ -4,6 +4,7 @@ import Parcel from "single-spa-react/parcel";
 import "./root.css";
 
 export default function Root(props) {
+  document.title = "TachMonShop | Lỗi 404"
   return (
     <BrowserRouter>
       <article id="page-404">

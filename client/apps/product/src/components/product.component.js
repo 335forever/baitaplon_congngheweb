@@ -21,12 +21,11 @@ async function getProduct() {
   const [_, shopId, productId] = window.location.pathname.match(
     /shop-([0-9]+)\/product-([0-9]+)/
   );
-  console.log({product: await findProduct({
-    productId,
-  }), shopId});
-  return {product: await findProduct({
+  const result = {product: await findProduct({
     productId,
   }), shopId};
+  document.title = `TachMonShop | ${result.product.name}`;
+  return result;
 }
 export function ProductPage() {
   const {data, error, isLoading} = useQuery(["product"], getProduct);

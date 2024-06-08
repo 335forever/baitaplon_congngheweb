@@ -10,6 +10,7 @@ import Parcel from "single-spa-react/parcel";
 import {Section} from "@TachMonShop/styleguide";
 
 export default function Wishlist(props) {
+  document.title = "TachMonShop | Yêu thích"
   const wishlistItems = [
     {
       name: "Gucci duffle bag",
