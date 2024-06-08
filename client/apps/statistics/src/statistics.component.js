@@ -96,14 +96,25 @@ const bestSellers = [
   }
 ];
 export default function statistics(props) {
+  var today = new Date();
+
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth()).padStart(2, '0');
+  var yyyy = today.getFullYear();
+
+  const [fromDate, setFromDate] = React.useState(yyyy + '-' + mm + '-' + dd);
+
+  mm = String(today.getMonth() + 1).padStart(2, '0');
+  const [toDate, setToDate] = React.useState(yyyy + '-' + mm + '-' + dd);
+
   return (
     <ChakraProvider>
       <div id="wrapper">
         <div style={{ "display": "flex", "gap": "10px" }}>
           <div className="range-label">Thống kê từ</div>
-          <div className="range-date">01/01/2024</div>
-          <div className="range-label">Thống kê từ</div>
-          <div className="range-date">31/01/2024</div>
+          <input type="date" className="range-date" onChange={(e) => setFromDate(e.target.value)} value={fromDate}></input>
+          <div className="range-label">Thống kê đến</div>
+          <input type="date" className="range-date" max={today} onChange={(e) => setToDate(e.target.value)} value={toDate}></input>
         </div>
         <div id="overall">
           <Summarize label="DOANH THU THÁNG" total={35000000} unit="VND" percent={6.50} icon={icRevenue} iconColor="#00ff66" />

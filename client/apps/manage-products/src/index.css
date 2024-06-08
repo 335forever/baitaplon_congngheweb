@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Quicksand';
+    src: url('../assets/fonts/Quicksand.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media (min-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
