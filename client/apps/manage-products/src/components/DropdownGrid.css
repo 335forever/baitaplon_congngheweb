@@ -32,6 +32,8 @@ button:hover {
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  font-family: 'Quicksand';
+  font-size: 16px;
   justify-content: center;
   min-height: 100px;
   min-width: 100px;

@@ -11,7 +11,7 @@ import icGame from "../../assets/images/ic_game.svg";
 
 function DropdownGrid() {
   const [isOpen, setIsOpen] = useState(false);
-  const [option, setOption] = useState('Di động');
+  const [option, setOption] = useState('Tất cả');
 
   const options = [
     { label: 'Tất cả' },
@@ -25,11 +25,11 @@ function DropdownGrid() {
 
   return (
     <div className="dropdown-container">
-      <button onClick={() => setIsOpen(!isOpen)}>Chọn Danh Mục</button>
+      <button onClick={() => setIsOpen(!isOpen)}>{option}</button>
       {isOpen && (
         <div className="grid-container">
           {options.map((option, index) => (
-            <button>
+            <button onClick={(e) => { setIsOpen(false); setOption(option.label); }}>
               <div key={index} className="grid-item">
                 {option.icon != null ? <span className="icon"><img src={option.icon} /></span> : <div />}
                 <span className="label">{option.label}</span>
