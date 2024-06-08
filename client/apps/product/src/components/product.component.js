@@ -66,7 +66,7 @@ export function ProductPage({ product }) {
             <div></div>
             <p id="product-review-count">{`(${product.reviewCount} đánh giá)`}</p>
             <p>|</p>
-            <p style={{color: product.isInStock ? "lime" : "var(--color-danger)"}}>{product.isInStock ? "Còn hàng" : "Đã hết hàng"}</p>
+            <p style={{ color: product.isInStock ? "lime" : "var(--color-danger)" }}>{product.isInStock ? "Còn hàng" : "Đã hết hàng"}</p>
           </div>
           <em>14.000.000đ</em>
           <div id="product-description">
@@ -135,7 +135,7 @@ export function ProductPage({ product }) {
           </div>
           <div id="product-services">
             <div className="flex">
-              <img src={Icons.delivery}/>
+              <img src={Icons.delivery} />
               <div>
                 <h6>Giao hàng miễn phí</h6>
                 <p>Nhập code ngay hôm nay tại đây</p>
@@ -143,7 +143,7 @@ export function ProductPage({ product }) {
             </div>
             <hr />
             <div className="flex">
-              <img src={Icons.returnIcon}/>
+              <img src={Icons.returnIcon} />
               <div>
                 <h6>Hoàn trả</h6>
                 <span>Chấp nhận hoàn trả miễn phí trong 30 ngày. </span>
