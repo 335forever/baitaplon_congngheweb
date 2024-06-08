@@ -78,7 +78,7 @@ const authenticate = async (req, res, next) => {
 const getImagesByProductId = async (productId) => {
     const connection = await pool.getConnection();
     const [images] = await connection.execute(
-        "SELECT * FROM m_productImage WHERE productId = ?",
+        "SELECT * FROM m_productimage WHERE productId = ?",
         [productId]
     );
     connection.release();
