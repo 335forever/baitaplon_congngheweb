@@ -10,7 +10,7 @@ export async function getSearchSuggestions({ search }, onResolve, onReject) {
         gl: "vn",
       },
       headers: {
-        "Content-Type": "application/xml"
+        "Content-Type": "application/xml",
       }
     });
     if (response.status === 200) {

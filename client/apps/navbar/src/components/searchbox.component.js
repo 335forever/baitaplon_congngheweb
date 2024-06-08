@@ -26,13 +26,13 @@ export default function SearchBox(props) {
   function handleSubmit(_event) {
     setShowSuggestion(false);
     setSuggestions([]);
-    if (input) navigateToUrl(`/search?q=${input}`);
+    if (input) navigateToUrl(`/search?name=${input}`);
   }
 
   function handleChooseSuggestion(suggestion) { 
     setInput(suggestion);
     setShowSuggestion(false);
-    navigateToUrl(`/search?q=${suggestion}`);
+    navigateToUrl(`/search?name=${suggestion}`);
   }
 
   useLayoutEffect(() => {

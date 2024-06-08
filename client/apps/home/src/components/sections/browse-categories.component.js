@@ -7,6 +7,7 @@ import { useQuery } from "react-query";
 import { getCategories } from "../../controllers/categories.controller";
 
 import "./styles/browse-categories.css"
+import { navigateToUrl } from "single-spa";
 export function BrowseCategories() {
     
     const {data, error, isLoading} = useQuery(["categories"], getCategories);
@@ -22,7 +23,9 @@ export function BrowseCategories() {
 
     return (<Section title="Chọn danh mục" subtitle="Danh mục" controller={<BrowseCategoriesController />}>
         <div style={{display: 'flex', gap: '30px', margin: '40px 0px', overflow: 'scroll'}}>
-            {!isLoading && !error && data.map(e => <button className="category-browser">
+            {!isLoading && !error && data.map(e => <button className="category-browser" onClick={() => {
+                navigateToUrl(e.getLink)
+            }}>
                 <FontAwesomeIcon icon={faShoppingBag} />
                 <p>{e.name}</p>
             </button>)}

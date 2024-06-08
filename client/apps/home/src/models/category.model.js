@@ -6,6 +6,6 @@ export default class Category {
     }
 
     get getLink() {
-        return `/search?categoryID=${encodeURIComponent(this.id)}`
+        return `/search?categoryId=${encodeURIComponent(this.id)}`
     }
 }

@@ -11,7 +11,7 @@ for /F "tokens=1,2 delims=," %%A in (modules.csv) do (
     echo %cd%
     if exist package.json (
         yarn install
-        start "" yarn start:standalone
+        start "%%A" yarn start:standalone 
     )
     cd %CURRENT_LOCATION%
 )

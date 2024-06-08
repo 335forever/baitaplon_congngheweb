@@ -35,8 +35,17 @@ function AccountPopup({ onClickOnPopup }) {
     location.reload();
   }
 
+  function navigateToAccount() {
+    navigateToUrl('/account');
+  }
+
   return (
     <ul id="login-popup">
+      <li
+        onClick={funcPopout(navigateToAccount)}
+      >
+        Tài khoản
+      </li>
       <li
         onClick={funcPopout(handleLogout)}
         style={{ color: "var(--color-danger)" }}

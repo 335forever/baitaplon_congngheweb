@@ -63,7 +63,8 @@ export function ProductPage() {
       await addProductToCart({product: product.productId, quantity: productState.count});
       navigateToUrl('/cart');
     }
-    catch (err) { 
+    catch (err) {
+      if (err.response.status === 401) navigateToUrl(`/signin?redirect=${encodeURIComponent(window.location.href)}`)
       console.log(err);
     }
   }
