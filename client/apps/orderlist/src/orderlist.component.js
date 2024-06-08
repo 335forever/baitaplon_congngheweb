@@ -40,7 +40,7 @@ const orders = [
   }
 ]
 
-export default function orderlist(props) {
+export default function orderlist() {
   const [mode, setMode] = useState(0);
 
   return (

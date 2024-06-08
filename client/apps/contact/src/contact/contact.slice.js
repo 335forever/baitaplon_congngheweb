@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as signUpFormReducers from "./signup.reducer"
+import * as signUpFormReducers from "./contact.reducer"
 
 const signUpFormSlice = createSlice({
     name: "signUpForm",

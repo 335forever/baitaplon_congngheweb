@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import singleSpaReact from "single-spa-react";
-import Orderlist from "./orderlist.component.js";
+import ManageProduct from "./manage-products.component.js";
 
 const lifecycles = singleSpaReact({
   React,
   ReactDOM,
-  rootComponent: Orderlist,
+  rootComponent: ManageProduct,
   errorBoundary(err, info, props) {
     return null;
   },

@@ -1,5 +1,5 @@
 {
-  "name": "@TachMonShop/contact",
+  "name": "@TachMonShop/statistics",
   "scripts": {
     "start": "webpack serve",
     "start:standalone": "webpack serve --env standalone",

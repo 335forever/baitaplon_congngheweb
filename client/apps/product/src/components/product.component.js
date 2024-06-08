@@ -21,14 +21,16 @@ async function getProduct() {
   const [_, shopId, productId] = window.location.pathname.match(
     /shop-([0-9]+)\/product-([0-9]+)/
   );
-  const result = {product: await findProduct({
-    productId,
-  }), shopId};
+  const result = {
+    product: await findProduct({
+      productId,
+    }), shopId
+  };
   document.title = `TachMonShop | ${result.product.name}`;
   return result;
 }
 export function ProductPage() {
-  const {data, error, isLoading} = useQuery(["product"], getProduct);
+  const { data, error, isLoading } = useQuery(["product"], getProduct);
   const [isDescriptionExtended, setIsDescriptionExtended] = useState(false);
   const [index, setIndex] = useState(0);
 
@@ -59,7 +61,7 @@ export function ProductPage() {
 
   async function addToCart() {
     try {
-      await addProductToCart({product: product.productId, quantity: productState.count});
+      await addProductToCart({ product: product.productId, quantity: productState.count });
       navigateToUrl('/cart');
     }
     catch (err) {
@@ -83,7 +85,7 @@ export function ProductPage() {
 
   if (isLoading) return <article>Đang tải</article>;
   if (error) return <article>Vui lòng tải lại</article>;
-  let {product, shopId} = data;
+  let { product, shopId } = data;
   let images = Array.from(Object.values(product.images));
   images.push(...images);
   return (
@@ -93,7 +95,7 @@ export function ProductPage() {
         names={["Trang chủ", `Shop ${shopId}`, product.name]}
       />
       <section id="product-main-content">
-        {images.slice(index + 1,index + 5).map((src) => (
+        {images.slice(index + 1, index + 5).map((src) => (
           <div className="product-image-gallery-container">
             <img src={src} />
           </div>
@@ -115,10 +117,10 @@ export function ProductPage() {
               {product.quantity > 0 ? "Còn hàng" : "Đã hết hàng"}
             </p>
           </div>
-          <em>{Intl.NumberFormat('vi', {style: 'currency', currency: 'VND'}).format(product.price)}</em>
+          <em>{Intl.NumberFormat('vi', { style: 'currency', currency: 'VND' }).format(product.price)}</em>
           {product.description ? <div id="product-description">
             {!isDescriptionExtended
-              ? product.description.slice(0, 150) + `${product.description.length <= 150 ? '': '...'}`
+              ? product.description.slice(0, 150) + `${product.description.length <= 150 ? '' : '...'}`
               : product.description}
             {product.description.length > 150 && <span
               onClick={() => setIsDescriptionExtended(!isDescriptionExtended)}
@@ -161,7 +163,7 @@ export function ProductPage() {
                   </div>
                 ))}
             </div>
-          </div> }
+          </div>}
           <div className="flex py-2 gap-4">
             <div id="product-count" className="flex">
               <button onClick={() => dispatch(productActions.decreaseCount())}>
@@ -174,7 +176,7 @@ export function ProductPage() {
                   handleCountChange(e);
                 }}
               />
-              <button onClick={() => {if (productState.count < product.quantity) dispatch(productActions.increaseCount())}}>
+              <button onClick={() => { if (productState.count < product.quantity) dispatch(productActions.increaseCount()) }}>
                 +
               </button>
             </div>
