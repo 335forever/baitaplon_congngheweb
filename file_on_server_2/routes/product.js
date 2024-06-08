@@ -9,7 +9,7 @@ router.get('/get/categories', async (req, res) => {
         const connection = await pool.getConnection();
 
         const [categories] = await connection.execute(
-            "SELECT * FROM m_productCategory"
+            "SELECT * FROM m_productcategory"
         );
         
         connection.release();
@@ -293,7 +293,7 @@ router.put('/update', authenticate, async (req, res) => {
         // Tiếp tục cập nhật images nếu có
         if (checkImagesFields(images,6)) {
             // Chuẩn bị câu truy vấn
-            let updateQuery = "UPDATE m_productImage SET ";
+            let updateQuery = "UPDATE m_productimage SET ";
             let updateValues = [];
             for (let i = 1; i <= 6; i++) {
                 const fieldName = `image${i}`;
