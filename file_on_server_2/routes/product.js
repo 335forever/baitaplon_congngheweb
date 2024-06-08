@@ -202,7 +202,7 @@ router.post('/add', authenticate, async (req, res) => {
             const imageURL = images[`image${i}`];
             imageValues.push(imageURL || null); // Nếu không có giá trị imageURL, đưa vào null
         }
-        const sql = `INSERT INTO m_productImage (productID, image1, image2, image3, image4, image5, image6) VALUES (?,?,?,?,?,?,?)`;
+        const sql = `INSERT INTO m_productimage (productID, image1, image2, image3, image4, image5, image6) VALUES (?,?,?,?,?,?,?)`;
         const insertValues = [productId, ...imageValues];
         await connection.execute(sql, insertValues);
         connection.release();
@@ -349,7 +349,7 @@ router.delete('/remove',authenticate, async (req,res) => {
 
         // Thực hiện xóa product
         await connection.execute(
-            'DELETE FROM m_productImage WHERE productId = ?',
+            'DELETE FROM m_productimage WHERE productId = ?',
             [productId]
         );
         await connection.execute(
