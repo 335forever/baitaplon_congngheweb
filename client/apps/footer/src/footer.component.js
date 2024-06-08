@@ -1,4 +1,5 @@
 import { BrowserRouter, Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -13,9 +14,15 @@ import appleBadge from "../assets/apple-badge.svg";
 import qr from "../assets/qr.png";
 
 export default function Footer(props) {
+  const isTooSmall = useMediaQuery({query: '(max-width: 950px)'})
+  const isTooTiny = useMediaQuery({query: '(max-width: 650px)'})
+
   return (
-    <div id="footer" className="flex flex-col w-full bg-black items-center py-2">
-      <div className="max-w-5xl">
+    <div
+      id="footer"
+      className="flex flex-col w-full bg-black items-center py-2"
+    >
+      <div style={{ maxWidth: "1280px" }}>
         <div id="content" className="flex flex-row py-12 gap-4">
           <BrowserRouter>
             <div className="flex flex-col grow gap-1">
@@ -31,7 +38,8 @@ export default function Footer(props) {
                 </button>
               </div>
             </div>
-            <div className="flex flex-col grow gap-2.5">
+            {!isTooSmall && 
+            <div className="flex flex-col grow gap-2.5 hidden-md">
               <h2>Hỗ trợ</h2>
               <div className="flex flex-col gap-1">
                 <p>100 Đại Cồ Việt, Hai Bà Trưng</p>
@@ -39,67 +47,77 @@ export default function Footer(props) {
                 <p>hotro@tachmonshop.com</p>
                 <p>(+84) 012 345 6789</p>
               </div>
-            </div>
-            <div className="flex flex-col grow gap-2.5">
+            </div>}
+            {!isTooSmall && <div className="flex flex-col grow gap-2.5 hidden-md">
               <h2>Tài khoản</h2>
-              <div className="flex flex-col gap-1"><Link to="/account">Tài khoản của tôi</Link>
-              <Link to="/signin">Đăng nhập/Đăng ký</Link>
-              <Link to="/cart">Giỏ hàng</Link>
-              <Link to="/wishlist">Quan tâm</Link>
-              <Link to="/shop">Cửa hàng</Link></div>
-            </div>
-            <div className="flex flex-col grow gap-2.5">
+              <div className="flex flex-col gap-1">
+                <Link to="/account">Tài khoản của tôi</Link>
+                <div>
+                  <Link to="/signin">Đăng nhập</Link>/
+                  <Link to="/signup">Đăng ký</Link>
+                </div>
+                <Link to="/cart">Giỏ hàng</Link>
+                <Link to="/wishlist">Quan tâm</Link>
+                <Link to="/shop">Cửa hàng</Link>
+              </div>
+            </div>}
+            {!isTooTiny && <div className="flex flex-col grow gap-2.5  hidden-md">
               <h2>Lối tắt</h2>
-              <div className="flex flex-col gap-1"><Link to="/privacy">Điều khoản dịch vụ</Link>
-              <Link to="/terms">Chính sách</Link>
-              <Link to="/faq">Câu hỏi thường gặp</Link>
-              <Link to="/contact">Liên hệ</Link>
-              </div></div>
+              <div className="flex flex-col gap-1">
+                <Link to="/privacy">Điều khoản dịch vụ</Link>
+                <Link to="/terms">Chính sách</Link>
+                <Link to="/faq">Câu hỏi thường gặp</Link>
+                <Link to="/contact">Liên hệ</Link>
+              </div>
+            </div>
+            }
             <div className="flex flex-col grow gap-2.5">
               <h2>Tải ứng dụng</h2>
-              <div className="flex flex-col gap-1"><em>Tiết kiệm 100.000đ cho người mới</em>
-              <div className="flex flex-row h-20 flex-nowrap gap-1">
-                <div className="h-auto min-w-max">
-                  <img
-                    className="block w-full h-full object-contain"
-                    src={qr}
-                  />
-                </div>
-                <div className="flex flex-col h-auto ">
-                  <div className="h-1/2 grow">
-                  <Link to="/404">
+              <div className="flex flex-col gap-1">
+                <em>Tiết kiệm 100.000đ cho người mới</em>
+                <div className="flex flex-row h-20 flex-nowrap gap-1">
+                  <div className="h-auto min-w-max">
                     <img
                       className="block w-full h-full object-contain"
-                      src={googleBadge}
+                      src={qr}
                     />
-                    </Link>
                   </div>
-                  <div className="grow min-w-max">
-                    <Link to="/404">
-                    <img src={appleBadge} />
-                    </Link>
+                  <div className="flex flex-col h-auto ">
+                    <div className="h-1/2 grow">
+                      <Link to="/404">
+                        <img
+                          className="block w-full h-full object-contain"
+                          src={googleBadge}
+                        />
+                      </Link>
+                    </div>
+                    <div className="grow min-w-max">
+                      <Link to="/404">
+                        <img src={appleBadge} />
+                      </Link>
+                    </div>
                   </div>
                 </div>
+                <div className="flex flex-row gap-4">
+                  <Link to="/404">
+                    <FontAwesomeIcon icon={faFacebookF} />
+                  </Link>
+                  <Link to="/404">
+                    <FontAwesomeIcon icon={faTwitter} />
+                  </Link>
+                  <Link to="/404">
+                    <FontAwesomeIcon icon={faInstagram} />
+                  </Link>
+                  <Link to="/404">
+                    <FontAwesomeIcon icon={faLinkedinIn} />
+                  </Link>
+                </div>
               </div>
-              <div className="flex flex-row gap-4">
-                <Link to="/404">
-                  <FontAwesomeIcon icon={faFacebookF} />
-                </Link>
-                <Link to="/404">
-                  <FontAwesomeIcon icon={faTwitter} />
-                </Link>
-                <Link to="/404">
-                  <FontAwesomeIcon icon={faInstagram} />
-                </Link>
-                <Link to="/404">
-                  <FontAwesomeIcon icon={faLinkedinIn} />
-                </Link>
-              </div>
-            </div></div>
+            </div>
           </BrowserRouter>
         </div>
-        <p className="inter-light" id="credit">
-          &copy;Copyright Rimel 2022. All right reserved
+        <p className="quicksand-light" id="credit">
+          &copy;Copyright TachMonShop 2024. All right reserved
         </p>
       </div>
     </div>

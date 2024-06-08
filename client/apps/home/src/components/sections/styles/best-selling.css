@@ -1,0 +1,17 @@
+#best-selling-btn {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    width: 160px;
+    height: 55px;
+    border-radius: 4px;
+    text-align: center;
+    vertical-align: center;
+}
+
+#best-selling-btn:hover {
+    background-color: hsl(from var(--color-danger) h s calc(0.8*l));
+}
+
+#best-selling-btn:active {
+    background-color: hsl(from var(--color-danger) h s calc(0.5*l));
+}

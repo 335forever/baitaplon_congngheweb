@@ -17,7 +17,44 @@
   --color-onSecondary: #000000;
   --color-white: #fdfffc;
   --color-black: #171817;
-  --color-overlay: rgba(253, 255, 252, 0.8);
-  font-family: "Inter", san-serif;
+  --color-overlay: #b3b3b3;
+  font-family: "Quicksand", san-serif;
   font-weight: 400;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  background: transparent;
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  color: transparent;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 0px;
+}
+
+.default-btn:hover {
+  background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
+}
+
+.default-btn:active {
+  background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
 }

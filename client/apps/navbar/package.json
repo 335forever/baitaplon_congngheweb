@@ -1,7 +1,7 @@
 {
   "name": "@TachMonShop/navbar",
   "scripts": {
-    "start": "webpack serve --port 10000",
+    "start": "webpack serve",
     "start:standalone": "webpack serve --env standalone",
     "build": "concurrently yarn:build:*",
     "build:webpack": "webpack --mode=production",
@@ -45,16 +45,24 @@
     "webpack-merge": "^5.10.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mui/joy": "^5.0.0-beta.36",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "process": "^0.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-responsive": "^10.0.0",
     "react-router-dom": "^6.23.0",
     "react-scripts": "4.0.3",
+    "react-toast": "^1.0.3",
+    "single-spa": "^6.0.1",
     "single-spa-react": "^6.0.1"
   }
 }

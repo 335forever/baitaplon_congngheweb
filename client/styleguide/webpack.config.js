@@ -1,5 +1,8 @@
 const { mergeWithRules } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa-react");
+const {
+  container: { ModuleFederationPlugin },
+} = require("webpack");
 
 module.exports = (webpackConfigEnv) => {
   const defaultConfig = singleSpaDefaults({
@@ -17,8 +20,9 @@ module.exports = (webpackConfigEnv) => {
     },
   })(defaultConfig, {
     devServer: {
-      port: 11000
+      port: 11000,
     },
+    externals: [/@TachMonShop\/.+/],
     // customize the webpack config here
     module: {
       rules: [
@@ -36,6 +40,20 @@ module.exports = (webpackConfigEnv) => {
         },
       ],
     },
+    // plugins: [
+    //  new ModuleFederationPlugin({
+    //     shared: {
+    //       react: {
+    //         eager: true,
+    //         singleton: true,
+    //       },
+    //       "react-dom": {
+    //         eager: true,
+    //         singleton: true,
+    //       },
+    //     },
+    //   }),
+    // ], 
   });
 
   return config;

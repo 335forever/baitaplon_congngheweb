@@ -15,9 +15,13 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   return merge(defaultConfig, {
+    watch: true,
+    devServer: {
+      port: 9000
+    },
     // modify the webpack config however you'd like to by adding to this object
     plugins: [
-      new dotenv(),
+      // new dotenv(),
       new HtmlWebpackPlugin({
         inject: false,
         template: "src/index.ejs",
@@ -25,10 +29,17 @@ module.exports = (webpackConfigEnv, argv) => {
           isLocal: webpackConfigEnv && webpackConfigEnv.isLocal,
           orgName,
         },
+        favicon: "./public/icon-logo.png",
       }),
-      new ProvidePlugin({
-        process: 'process/browser'
-      })
+      // new ProvidePlugin({
+      //   process: 'process/browser'
+      // })
     ],
+    externals: {
+      "@TachMonShop/navbar": "//localhost:10000/TachMonShop-navbar.js",
+      "@TachMonShop/styleguide": "//localhost:11000/TachMonShop-styleguide.js",
+      "@TachMonShop/footer": "//localhost:10001/TachMonShop-footer.js",
+      "@TachMonShop/home": "//localhost:10002/TachMonShop-home.js"
+    }
   });
 };

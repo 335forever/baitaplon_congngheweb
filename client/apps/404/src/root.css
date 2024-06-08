@@ -1,0 +1,43 @@
+#page-404 {
+    padding: 80px 0;
+    text-align: center;
+
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        width: 100%;
+        margin: 40px 0;
+    }
+
+    section>a {
+        display: flex;
+        border-radius: 4px;
+        height: 56px;
+        width: 254px;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--color-danger);
+        color: var(--color-white)
+    }
+
+    section>a:hover {
+        background-color: hsl(from var(--color-danger) h s calc(0.8*l));
+    }
+
+    section>a:active {
+        background-color: hsl(from var(--color-danger) h s calc(0.5*l));
+    }
+}
+
+#text-404 {
+    font-size: 60px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    #page-404 {
+        padding: 20px 0;
+    }
+}

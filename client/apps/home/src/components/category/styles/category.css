@@ -1,0 +1,26 @@
+.category {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 16px 16px 16px 0;
+}
+
+.category:hover {
+    background-color: var(--color-secondary);
+}
+
+.category button {
+    height: 24px;
+    width: 24px;
+    aspect-ratio: 1;
+}
+
+.category button :first-child {
+    height: 16px;
+    width: 16px;
+    aspect-ratio: 1;
+}

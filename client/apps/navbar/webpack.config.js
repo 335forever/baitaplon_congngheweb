@@ -11,14 +11,19 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   return merge(defaultConfig, {
+    watch: true,
+    devServer: {
+      port: 10000,
+    },
     // modify the webpack config however you'd like to by adding to this object
     plugins: [
       new ProvidePlugin({
-        process: 'process/browser'
-      })
+        process: "process/browser",
+      }),
     ],
-    devServer: {
-      port: 10000
+    externals: {
+      "@TachMonShop/styleguide": "//localhost:11000/TachMonShop-styleguide.js",
+      "@TachMonShop/api": "//localhost:3939/TachMonShop-api.js",
     },
   });
 };

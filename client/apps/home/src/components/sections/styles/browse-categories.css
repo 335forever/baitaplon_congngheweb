@@ -1,0 +1,52 @@
+#browse-categories-controller {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    > button {
+        display: relative;
+        background-color: var(--color-secondary);
+        height: 45px;
+        width: 45px;
+        border-radius: 22.5px;
+
+        > * {
+            display: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    }
+}
+
+.category-browser {
+    min-width: 170px;
+    max-width: 170px;
+    height: 145px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid var(--color-overlay);
+    border-radius: 4px;
+
+    * {
+        color: var(--color-primary);
+    }
+
+    :first-child {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+.category-browser:hover {
+    background-color: var(--color-danger);
+    border: none;
+    cursor: pointer;
+    * {
+        color: var(--color-white);
+    }
+}
+

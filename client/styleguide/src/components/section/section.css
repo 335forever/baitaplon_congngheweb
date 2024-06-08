@@ -1,0 +1,28 @@
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.title h2 {
+    font-weight: 600;
+    font-size: 36px;
+}
+
+.subtitle {
+    color: var(--color-danger);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+
+    h3 {
+        font-weight: 600;
+    }
+}

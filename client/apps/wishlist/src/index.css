@@ -1,4 +1,15 @@
-.discount-tag {
+#action {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    color: white;
+    padding: 8px;
+    font-size: 0.8em;
+}
+
+.discount-tag,
+.new-tag {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -57,7 +68,7 @@
     justify-content: space-between;
 }
 
-#wrapper {
+#wrapper-wishlist {
     display: flex;
     font-family: 'Quicksand';
     flex-direction: column;

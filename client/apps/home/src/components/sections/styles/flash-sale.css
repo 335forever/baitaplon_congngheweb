@@ -1,0 +1,47 @@
+#flash-sale-controller {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    >button {
+        display: relative;
+        background-color: var(--color-secondary);
+        height: 45px;
+        width: 45px;
+        border-radius: 22.5px;
+
+        >* {
+            display: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    }
+}
+
+
+.view-more-btn {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    >button {
+        display: block;
+        background-color: var(--color-danger);
+        color: var(--color-white);
+        width: 160px;
+        height: 55px;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    >button:hover {
+        background-color: hsl(from var(--color-danger) h s calc(0.8*l));
+    }
+    
+    >button:active {
+        background-color: hsl(from var(--color-danger) h s calc(0.5*l));
+    }
+}

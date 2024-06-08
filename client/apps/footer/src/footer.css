@@ -44,6 +44,6 @@ div {
     width: 180px;
 }
 
-.input-box > input :focus {
+.input-box > input :active {
     border: none;
 }

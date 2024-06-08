@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Root Config</title>
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="icon" type="image/x-icon" href="//localhost:9000/icon-logo.png">
   <!--
     Remove this if you only support browsers that support async/await.
     This is needed by babel to share largeish helper code for compiling async/await in older
@@ -41,7 +42,7 @@
       }
     }
   </script>
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.4/lib/system/single-spa.min.js" as="script">
 
   <!-- Add your organization's prod import map URL to this script's src  -->
   <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
@@ -50,17 +51,28 @@
     <script type="systemjs-importmap">
     {
       "imports": {
-        "@TachMonShop/root-config": "http://localhost:9000/TachMonShop-root-config.js",
-        "@TachMonShop/navbar": "http://localhost:10000/TachMonShop-navbar.js",
-        "@TachMonShop/styleguide": "http://localhost:11000/TachMonShop-styleguide.js",
-        "@TachMonShop/footer": "http://localhost:10001/TachMonShop-footer.js"
+        "@TachMonShop/navbar": "//localhost:10000/TachMonShop-navbar.js",
+        "@TachMonShop/styleguide": "//localhost:11000/TachMonShop-styleguide.js",
+        "@TachMonShop/footer": "//localhost:10001/TachMonShop-footer.js",
+        "@TachMonShop/root-config": "//localhost:9000/TachMonShop-root-config.js",
+        "@TachMonShop/api": "//localhost:3939/TachMonShop-api.js"
       }
     }
     </script>
     <script type="systemjs-importmap">
       {
         "imports": {
-          "@TachMonShop/home": "http://localhost:10002/TachMonShop-home.js"
+          "@TachMonShop/home": "//localhost:10002/TachMonShop-home.js",
+          "@TachMonShop/login": "//localhost:10003/TachMonShop-login.js",
+          "@TachMonShop/404": "//localhost:404/TachMonShop-not-found.js",
+          "@TachMonShop/product": "//localhost:10004/TachMonShop-product.js",
+          "@TachMonShop/cart": "//localhost:10005/TachMonShop-cart.js",
+          "@TachMonShop/account": "//localhost:10006/TachMonShop-account.js",
+          "@TachMonShop/wishlist": "//localhost:10007/TachMonShop-wishlist.js",
+          "@TachMonShop/billing": "//localhost:10008/TachMonShop-billing.js",
+          "@TachMonShop/about": "//localhost:10009/TachMonShop-about.js",
+          "@TachMonShop/contact": "//localhost:10010/TachMonShop-contact.js",
+          "@TachMonShop/search": "//localhost:10011/TachMonShop-search.js"
         }
       }
     </script>
@@ -89,7 +101,7 @@
   </noscript>
   <script>
     System.import('@TachMonShop/root-config');
-    System.import('@TachMonShop/styleguide')
+    System.import('@TachMonShop/styleguide');
   </script>
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
 </body>

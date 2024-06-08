@@ -1,5 +1,17 @@
+folder,port
 root-config,9000
 styleguide,11000
+api,3939
 apps/navbar,10000
 apps/footer,10001
 apps/home,10002
+apps/login,10003
+apps/404,404
+apps/product,10004
+apps/cart,10005
+apps/account,10006
+apps/wishlist,10007
+apps/billing,10008
+apps/about,10009
+apps/contact,10010
+apps/search,10011

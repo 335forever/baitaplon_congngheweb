@@ -17,14 +17,50 @@
 
   -->
   <header>
-    <application name="@TachMonShop-navbar"></application>
+    <application name="@TachMonShop/navbar"></application>
   </header>
-  <main class="m-auto max-w-5xl">
+  <main class="m-auto" style="max-width: 1180px;">
+    <route path="/" exact>
+      <application name="@TachMonShop/home"></application>
+    </route>
+    <route path="signin">
+      <application name="@TachMonShop/login"></application>
+    </route>
+    <route path="signup">
+      <application name="@TachMonShop/login"></application>
+    </route>
+    <route path="otp">
+      <application name="@TachMonShop/login"></application>
+    </route>
+    <route path="cart" exact>
+      <application name="@TachMonShop/cart"></application>
+    </route>
+    <route path="search" exact>
+      <application name="@TachMonShop/search"></application>
+    </route>
+    <route path="cart/billing" exact>
+      <application name="@TachMonShop/billing"></application>
+    </route>
+    <route path="shop-:shoperId/product-:productId">
+      <application name="@TachMonShop/product"></application>
+    </route>
+    <route path="wishlist">
+      <application name="@TachMonShop/wishlist"></application>
+    </route>
+    <route path="orderlist">
+      <application name="@TachMonShop/orderlist"></application>
+    </route>
     <route default>
-      <application name="@TachMonShop-home"></application>
+      <application name="@TachMonShop/404"></application>
+    </route>
+    <route path="about">
+      <application name="@TachMonShop/about"></application>
+    </route>
+    <route path="contacts">
+      <application name="@TachMonShop/contact"></application>
     </route>
   </main>
   <footer>
-    <application name="@TachMonShop-footer"></application>
+    <application name="@TachMonShop/footer"></application>
   </footer>
 </single-spa-router>
