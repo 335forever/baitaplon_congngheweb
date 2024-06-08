@@ -1,5 +1,6 @@
 folder,port
 root-config,9000
+notification,9001
 styleguide,11000
 api,3939
 apps/navbar,10000

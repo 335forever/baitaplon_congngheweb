@@ -61,7 +61,7 @@ export function ProductPage() {
 
   async function addToCart() {
     try {
-      await addProductToCart({ product: product.productId, quantity: productState.count });
+      await addProductToCart({ productId: product.productID, quantity: productState.count });
       navigateToUrl('/cart');
     }
     catch (err) {
@@ -96,7 +96,7 @@ export function ProductPage() {
       />
       <section id="product-main-content">
         {images.slice(index + 1, index + 5).map((src) => (
-          <div className="product-image-gallery-container">
+          <div key={src} className="product-image-gallery-container">
             <img src={src} />
           </div>
         ))}
@@ -219,9 +219,9 @@ export function ProductPage() {
           {Array(10).fill(<Parcel config={Product}></Parcel>)}
         </div>
       </Section> */}
-      <Section subtitle="Đánh giá">
+      {/* <Section subtitle="Đánh giá">
         <textarea style={{ width: "100%" }}></textarea>
-      </Section>
+      </Section> */}
     </article>
   );
 }

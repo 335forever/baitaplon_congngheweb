@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { signIn } from "@TachMonShop/api";
 import { navigateToUrl } from "single-spa";
 import { theme } from "./root.component";
+import { toast } from "@TachMonShop/notification";
 
 import "./index.css";
 
@@ -20,7 +21,7 @@ export function Login(props) {
 
   const urlParams = new URLSearchParams(window.location.search);
 
-  const toast = useToast();
+  // const toast = useToast();
   const usernameInput = useRef();
   const passwordInput = useRef();
 
@@ -31,16 +32,24 @@ export function Login(props) {
         form,
         (res) => {
           localStorage.setItem("token", res.data.token);
-          // toast({
-          //   title: "Đăng nhập thành công!",
-          //   duration: 1000,
-          //   isClosable: false,
-          //   status: "success",
-          // });
-          navigateToUrl(urlParams.get("redirect") || '/otp');
+          toast({
+            title: "Đăng nhập thành công!",
+            duration: 1000,
+            isClosable: false,
+            status: "success",
+          });
+          navigateToUrl(urlParams.get("redirect") || '/');
           console.log(res);
         },
-        (res) => console.log(res)
+        (res) => {
+          toast({
+            title: "Lỗi",
+            description: "Tài khoản hoặc mật khẩu không đúng",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        }
       );
       setIsLogging(false);
     }
