@@ -9,7 +9,7 @@ router.get('/get/categories', async (req, res) => {
         const connection = await pool.getConnection();
 
         const [categories] = await connection.execute(
-            "SELECT * FROM m_productCategory"
+            "SELECT * FROM m_productcategory"
         );
         
         connection.release();
@@ -202,7 +202,7 @@ router.post('/add', authenticate, async (req, res) => {
             const imageURL = images[`image${i}`];
             imageValues.push(imageURL || null); // Nếu không có giá trị imageURL, đưa vào null
         }
-        const sql = `INSERT INTO m_productImage (productID, image1, image2, image3, image4, image5, image6) VALUES (?,?,?,?,?,?,?)`;
+        const sql = `INSERT INTO m_productimage (productID, image1, image2, image3, image4, image5, image6) VALUES (?,?,?,?,?,?,?)`;
         const insertValues = [productId, ...imageValues];
         await connection.execute(sql, insertValues);
         connection.release();
@@ -293,7 +293,7 @@ router.put('/update', authenticate, async (req, res) => {
         // Tiếp tục cập nhật images nếu có
         if (checkImagesFields(images,6)) {
             // Chuẩn bị câu truy vấn
-            let updateQuery = "UPDATE m_productImage SET ";
+            let updateQuery = "UPDATE m_productimage SET ";
             let updateValues = [];
             for (let i = 1; i <= 6; i++) {
                 const fieldName = `image${i}`;
@@ -349,7 +349,7 @@ router.delete('/remove',authenticate, async (req,res) => {
 
         // Thực hiện xóa product
         await connection.execute(
-            'DELETE FROM m_productImage WHERE productId = ?',
+            'DELETE FROM m_productimage WHERE productId = ?',
             [productId]
         );
         await connection.execute(
