@@ -39,7 +39,6 @@ export function Login(props) {
             status: "success",
           });
           navigateToUrl(urlParams.get("r") || '/');
-          console.log(res);
         },
         (res) => {
           toast({

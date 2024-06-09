@@ -6,7 +6,6 @@ import "./banner.css";
 import { getBanners } from "../../controllers/banner.controller";
 
 export function Banner() {
-  console.log("Hello Banner");
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <BannerContent />

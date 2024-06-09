@@ -116,7 +116,7 @@ function CartContent() {
     listItem.forEach((element) => {
       totalPrice += element.price * element.quantity;
     setTotalPrice(totalPrice);
-    setShipFee(Math.ceil(0.1 * totalPrice));
+    setShipFee(Math.max(Math.ceil(0.1*totalPrice), 15000));
   });
   }, [listItem]);
 
@@ -124,6 +124,7 @@ function CartContent() {
     await Promise.all(listItem.map(e => updateCart({
       productId: e.id, quantity: e.quantity
     })));
+    setListItem(listItem.filter(e => e.quantity > 0));
     toast({
       title: "Cập nhật thành công!",
       duration: 1000,

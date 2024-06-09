@@ -3,7 +3,6 @@ import { useToast, extendTheme, ChakraProvider } from "@chakra-ui/react";
 let _toast;
 
 export function showToast(content) {
-  console.log(content);
   _toast(content);
 }
 

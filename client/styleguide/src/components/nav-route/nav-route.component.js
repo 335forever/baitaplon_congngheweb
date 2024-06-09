@@ -7,9 +7,8 @@ import './nav-route.css';
 
 function _NavRoute({names }) {
   const link = window.location.pathname;
-  console.log(link);
   const linkPatitions = link.split("/");
-  console.log(linkPatitions);
+
   return (
     <div className="nav-route">
       <BrowserRouter>

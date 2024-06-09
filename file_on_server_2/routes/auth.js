@@ -165,6 +165,25 @@ router.get('/getuserinfo', authenticate, async (req, res) => {
     }
 });
 
+// Tìm người dùng
+router.get('/finduser', async (req, res) => {
+    const accountId = req.query.accountId;
+    if (!accountId) return res.status(400).json({error:'Missing accountId'});
+    try {
+        const connection = await pool.getConnection();
+
+        const [user] = await connection.execute(
+            "SELECT name, email, phone, address FROM m_account WHERE accountId = ?",
+            [accountId]
+        );
+        connection.release();
+        return res.status(200).json({msg:'success',user});
+    } catch (error) {
+        console.error('Get infor fail:', error);
+        return res.status(500).json({ error: error.message });
+    }
+});
+
 
 // Quên mật khẩu (step 1)
 router.post('/forgotpassword/otp',async (req, res) => {
