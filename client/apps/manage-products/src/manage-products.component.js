@@ -16,31 +16,31 @@ const products = [
     "price": 5000000
   },
   {
-    "id": 1,
+    "id": 2,
     "image": imgProduct,
     "name": "HAVIT HV-G92 Gamepad",
     "price": 5000000
   },
   {
-    "id": 1,
+    "id": 3,
     "image": imgProduct,
     "name": "HAVIT HV-G92 Gamepad",
     "price": 5000000
   },
   {
-    "id": 1,
+    "id": 4,
     "image": imgProduct,
     "name": "HAVIT HV-G92 Gamepad",
     "price": 5000000
   },
   {
-    "id": 1,
+    "id": 5,
     "image": imgProduct,
     "name": "HAVIT HV-G92 Gamepad",
     "price": 5000000
   },
   {
-    "id": 1,
+    "id": 6,
     "image": imgProduct,
     "name": "HAVIT HV-G92 Gamepad",
     "price": 5000000
