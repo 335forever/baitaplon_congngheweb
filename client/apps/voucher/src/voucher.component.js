@@ -63,7 +63,7 @@ export default function VoucherList(props) {
         {vouchers.map((e, index) => (
           <Voucher key={index} {...e} onDelete={() => handleDelete(e.id)} />
         ))}
-        <button id="add" onClick={() => setVouchers([...vouchers, { id: vouchers.length + 1, type: 0, value: 0, minOrder: 0, maxDiscount: 0 }])}>
+        <button id="add" onClick={() => setVouchers([...vouchers, { number: 0, type: 0, value: 0, minOrder: 0, maxDiscount: 0 }])}>
           <img src={icAdd} alt="Add"></img>
         </button>
       </div>
