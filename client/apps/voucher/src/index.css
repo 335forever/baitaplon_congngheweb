@@ -1,0 +1,95 @@
+#add {
+    border: 0px;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+#body {
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.function {
+    border: 0px;
+    background-color: transparent;
+    padding: 0px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    font-size: 14px;
+    gap: 12px;
+}
+
+input {
+    background-color: #dfdfdf;
+    border: 0px;
+    border-radius: 4px;
+    font-family: 'Quicksand';
+    font-weight: 700;
+}
+
+input:disabled {
+    background-color: transparent;
+}
+
+
+select {
+    background-color: transparent;
+    border: 0px;
+    font-family: 'Quicksand';
+    font-size: 22px;
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+.voucher {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    display: flex;
+    gap: 10px;
+    padding: 18px 10px;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Quicksand';
+    font-size: 14px;
+    gap: 32px;
+    margin-left: 9.375%;
+    margin-right: 9.375%;
+    margin-top: 32px;
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url('../assets/fonts/Quicksand.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media (min-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
