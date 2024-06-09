@@ -26,7 +26,6 @@ export async function findProduct(
       },
     });
     if (res.status == 200) {
-      console.log(res.data.products);
       return res.data['products'] || res.data.product;
     }
     else throw res;

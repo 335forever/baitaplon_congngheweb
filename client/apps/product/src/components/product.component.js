@@ -41,12 +41,10 @@ export function ProductPage() {
   });
 
   function handleColorChange({ target }) {
-    console.log(target.value);
     dispatch(productActions.setColor(target.getAttribute("value")));
   }
 
   function handleSizeChange({ target }) {
-    console.log(target.value);
     dispatch(productActions.setSize(target.getAttribute("value")));
   }
 
@@ -66,7 +64,6 @@ export function ProductPage() {
     }
     catch (err) {
       if (err.response.status === 401) navigateToUrl(`/signin?redirect=${encodeURIComponent(window.location.href)}`)
-      console.log(err);
     }
   }
 

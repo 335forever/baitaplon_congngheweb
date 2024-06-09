@@ -31,10 +31,9 @@ function RegisterContent(props) {
             isClosable: false,
             status: "success",
           });
-          console.log(res);
         },
         (err) => {
-          console.log(err);
+
         }
       );
       setIsLogging(false);

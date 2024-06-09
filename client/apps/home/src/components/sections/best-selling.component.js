@@ -21,7 +21,6 @@ export function BestSelling() {
     }
 
     function BestSellingContent(data, error, isLoading) {
-        console.log(data, error, isLoading); 
         if (isLoading) return "Đang tải";
         if (error) return "Vui lòng thử lại sau";
         return data.map(e => <Parcel config={Product} product={e}></Parcel>);

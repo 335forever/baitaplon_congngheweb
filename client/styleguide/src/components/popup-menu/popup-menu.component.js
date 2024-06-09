@@ -15,7 +15,6 @@ function _PopupMenu({ children, isOpen, trigger, setOpenState, equalWidth = fals
 
   useLayoutEffect(() => {
     const handleWindow = () => {
-      console.log(window.innerWidth);
       if (isOpen) {
         var popupRect = popupMenu.current.getBoundingClientRect();
         const windowWidth = window.innerWidth;

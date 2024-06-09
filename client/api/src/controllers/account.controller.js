@@ -4,7 +4,6 @@ const instance = axios.create({
   timeout: 3000,
 });
 export async function signIn(form, onResolve, onReject) {
-  console.log(form);
   try {
     const res = await instance.post('/login', {
       ...form,

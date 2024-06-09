@@ -8,7 +8,6 @@ function wait(milliseconds) {
 export async function getCategories() {
   try {
     const categories = await apiGetCategories();
-    console.log(categories);
     return categories.map(e => new Category(e.categoryID, e.name));
   }
   catch (err) { 
