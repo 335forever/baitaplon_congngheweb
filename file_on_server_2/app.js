@@ -6,21 +6,18 @@ const productRouter = require('./routes/product');
 const cartRouter = require('./routes/cart');
 const orderRouter = require('./routes/order');
 const voucherRouter = require('./routes/voucher');
-const {sendEmail} = require('./func');
+const cors = require('cors');
 
 require('dotenv').config();
 
 // Middleware để phân tích các request body dưới dạng JSON
 app.use(bodyParser.json());
 
-// Thiết lập CORS
-app.use((req, res, next) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
+app.use(cors({   
+    origin: '*',   
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],   
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use('/auth', authRouter);
 
