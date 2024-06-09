@@ -103,7 +103,7 @@ function CartContent() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [listItem, setListItem] = useState([]);
 
-  const coupon = useRef();
+  // const coupon = useRef();
 
   useEffect(() => {
     if (data) {
@@ -148,12 +148,12 @@ function CartContent() {
     return totalPrice + shipFee;
   }
 
-  function getCoupon(e) {
-    e.preventDefault();
-    if (new FormData(coupon.current).get('coupon') === "FREESHIP") {
-      setShipFee(0);
-    }
-  }
+  // function getCoupon(e) {
+  //   e.preventDefault();
+  //   if (new FormData(coupon.current).get('coupon') === "FREESHIP") {
+  //     setShipFee(0);
+  //   }
+  // }
 
   if (isLoading) return "Đang tải";
   if (error) return "Vui lòng thử lại";
@@ -229,7 +229,7 @@ function CartContent() {
           </button></div>
         </div>
 
-        <form ref={coupon} className="flex flex-row place-self-start gap-2">
+        {/* <form ref={coupon} className="flex flex-row place-self-start gap-2">
           <input
             type="text"
             className="border border-black rounded pl-3 placeholder-gray-400"
@@ -243,7 +243,7 @@ function CartContent() {
           >
             Nhập mã giảm giá
           </button>
-        </form>
+        </form> */}
       </div>
     </div>
   );
