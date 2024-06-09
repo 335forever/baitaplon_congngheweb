@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 const instance = axios.create({
-  baseURL: `${process.env.SERVER_API_ENDPOINT}/product`,
+  baseURL: `http://54.255.209.5/product`,
   timeout: 3000,
 });
 export async function getCategories() {
@@ -10,7 +10,7 @@ export async function getCategories() {
     return response.data['categories'];
   }
   else throw new AxiosError(response.data.message, response.data.status);
-  
+
 }
 
 export async function findProduct(

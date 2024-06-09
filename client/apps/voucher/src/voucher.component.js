@@ -1,72 +1,67 @@
 import "./index.css";
 
 import icAdd from "../assets/images/ic_add.svg";
-
-import React, { useState } from "react";
 import Voucher from "./components/Voucher";
+import { getVouchers } from "../../../api/src/TachMonShop-api";
+
+import React, { useState, useEffect } from "react";
+import { ChakraProvider } from "@chakra-ui/react";
+
+const shopId = 19;
 
 export default function VoucherList(props) {
-  const [vouchers, setVouchers] = useState([{
-    id: 1,
-    type: 0, // 0: %; 1: VND
-    value: 50,
-    minOrder: 100000,
-    maxDiscount: 20000,
-    number: 10,
-  },
-  {
-    id: 2,
-    type: 1, // 0: %; 1: VND
-    value: 30000,
-    minOrder: 100000,
-    maxDiscount: 30000,
-    number: 10,
-  },
-  {
-    id: 3,
-    type: 0, // 0: %; 1: VND
-    value: 50,
-    minOrder: 100000,
-    maxDiscount: 20000,
-    number: 10,
-  },
-  {
-    id: 4,
-    type: 1, // 0: %; 1: VND
-    value: 30000,
-    minOrder: 100000,
-    number: 10,
-    maxDiscount: 30000
-  },
-  {
-    id: 5,
-    type: 0, // 0: %; 1: VND
-    value: 50,
-    minOrder: 100000,
-    number: 10,
-    maxDiscount: 20000
-  }
-  ]);
+  const [vouchers, setVouchers] = React.useState([]);
 
-  const handleDelete = (id) => {
-    setVouchers(vouchers.filter(voucher => voucher.id !== id));
-  };
+  useEffect(() => {
+    async function getData() {
+      const data = await getVouchers(shopId);
+
+      // const data = [
+      //   {
+      //     voucherID: 6,
+      //     discountPercent: 50,
+      //     minprice: 100000,
+      //     maxdiscount: 20000,
+      //     quantity: 10,
+      //     expired: "2024-12-31T23:59:59",
+      //   },
+      //   {
+      //     voucherID: 5,
+      //     discountPercent: 50,
+      //     minprice: 100000,
+      //     maxdiscount: 20000,
+      //     quantity: 10,
+      //     expired: "2024-12-31T23:59:59",
+      //   }
+      // ]
+
+      setVouchers(data);
+    }
+
+    getData();
+  }, []);
+
+  const deleteVouchers = (id) => {
+    setVouchers(vouchers.filter(voucher => voucher.voucherID !== id));
+  }
 
   return (
-    <div id="wrapper">
-      <div id="route">
-        <a style={{ color: 'rgba(0, 0, 0, 0.5)' }}>Tài khoản </a>
-        /
-        <a> Vouchers</a>
-      </div>
-      <div id="body">
-        {vouchers.map((e, index) => (
-          <Voucher key={index} {...e} onDelete={() => handleDelete(e.id)} />
-        ))}
-        <button id="add" onClick={() => setVouchers([...vouchers, { number: 0, type: 0, value: 0, minOrder: 0, maxDiscount: 0 }])}>
-          <img src={icAdd} alt="Add"></img>
-        </button>
-      </div>
-    </div >
+    <ChakraProvider>
+      <div id="wrapper">
+        <div id="route">
+          <a style={{ color: 'rgba(0, 0, 0, 0.5)' }}>Tài khoản </a>
+          /
+          <a> Vouchers</a>
+        </div>
+        <div id="body">
+          {vouchers.map((e, index) => (
+            <Voucher key={index} {...e} onDelete={() => deleteVouchers(e.voucherID)} />
+          ))}
+          <button id="add" onClick={() => setVouchers([...vouchers, { discountPercent: 0, expired: (new Date()).toISOString(), minprice: 0, maxdiscount: 0, quantity: 0 }])}>
+            <img src={icAdd} alt="Add"></img>
+          </button>
+        </div>
+      </div >
+    </ChakraProvider>
   );
 }
