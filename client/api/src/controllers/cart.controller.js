@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: `${process.env.SERVER_API_ENDPOINT}/cart`,
+  baseURL: `http://54.255.209.5/cart`,
   timeout: 3000,
 });
 
@@ -18,8 +18,8 @@ export async function addProductToCart({ productId, quantity }) {
 
 export async function getCart() {
   const res = await instance.get("/get", {
-      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-    });
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
   if (res.status == 200) return res.data.cart;
 }
 

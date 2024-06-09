@@ -21,5 +21,9 @@ export {
     getCart,
     updateCart
 } from "./controllers/cart.controller";
+export {
+    getVouchers,
+    createVoucher
+} from "./controllers/voucher.controller";
 
 export {createOrder, getOrders, manageOrders} from "./controllers/order.controller";

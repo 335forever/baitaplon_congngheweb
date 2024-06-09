@@ -8,3 +8,4 @@ export default class Category {
         return `/category?name=${encodeURIComponent(this.name)}`
     }
 }
+
