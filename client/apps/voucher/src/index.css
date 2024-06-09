@@ -19,6 +19,7 @@ button:hover {
 }
 
 .function {
+    align-items: center;
     border: 0px;
     background-color: transparent;
     padding: 0px;
@@ -38,10 +39,15 @@ input {
     border-radius: 4px;
     font-family: 'Quicksand';
     font-weight: 700;
+    padding: 4px;
 }
 
 input:disabled {
     background-color: transparent;
+}
+
+input:hover {
+    border: 0px;
 }
 
 

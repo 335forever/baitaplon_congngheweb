@@ -11,27 +11,31 @@ export default function VoucherList(props) {
     type: 0, // 0: %; 1: VND
     value: 50,
     minOrder: 100000,
-    maxDiscount: 20000
+    maxDiscount: 20000,
+    number: 10,
   },
   {
     id: 2,
     type: 1, // 0: %; 1: VND
     value: 30000,
     minOrder: 100000,
-    maxDiscount: 30000
+    maxDiscount: 30000,
+    number: 10,
   },
   {
     id: 3,
     type: 0, // 0: %; 1: VND
     value: 50,
     minOrder: 100000,
-    maxDiscount: 20000
+    maxDiscount: 20000,
+    number: 10,
   },
   {
     id: 4,
     type: 1, // 0: %; 1: VND
     value: 30000,
     minOrder: 100000,
+    number: 10,
     maxDiscount: 30000
   },
   {
@@ -39,6 +43,7 @@ export default function VoucherList(props) {
     type: 0, // 0: %; 1: VND
     value: 50,
     minOrder: 100000,
+    number: 10,
     maxDiscount: 20000
   }
   ]);
