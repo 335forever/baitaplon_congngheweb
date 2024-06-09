@@ -1,5 +1,5 @@
 // Anything exported from this file is importable by other in-browser modules.
-import {
+export {
     signIn,
     signUp,
     isSignedIn,
@@ -7,8 +7,8 @@ import {
     getUserInfo,
     update as updateUser
 } from "./controllers/account.controller";
-import { getSearchSuggestions } from "./controllers/search.controller";
-import {
+export { getSearchSuggestions } from "./controllers/search.controller";
+export {
     getCategories,
     findProduct,
     addProduct,
@@ -16,25 +16,16 @@ import {
     removeProduct,
     uploadImages
 } from "./controllers/category.controller";
-import {
+export {
     addProductToCart,
     getCart,
     updateCart
 } from "./controllers/cart.controller";
-import {
+export {
     getVouchers,
     createVoucher,
     deleteVoucher,
     updateVoucher
 } from "./controllers/voucher.controller";
 
-export {
-    signIn, signUp, isSignedIn, logout,
-    getSearchSuggestions,
-    getUserInfo, updateUser,
-    getCategories,
-    findProduct, addProduct, updateProduct, removeProduct, addProductToCart,
-    uploadImages,
-    getCart, updateCart,
-    getVouchers, createVoucher, deleteVoucher, updateVoucher
-};
+export { createOrder, getOrders, manageOrders } from "./controllers/order.controller";

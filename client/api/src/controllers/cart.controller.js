@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: `${process.env.SERVER_API_ENDPOINT}`,
+  baseURL: `${process.env.SERVER_API_ENDPOINT}/cart`,
   timeout: 3000,
 });
 

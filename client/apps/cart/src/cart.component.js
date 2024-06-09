@@ -116,7 +116,7 @@ function CartContent() {
     listItem.forEach((element) => {
       totalPrice += element.price * element.quantity;
     setTotalPrice(totalPrice);
-    setShipFee(Math.max(Math.ceil(0.1*totalPrice), 15000));
+    setShipFee(totalPrice < 15000 ? 0: Math.max(Math.ceil(0.1*totalPrice), 15000));
   });
   }, [listItem]);
 
@@ -169,9 +169,9 @@ function CartContent() {
 
       {/* item container */}
       <div className="flex flex-col shadow-lg mb-4 pb-4">
-        {listItem.filter(item => item.quantity > 0).map((item) => {
+        {listItem.filter(item => item.quantity > 0).length > 0 ? listItem.filter(item => item.quantity > 0).map((item) => {
           return <Item key={item.id} item={item} setListItem={handleQuantityChange} />;
-        })}
+        }): <p style={{width: '100%', textAlign: 'center'}}>Vui lòng chọn món đồ bạn yêu thích!</p>}
 
         <div className="flex flex-row justify-between mx-20 my-7">
           <div

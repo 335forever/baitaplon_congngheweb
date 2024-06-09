@@ -16,3 +16,22 @@ export const tabs = [
         to: '/signup'
     }
 ]
+
+export const accountTabs = [
+    {
+        name: 'Trang chủ',
+        to: '/'
+    },
+    {
+        name: 'Liên hệ',
+        to: '/contacts'
+    },
+    {
+        name: 'Về chúng tôi',
+        to: '/about'
+    }, 
+    {
+        name: 'Tài khoản',
+        to: '/account'
+    }
+]

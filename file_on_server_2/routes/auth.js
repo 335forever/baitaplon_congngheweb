@@ -117,10 +117,6 @@ router.put('/update', authenticate, async (req, res) => {
             else if (key === 'name' || key === 'email' || key === 'phone' || key === 'address' || key === 'birthday'){
                 updateQuery += ` ${key} = ?,`;
                 updateValues.push(newData[key]);
-            }
-            else if (key === 'isShoper') {
-                updateQuery += ` ${key} = ?,`;
-                updateValues.push(newData[key] === 'true');
             } 
             else unUsed.push(key);
         });
@@ -139,6 +135,45 @@ router.put('/update', authenticate, async (req, res) => {
         return res.status(200).json({ msg: 'success' , notUseToUpdate : unUsed})
     } catch (error) {
         console.error('Updated fail:', error);
+        return res.status(500).json({ error: error.message });
+    }
+});
+
+// Up lên thành shop
+router.put('/uptoshop', authenticate, async (req, res) => {
+    const accountId = req.accountId;
+    try {
+        const connection = await pool.getConnection();
+        const [user] = await connection.execute(
+            'SELECT * FROM m_shoper WHERE accountID = ?',
+            [accountId]
+        );
+        if (user.length != 0) {
+            connection.release();
+            return res.status(400).json({error:'You are already a shopper'})
+        }
+
+        const name = req.body.name;
+        const phone = req.body.phone;
+        const address = req.body.address;
+        const email = req.body.email;
+        const avatar = req.body.avatar;
+        const taxid = req.body.taxid;
+
+        if (!name || !phone || !address || !email || !avatar || !taxid) {
+            connection.release();
+            return res.status(400).json({error:'Require full information about (name, phone, address, email, avatar, taxid)'});
+        }
+        
+        await connection.execute(
+            'INSERT INTO m_shoper (name,phone,address,email,avatar,taxid,accountID) VALUES (?,?,?,?,?,?,?)',
+            [name,phone,address,email,avatar,taxid,accountId]
+        );
+
+        connection.release();
+        return res.status(200).json({ msg: 'success'})
+    } catch (error) {
+        console.error('Up to shop fail:', error);
         return res.status(500).json({ error: error.message });
     }
 });

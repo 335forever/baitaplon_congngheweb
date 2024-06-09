@@ -74,4 +74,126 @@ router.get('/find', async (req,res) => {
     }
 });
 
+router.delete('/remove',authenticate, async (req,res) => {
+    const accountId = req.accountId;
+    const voucherId = req.body.voucherId;
+    if (!voucherId) return res.status(400).json({msg: 'Missing voucherId'});
+    try {
+        const connection = await pool.getConnection();
+
+        // Kiểm tra user có quyền của shop không
+        const [rows] = await connection.execute(
+            "SELECT * FROM m_shoper WHERE accountId = ?",
+            [accountId]
+        );
+        if (rows.length === 0) {
+            connection.release();
+            return res.status(403).json({ error: 'Unauthorized to remove a voucher' });
+        }
+        const shoperId = rows[0].shoperID;
+
+        // Kiểm tra voucher này có thuộc shop này không
+        const [findVoucherOfThisShop] = await connection.execute(
+            `SELECT * FROM m_voucher WHERE voucherID = ? AND shoperID = ? `,
+            [voucherId,shoperId]
+        );
+        if (findVoucherOfThisShop.length === 0) {
+            connection.release();
+            return res.status(403).json({ error: 'You do not have permission to remove this voucher' });
+        }
+
+        // Thực hiện xóa voucher
+        await connection.execute(
+            'DELETE FROM m_voucher WHERE voucherID = ?',
+            [voucherId]
+        );
+ 
+        connection.release;
+        return res.status(200).json({ msg: 'success' });
+    } catch (error) {
+        console.error('Remove voucher fail:', error);
+        return res.status(500).json({ error: error.message });
+    }
+});
+
+// Cập nhật thông tin voucher
+router.put('/update', authenticate, async (req, res) => {
+    const accountId = req.accountId;
+    const voucherId = req.body.voucherId;
+    if (!voucherId) return res.status(400).json({msg: 'Missing voucherId'});
+    try {
+        const connection = await pool.getConnection();
+
+        // Kiểm tra user có quyền của shop không
+        const [rows] = await connection.execute(
+            "SELECT * FROM m_shoper WHERE accountId = ?",
+            [accountId]
+        );
+        if (rows.length === 0) {
+            connection.release();
+            return res.status(403).json({ error: 'Unauthorized to remove a voucher' });
+        }
+        const shoperId = rows[0].shoperID;
+
+        // Kiểm tra voucher này có thuộc shop này không
+        const [findVoucherOfThisShop] = await connection.execute(
+            `SELECT * FROM m_voucher WHERE voucherID = ? AND shoperID = ? `,
+            [voucherId,shoperId]
+        );
+        if (findVoucherOfThisShop.length === 0) {
+            connection.release();
+            return res.status(403).json({ error: 'You do not have permission to remove this voucher' });
+        }
+
+        // Đọc data từ request
+        const discountPercent   = req.body.discountPercent;
+        const expired        = req.body.expired ;
+        const minprice    = req.body.minprice;
+        const maxdiscount       = req.body.maxdiscount;
+        const quantity  = req.body.quantity;
+
+        // Kiểm tra có data để cập nhật không
+        if (!discountPercent && !expired && !minprice && !maxdiscount && !quantity) {
+            connection.release();
+            return res.status(400).json({error: 'No data to update'})
+        }
+
+        // Cập nhật voucher nếu có dữ liệu
+        let updateQuery = "UPDATE m_voucher SET "; // Chuẩn bị câu truy vấn
+        let updateValues = [];
+        if (discountPercent) {
+            updateQuery += "discountPercent = ?, ";
+            updateValues.push(discountPercent);
+        }
+        if (expired) {
+            updateQuery += "expired = ?, ";
+            updateValues.push(expired);
+        }
+        if (minprice) {
+            updateQuery += "minprice = ?, ";
+            updateValues.push(minprice);
+        }
+        if (maxdiscount) {
+            updateQuery += "maxdiscount = ?, ";
+            updateValues.push(maxdiscount);
+        }
+        if (quantity) {
+            updateQuery += "quantity = ?, ";
+            updateValues.push(quantity);
+        }
+        updateQuery = updateQuery.slice(0, -2);
+        updateQuery += " WHERE voucherId = ?";
+        updateValues.push(voucherId);
+
+        // Thực hiện cập nhật voucher 
+        await connection.execute(updateQuery, updateValues);
+        
+        connection.release();
+        return res.status(200).json({ msg: 'success' });
+    } catch (error) {
+        console.error('Update voucher fail:', error);
+        return res.status(500).json({ error: error.message });
+    }
+});
+
 module.exports = router;

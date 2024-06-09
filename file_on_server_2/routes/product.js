@@ -313,7 +313,7 @@ router.put('/update', authenticate, async (req, res) => {
         connection.release();
         return res.status(200).json({ msg: 'success' });
     } catch (error) {
-        console.error('Add product fail:', error);
+        console.error('Update product fail:', error);
         return res.status(500).json({ error: error.message });
     }
 });

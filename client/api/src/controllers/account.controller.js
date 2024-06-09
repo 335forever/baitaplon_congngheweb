@@ -1,6 +1,6 @@
 import axios from "axios";
 const instance = axios.create({
-  baseURL: `${process.env.SERVER_API_ENDPOINT}`,
+  baseURL: `${process.env.SERVER_API_ENDPOINT}/auth`,
   timeout: 3000,
 });
 export async function signIn(form, onResolve, onReject) {
