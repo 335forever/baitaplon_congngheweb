@@ -4,10 +4,21 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Icons } from "../../TachMonShop-icons";
 import "./product.css";
+import { isSignedIn, addProductToCart } from "@TachMonShop/api";
 
 function _Product({product}) {
   function handleNavigate() {
     navigateToUrl(`/shop-${product.shoperID}/product-${product.productID}`);
+  }
+
+  async function addToCart() {
+    if (!isSignedIn()) navigateToUrl('/signIn');
+    else {
+      await addProductToCart({
+        productId: product.productID,
+        quantity: 1
+      })
+    }
   }
   return (
     <div className="product">
@@ -17,7 +28,7 @@ function _Product({product}) {
             className="product-img"
             src={product.images.image1}
           />
-          <button className="add-to-cart-btn">Thêm vào giỏ</button>
+          <button className="add-to-cart-btn" onClick={addToCart}>Thêm vào giỏ</button>
         </div>
         <div className="product-info">
           <a onClick={handleNavigate}>{`${product.name.slice(0, 50)}${product.name.length > 50 ? '...': ''}`}</a>
