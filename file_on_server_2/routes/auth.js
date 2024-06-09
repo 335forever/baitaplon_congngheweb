@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 const bcrypt = require('bcrypt');
-const { generateToken, authenticate, hashPassword} = require('../func');
+const { generateToken, authenticate, hashPassword, genOTP, sendEmail} = require('../func');
 require('dotenv').config();
 
 // Đăng nhập
@@ -166,7 +166,7 @@ router.get('/getuserinfo', authenticate, async (req, res) => {
 });
 
 
-// Quên mật khẩu
+// Quên mật khẩu (step 1)
 router.post('/forgotpassword/otp',async (req, res) => {
     const username = req.body.username;
     if (!username) return res.status(400).json({error:'Missing username'});
@@ -174,7 +174,7 @@ router.post('/forgotpassword/otp',async (req, res) => {
         const connection = await pool.getConnection();
      
         const [user] = await connection.execute(
-            'SELECT * FROM m_account WHERE username = ?',
+            'SELECT accountid,email FROM m_account WHERE username = ?',
             [username]
         );
 
@@ -188,10 +188,66 @@ router.post('/forgotpassword/otp',async (req, res) => {
             return res.status(404).json({error:'No information about secure email'});
         }
         
+        const otpContainer = {
+            otp: genOTP(),
+            accountId: user[0].accountid,
+            expiryTime: new Date(Date.now() + 15 * 60000)
+        }
+        const index = global.otpList.findIndex(item => item.accountId === user[0].accountid);
+        if (index !== -1) 
+            global.otpList[index] = otpContainer;
+        else 
+            global.otpList.push(otpContainer);
+        
+        await sendEmail(user[0].email,otpContainer.otp);
         connection.release();
-        return res.status(200).json({msg:'success', user});
+        return res.status(200).json({msg:'success'});
     } catch (error) {
-        console.error('Get OTP fail:', error);
+        console.error('Send OTP fail:', error);
+        return res.status(500).json({ error: error.message });
+    }
+});
+
+// Quên mật khẩu (step 2)
+router.post('/forgotpassword/confirm',async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const otp = req.body.otp;
+    if (!username) return res.status(400).json({error:'Missing username'});
+    if (!password) return res.status(400).json({error:'Missing password'});
+    if (!otp) return res.status(400).json({error:'Missing otp'});
+    try {
+        const connection = await pool.getConnection();
+        const [user] = await connection.execute(
+            'SELECT accountid FROM m_account WHERE username = ?',
+            [username]
+        );
+        if (user.length === 0) {
+            connection.release();
+            return res.status(404).json({error:'Invalid username'});
+        }
+        const index = global.otpList.findIndex(item => item.accountId === user[0].accountid);
+        if (index == -1) {
+            connection.release();
+            return res.status(400).json({error:'Get OTP first'});
+        }
+        if (otp != global.otpList[index].otp) {
+            connection.release();
+            return res.status(400).json({error:'OTP incorrect'});
+        }
+        if (Date.now() > global.otpList[index].expiryTime) {
+            connection.release();
+            return res.status(400).json({error:'OTP expiried'});
+        }
+        await connection.execute(
+            'UPDATE m_account SET password = ? WHERE accountid = ?',
+            [hashPassword(password),user[0].accountid]
+        );
+        global.otpList.splice(index, 1);
+        connection.release();
+        return res.status(200).json({msg:'success'});
+    } catch (error) {
+        console.error('Set new pass fail:', error);
         return res.status(500).json({ error: error.message });
     }
 });

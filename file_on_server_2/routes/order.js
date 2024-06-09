@@ -32,14 +32,14 @@ router.post('/new', authenticate, async (req,res) => {
         }
 
         // Load data cần thiết 
-        const voucherId = req.body.voucherId || -1;
+        const voucherId = req.body.voucherId || null;
         const paymentMethod = req.body.paymentMethod || 0;
         const orderDate = new Date();
         const status = 0;
         const isPaid = false;
         var total = productInfo[0].price * quantity;
 
-        if (voucherId != -1) {
+        if (voucherId) {
             const [voucherInfo] = await connection.execute(
                 'SELECT * FROM m_voucher WHERE voucherID = ?',
                 [voucherId]
@@ -77,6 +77,24 @@ router.post('/new', authenticate, async (req,res) => {
         );
 
         return res.status(201).json({msg:'success'})
+    } catch (error) {
+        console.error('Make order fail:', error);
+        return res.status(500).json({ total:total, error: error.message });
+    }
+});
+
+router.get('/get', authenticate, async (req,res) => {
+    const accountId = req.accountId;
+    
+    try {
+        const connection = await pool.getConnection();
+        const [order] = await connection.execute(
+            'SELECT * FROM m_order WHERE accountId = ?',
+            [accountId]
+        );
+
+        connection.release();
+        return res.status(201).json({msg:'success',order})
     } catch (error) {
         console.error('Make order fail:', error);
         return res.status(500).json({ total:total, error: error.message });
