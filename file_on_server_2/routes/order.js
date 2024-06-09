@@ -72,8 +72,8 @@ router.post('/new', authenticate, async (req,res) => {
         }
 
         await connection.execute(
-            'INSERT INTO m_order (accountID,productID,quantity,voucherID,isPaid,total,orderDate,status,paymentMethod) VALUES (?,?,?,?,?,?,?,?,?)',
-            [accountId, productId, quantity, voucherId, isPaid, total, orderDate, status, paymentMethod]
+            'INSERT INTO m_order (accountID,productID,quantity,voucherID,isPaid,total,orderDate,status,paymentMethod,shoperID) VALUES (?,?,?,?,?,?,?,?,?,?)',
+            [accountId, productId, quantity, voucherId, isPaid, total, orderDate, status, paymentMethod,productInfo[0].shoperID]
         );
 
         return res.status(201).json({msg:'success'})
@@ -85,7 +85,6 @@ router.post('/new', authenticate, async (req,res) => {
 
 router.get('/get', authenticate, async (req,res) => {
     const accountId = req.accountId;
-    
     try {
         const connection = await pool.getConnection();
         const [order] = await connection.execute(
@@ -96,8 +95,33 @@ router.get('/get', authenticate, async (req,res) => {
         connection.release();
         return res.status(201).json({msg:'success',order})
     } catch (error) {
-        console.error('Make order fail:', error);
-        return res.status(500).json({ total:total, error: error.message });
+        console.error('Get order fail:', error);
+        return res.status(500).json({error: error.message });
+    }
+});
+
+router.get('/manager', authenticate, async (req,res) => {
+    const accountId = req.accountId;
+    try {
+        const connection = await pool.getConnection();
+        const [shoperInfo] = await connection.execute(
+            'SELECT * FROM m_shoper WHERE accountId = ?',
+            [accountId]
+        );
+        if (shoperInfo.length == 0) {
+            connection.release();
+            return res.status(403).json({error:'User is not authorized to manage order'})
+        }
+        const [orderInfo] = await connection.execute(
+            'SELECT orderID,accountID,productID,quantity,isPaid,total,orderDate,status,paymentMethod FROM m_order WHERE shoperID = ?',
+            [shoperInfo[0].shoperID]
+        );
+
+        connection.release();
+        return res.status(201).json({msg:'success',orderInfo})
+    } catch (error) {
+        console.error('Manager order fail:', error);
+        return res.status(500).json({error: error.message });
     }
 });
 
