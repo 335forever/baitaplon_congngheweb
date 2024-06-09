@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 const instance = axios.create({
-  baseURL: `http://54.255.209.5/voucher`,
+  baseURL: `${process.env.SERVER_API_ENDPOINT}`,
   timeout: 3000,
 });
 
@@ -20,21 +20,61 @@ export async function getVouchers(shopId) {
 }
 
 export async function createVoucher({ discountPercent, expired, minprice, maxdiscount, quantity }) {
-  const response = await instance.post("/new", {
-    "discountPercent": discountPercent,
-    "expired": expired,
-    "minPrice": minprice,
-    "maxDiscount": maxdiscount,
-    "quantity": quantity
-  }, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhZ25pZSIsImlhdCI6MTcxNzk0Mjk5MSwiZXhwIjoxNzE3OTUzNzkxfQ.HVLLckb56jp5_HzMVqb48VErRWCtbVIWH659lNrX-VY`
+  const response = await instance.post("/new",
+    {
+      "discountPercent": discountPercent,
+      "expired": expired,
+      "minPrice": minprice,
+      "maxDiscount": maxdiscount,
+      "quantity": quantity
     },
-    withCredentials: false
-  });
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      },
+    }
+  );
 
   if (response.status == 201) {
+    return true;
+  } else {
+    throw new AxiosError(response.data.message, response.data.status);
+  }
+}
+
+export async function deleteVoucher(voucherId) {
+  const response = await instance.delete('/remove', {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem("token")}`
+    },
+    data: {
+      voucherId: voucherId
+    }
+  });
+
+  if (response.status == 200) {
+    return true;
+  } else {
+    throw new AxiosError(response.data.message, response.data.status);
+  }
+}
+
+export async function updateVoucher(voucher) {
+  const response = await instance.put('/update',
+    {
+      ...voucher
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      }
+    }
+  )
+
+  if (response.status == 200) {
     return true;
   } else {
     throw new AxiosError(response.data.message, response.data.status);

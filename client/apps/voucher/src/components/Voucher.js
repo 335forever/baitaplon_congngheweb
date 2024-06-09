@@ -6,7 +6,7 @@ import icVerify from "../../assets/images/ic_verify.svg";
 
 import React, { useState } from "react";
 
-export default function Voucher({ voucherID, discountPercent, expired, minprice, maxdiscount, quantity, onDelete }) {
+export default function Voucher({ voucherID, discountPercent, expired, minprice, maxdiscount, quantity, onCreate, onDelete, onUpdate }) {
   const [_editing, setEditing] = React.useState(false);
 
   const [_maxDiscount, setMaxDiscount] = React.useState(maxdiscount);
@@ -17,29 +17,33 @@ export default function Voucher({ voucherID, discountPercent, expired, minprice,
 
   const verify = async () => {
     if (voucherID == null) {
-      console.log({
-        "discountPercent": _value,
-        "expired": `${toDate}T00:00:00`,
-        "minprice": _minOrder,
-        "maxdiscount": _maxDiscount,
-        "quantity": _number
-      })
 
-      if (await createVoucher({
+      setEditing(false);
+
+      onCreate({
         discountPercent: _value,
-        expired: `${toDate}T00:00:00`,
+        expired: `${toDate}T23:59:59`,
         minprice: _minOrder,
         maxdiscount: _maxDiscount,
         quantity: _number
-      })) {
-      } else {
-        // toast lỗi
-      }
-      setEditing(false);
+      });
     } else {
-      console.log('update voucher');
+      setEditing(false);
+
+      onUpdate({
+        voucherID: voucherID,
+        discountPercent: _value,
+        expired: `${toDate}T23:59:59`,
+        minprice: _minOrder,
+        maxdiscount: _maxDiscount,
+        quantity: _number
+      });
     }
   }
+
+  const delVoucher = async () => {
+    onDelete(voucherID);
+  };
 
   return (<div className="voucher">
     <div className="info">
@@ -66,7 +70,7 @@ export default function Voucher({ voucherID, discountPercent, expired, minprice,
     }
     {_editing ?
       <button className="function" onClick={(e) => setEditing(false)}><img src={icCancel}></img></button> :
-      <button className="function" onClick={onDelete} ><img src={icTrash}></img></button>
+      <button className="function" onClick={delVoucher} ><img src={icTrash}></img></button>
     }
   </div>);
 }

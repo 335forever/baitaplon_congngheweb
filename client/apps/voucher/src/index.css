@@ -1,6 +1,9 @@
 #add {
+    background-color: #dfdfdf;
     border: 0px;
     border-radius: 6px;
+    display: flex;
+    justify-content: center;
     padding: 10px;
 }
 

@@ -23,26 +23,18 @@ import {
 } from "./controllers/cart.controller";
 import {
     getVouchers,
-    createVoucher
+    createVoucher,
+    deleteVoucher,
+    updateVoucher
 } from "./controllers/voucher.controller";
 
 export {
-    signIn,
-    signUp,
-    isSignedIn,
-    logout,
+    signIn, signUp, isSignedIn, logout,
     getSearchSuggestions,
-    getUserInfo,
-    updateUser,
+    getUserInfo, updateUser,
     getCategories,
-    findProduct,
-    addProduct,
-    updateProduct,
-    removeProduct,
+    findProduct, addProduct, updateProduct, removeProduct, addProductToCart,
     uploadImages,
-    addProductToCart,
-    getCart,
-    updateCart,
-    getVouchers,
-    createVoucher
+    getCart, updateCart,
+    getVouchers, createVoucher, deleteVoucher, updateVoucher
 };

@@ -16,6 +16,7 @@ module.exports = (webpackConfigEnv, argv) => {
     externals: {
       "@TachMonShop/styleguide": "//localhost:11000/TachMonShop-styleguide.js",
       "@TachMonShop/api": "//localhost:3939/TachMonShop-api.js",
+      '@TachMonShop/notification': "//localhost:9001/TachMonShop-notification.js"
     }
     // modify the webpack config however you'd like to by adding to this object
   });
