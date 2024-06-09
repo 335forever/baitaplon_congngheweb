@@ -1,5 +1,5 @@
 import icEdit from "../../assets/images/ic_edit.svg";
-import icEye from "../../assets/images/ic_eye.svg";
+import icTrash from "../../assets/images/ic_trash.svg";
 
 export default function Product({ id, image, name, price }) {
   return (
@@ -9,7 +9,8 @@ export default function Product({ id, image, name, price }) {
       </div>
       <div className="function">
         <button><img src={icEdit} alt="" /></button>
-        <button><img src={icEye} alt="" /></button>
+
+        <button><img src={icTrash} alt="" /></button>
       </div>
       <div className="name">
         <div>{name}</div>
