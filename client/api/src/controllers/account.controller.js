@@ -30,18 +30,15 @@ export async function signUp(form, onResolve, onReject) {
   }
 }
 
-export async function getUserInfo(onResolve, onReject) {
-  try {
-    const res = await instance.get("/getuserinfo", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    if (res.statusCode === 200) onResolve(res);
-    else onReject(res);
-  } catch (err) {
-    onReject(err);
-  }
+export async function getUserInfo() {
+  const res = await instance.get("/getuserinfo", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  if (res.status === 200) return res.data.userInfo;
+  else throw res;
+
 }
 
 export async function update(form, onResolve, onReject) {

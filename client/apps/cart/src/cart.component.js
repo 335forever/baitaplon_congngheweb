@@ -224,6 +224,7 @@ function CartContent() {
           </div>
           <div className="flex flex-row justify-end py-2"><button
             className="btn" disabled={totalPrice <= 0}
+            onClick={() => navigateToUrl('cart/billing')}
           >
             Thanh toán
           </button></div>
