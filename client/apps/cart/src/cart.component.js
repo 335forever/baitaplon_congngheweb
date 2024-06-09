@@ -1,20 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useRef} from "react";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { navigateToUrl } from "single-spa";
 import { getCart, findProduct, updateCart } from "@TachMonShop/api";
 import "./cart.css";
+
+import { toast } from "@TachMonShop/notification"
 
 function Item(props) {
   const [quantity, setQuantity] = useState(props.item.quantity);
   const [totalPrice, setTotalPrice] = useState(quantity * props.item.price);
 
   const onchangeHandle = (event) => {
-    if (event.target.value < 0) {
+    if (event.target.value <= 0) {
       event.preventDefault();
     } else {
       setTotalPrice(props.item.price * event.target.value);
       setQuantity(event.target.value);
       props.setListItem(props.item.id, event.target.value);
     }
+  };
+
+  const onDeleteItem = () => {
+    setTotalPrice(0);
+    setQuantity(0);
+    props.setListItem(props.item.id, 0);
   };
 
   return (
@@ -46,7 +55,6 @@ function Item(props) {
           <input
             type="number"
             className="w-20 h-10 border text-center"
-            defaultValue={props.item.quantity}
             value={quantity}
             onKeyPress={(event) => {
               if (!/[0-9]/.test(event.key)) {
@@ -54,24 +62,19 @@ function Item(props) {
               }
             }}
             onChange={onchangeHandle}
-            onBlur={async (e) => {
-              if (e.target.value > 0) {
-                updateCart({
-                  productId: props.item.id,
-                  quantity: e.target.value,
-                });
-              }
-            }}
           />
         </div>
 
-        <div className="w-1/6">
+        <div className="flex w-1/6 gap-10 justify-between">
           <span>
             {Intl.NumberFormat("vi", {
               style: "currency",
               currency: "VND",
             }).format(totalPrice)}
           </span>
+          <button type="button" style={{color: 'var(--color-danger)'}} onClick={onDeleteItem}>
+            Xóa
+          </button>
         </div>
       </div>
       {/* item end */}
@@ -96,29 +99,38 @@ async function getFullCart() {
 }
 function CartContent() {
   const { data, error, isLoading } = useQuery(["cart"], getFullCart);
-  const [listItem, setListItem] = useState([
-    // {
-    //   id: 1,
-    //   name: " book name with very long name without stop,"
-    //         +" very very long long super super super long long" ,
-    //   price:42000,
-    //   image: image1,
-    //   quantity:1,
-    // },
-    // {
-    //   id: 2,
-    //   name: "book 2",
-    //   price:100000,
-    //   image: image2,
-    //   quantity:2,
-    // },
-  ]);
+  const [shipFee, setShipFee] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [listItem, setListItem] = useState([]);
+
+  // const coupon = useRef();
 
   useEffect(() => {
     if (data) {
       setListItem(data);
     }
   }, [data]);
+
+  useLayoutEffect(() => {
+    let totalPrice = 0;
+    listItem.forEach((element) => {
+      totalPrice += element.price * element.quantity;
+    setTotalPrice(totalPrice);
+    setShipFee(Math.ceil(0.1 * totalPrice));
+  });
+  }, [listItem]);
+
+  async function updateCartInstance() {
+    await Promise.all(listItem.map(e => updateCart({
+      productId: e.id, quantity: e.quantity
+    })));
+    toast({
+      title: "Cập nhật thành công!",
+      duration: 1000,
+      isClosable: false,
+      status: "success",
+    });
+  }
 
   const handleQuantityChange = (id, quantity) => {
     const newListItem = listItem.map((item) => {
@@ -131,25 +143,33 @@ function CartContent() {
     });
     setListItem(newListItem);
   };
-  let totalPrice = 0;
-  listItem.forEach((element) => {
-    totalPrice += element.price * element.quantity;
-  });
+
+  function getTotalBilling() {
+    return totalPrice + shipFee;
+  }
+
+  // function getCoupon(e) {
+  //   e.preventDefault();
+  //   if (new FormData(coupon.current).get('coupon') === "FREESHIP") {
+  //     setShipFee(0);
+  //   }
+  // }
+
   if (isLoading) return "Đang tải";
   if (error) return "Vui lòng thử lại";
   return (
     <div className="flex flex-col mx-auto max-w-5xl pt-20 py-4">
       <div className="flex flex-row items-center shadow-lg text-sm h-14 mb-3 py-0 px-3">
-        <div className="font-sans text-black text-sm w-1/2 ml-24">Product</div>
-        <div className="font-sans text-black text-sm w-1/6">Price</div>
-        <div className="font-sans text-black text-sm w-1/6">Quantity</div>
-        <div className="font-sans text-black text-sm w-1/6">Subtotal</div>
+        <div className="font-sans text-black text-sm w-1/2 ml-24">Sản phẩm</div>
+        <div className="font-sans text-black text-sm w-1/6">Giá</div>
+        <div className="font-sans text-black text-sm w-1/6">Số lượng</div>
+        <div className="font-sans text-black text-sm w-1/6">Tổng</div>
       </div>
 
       {/* item container */}
       <div className="flex flex-col shadow-lg mb-4 pb-4">
-        {listItem.map((item) => {
-          return <Item item={item} setListItem={handleQuantityChange} />;
+        {listItem.filter(item => item.quantity > 0).map((item) => {
+          return <Item key={item.id} item={item} setListItem={handleQuantityChange} />;
         })}
 
         <div className="flex flex-row justify-between mx-20 my-7">
@@ -157,13 +177,13 @@ function CartContent() {
             className="border border-black rounded px-5 py-2
                          hover:bg-gray-300 active:bg-gray-400"
           >
-            <button className="">Return to shop</button>
+            <button className="" onClick={() => navigateToUrl('/')}>Quay lại</button>
           </div>
           <div
             className="border border-black rounded px-5 py-2
                          hover:bg-gray-300 active:bg-gray-400"
           >
-            <button>Update Cart</button>
+            <button onClick={updateCartInstance}>Cập nhật</button>
           </div>
         </div>
       </div>
@@ -171,10 +191,10 @@ function CartContent() {
 
       <div className="flex flex-row-reverse items-center justify-between">
         <div className="flex flex-col border border-black rounded p-5 w-80">
-          <div className="h-7 text-xl pr-10 mb-5">Cart total</div>
+          <div className="h-7 text-xl pr-10 mb-5">Thanh toán</div>
 
           <div className="flex flex-row justify-items-stretch">
-            <div className="text-sm w-4/12">Subtotal:</div>
+            <div className="text-sm w-4/12">Giá:</div>
             <div className="text-sm w-8/12 text-end">
               {Intl.NumberFormat("vi", {
                 style: "currency",
@@ -182,42 +202,49 @@ function CartContent() {
               }).format(totalPrice)}
             </div>
           </div>
-          <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+          <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 
           <div className="flex flex-row justify-items-stretch">
-            <div className="text-sm w-4/12">Shipping:</div>
-            <div className="text-sm w-8/12 text-end">Free</div>
+            <div className="text-sm w-4/12">Vận chuyển:</div>
+            <div className="text-sm w-8/12 text-end">{shipFee > 0 ? Intl.NumberFormat("vi", {
+                style: "currency",
+                currency: "VND",
+              }).format(shipFee) : "Miễn phí"}</div>
           </div>
-          <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+          <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 
           <div className="flex flex-row justify-items-stretch">
-            <div className="text-sm w-4/12 font-semibold">Total:</div>
+            <div className="text-sm w-4/12 font-semibold">Tổng:</div>
             <div className="text-sm w-8/12 text-end font-semibold">
               {Intl.NumberFormat("vi", {
                 style: "currency",
                 currency: "VND",
-              }).format(totalPrice)}
+              }).format(getTotalBilling())}
             </div>
           </div>
           <div className="flex flex-row justify-end py-2"><button
-            className="btn"
+            className="btn" disabled={totalPrice <= 0}
+            onClick={() => navigateToUrl('cart/billing')}
           >
-            Process to checkout
+            Thanh toán
           </button></div>
         </div>
 
-        <div className="flex flex-row place-self-start gap-2">
+        {/* <form ref={coupon} className="flex flex-row place-self-start gap-2">
           <input
             type="text"
             className="border border-black rounded pl-3 placeholder-gray-400"
             placeholder="Coupon Code"
+            name="coupon"
           />
           <button
+            type="submit"
             className="btn"
+            onClick={getCoupon}
           >
-            Apply coupon
+            Nhập mã giảm giá
           </button>
-        </div>
+        </form> */}
       </div>
     </div>
   );

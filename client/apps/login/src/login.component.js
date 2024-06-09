@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import brand from "../assets/images/brand.svg";
-import { Button, ChakraProvider, CircularProgress, useToast } from "@chakra-ui/react";
+import { Button, ChakraProvider, CircularProgress } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 import { signIn } from "@TachMonShop/api";
@@ -38,7 +38,7 @@ export function Login(props) {
             isClosable: false,
             status: "success",
           });
-          navigateToUrl(urlParams.get("redirect") || '/');
+          navigateToUrl(urlParams.get("r") || '/');
           console.log(res);
         },
         (res) => {
