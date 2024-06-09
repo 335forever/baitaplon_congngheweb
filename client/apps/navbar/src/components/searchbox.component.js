@@ -40,7 +40,8 @@ export default function SearchBox(props) {
       if (input && showSuggestion)
         getSearchSuggestions(
           { search: input },
-          (res) => setSuggestions(res)
+          (res) => setSuggestions(res),
+          (res) => console.log(res)
         );
       else if (!input) {
         setSuggestions([]);

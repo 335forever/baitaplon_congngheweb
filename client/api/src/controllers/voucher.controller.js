@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 const instance = axios.create({
-  baseURL: `http://54.255.209.5/voucher`,
+  baseURL: `${process.env.SERVER_API_ENDPOINT}/voucher`,
   timeout: 3000,
 });
 
