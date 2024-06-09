@@ -32,10 +32,16 @@ app.use('/order', orderRouter);
 
 app.use('/voucher', voucherRouter);
 
-// const htmlContent = "<div style='color:red'>Hello World!</div>"
-// sendEmail('ducquank52t1@gmail.com',htmlContent);
 
-
+global.otpList = [];
+setInterval(() => {
+    const currentTime = Date.now();
+    for (let i = global.otpList.length - 1; i >= 0; i--) {
+        if (global.otpList[i].expiryTime < currentTime) {
+        global.otpList.splice(i, 1);
+        }
+    }
+  }, 60000); // Run every 1 minute
 
 // Khởi động server
 const port = process.env.PORT || 3000;

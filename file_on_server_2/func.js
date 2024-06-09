@@ -136,4 +136,9 @@ const sendEmail = async (toEmail, htmlContent) => {
         console.log('Error: ' + error.message);
     }
 };
-module.exports = { generateToken, authenticate, getImagesByProductId, checkImagesFields, sendEmail, hashPassword};
+
+const genOTP = () => {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+module.exports = { generateToken, authenticate, getImagesByProductId, checkImagesFields, sendEmail, hashPassword, genOTP};
