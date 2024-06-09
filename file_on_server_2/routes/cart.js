@@ -82,7 +82,7 @@ router.put('/update',  authenticate,async (req,res) => {
     const accountId = req.accountId;
     const productId = req.body.productId;
     const quantity = req.body.quantity;
-    if (!productId || !quantity) return res.status(400).json({error:'Missing productId or quantity'})
+    if (productId == undefined || quantity == undefined) return res.status(400).json({error:'Missing productId or quantity'})
     
     try {
         const connection = await pool.getConnection();
