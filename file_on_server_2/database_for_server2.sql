@@ -44,7 +44,7 @@ CREATE TABLE `m_account` (
 
 LOCK TABLES `m_account` WRITE;
 /*!40000 ALTER TABLE `m_account` DISABLE KEYS */;
-INSERT INTO `m_account` VALUES (34,'quan','$2b$10$UEfQ4FPp4ObAy4YKWboCWus7gu.b.i.NRkk9GPfMYev8IjDDkxw4m','quan','ducquank52t1@gmail.com','0941672663','Ha Noi','2002-06-22',_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4iLCJpYXQiOjE3MTc5NDgyNzQsImV4cCI6MTcxNzk1OTA3NH0.epYbC6I1voQ-TSynehcoBvKjxKWBVtBdh2z-QuqiooI'),(39,'quan2205','$2b$10$ryIdarkmHXTfULXESx1lMeInes3HI2B565iKQ1ji0CHoNvN/e342G','NDQ',NULL,NULL,NULL,NULL,_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1IiwiaWF0IjoxNzE3OTI0NzQ1LCJleHAiOjE3MTc5MzU1NDV9.u6dwPoacMogQbXG7jHwlykEZMdybv_M3LdjNCpcg6M8'),(40,'quan2205-01','$2b$10$XBxXhg.XSRGuIocVLAQ8a.UmobSv53OmynzKz7Jbzlt6zQ47vzPdm','Your Name',NULL,'0941672663','Ha Noi',NULL,_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1LTAxIiwiaWF0IjoxNzE2Mzk1MzgwLCJleHAiOjE3MTY0MDYxODB9.RbMN8rSrefUU-WdNhXgbTguzoUAMen2S9O9uMQ6uJLQ'),(43,'quan2205-03','$2b$10$24NHznITG5aeS22.LL70s.YSOg3ASDhPbwUAuUz61IJ9Ox4Av6fgC','quan','ducquank52t1@gmail.com','0941672663','Ha Noi','2002-06-22',_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1LTAzIiwiaWF0IjoxNzE2NDA1NDQ5LCJleHAiOjE3MTY0MTYyNDl9._MwxFtG6FbvYZVWDtkBIMS-pGCvHlm1OblcfvktjRlw'),(44,'quan2205-04','$2b$10$GFgaeNXWeKl1aNIdeKqaC.Dnv74oO4UeQ0mvlMdB59qi6PusGF1bS','Your Name',NULL,NULL,NULL,NULL,_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1LTA0IiwiaWF0IjoxNzE3OTQ4NDIyLCJleHAiOjE3MTc5NTkyMjJ9.nHIqk81c5fcJuJjgVLoVv1rBcX4GwgacdO4FoWwC7Uw'),(45,'quan2205-05','$2b$10$WKZmhUYh8WOKXL/.XciATekYCHH8YM0bLblGpfQ.G1fn2mMwS9WZ2','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0',NULL),(46,'quan2205-06','$2b$10$kaw6DuZOL34RcMMPePmkBeUKoKeonM7jD0ZvllphG0zNC51ECVOAG','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0',NULL),(47,'quan0306-01','$2b$10$sK15a7.5qKEttrI3xRVAG.o/dJVcatFlhOyKnGU5AzrRRvLqiprVq','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4wMzA2LTAxIiwiaWF0IjoxNzE3NzUyMzAzLCJleHAiOjE3MTc3NjMxMDN9.nsxWYHyc2Zj4xAm-YdkW5RSX8CaMqIEcCYVOqSSJyxs'),(48,'ragnie','$2b$10$oe9yYy7S3FTKQm3bfjWYU.hal/7VZuS24OmbAjxPjc2kRP6DXc6xC','R.Sohlman','ragnie2602@gmail.com','0947578718',NULL,'2002-10-03',_binary '\0','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhZ25pZSIsImlhdCI6MTcxNzc1NjI5NCwiZXhwIjoxNzE3NzY3MDk0fQ.yOJVZ56IqYFRVZXZkj4hASDe-1A3MrJnKoBNJp3qF0o'),(49,'quan0806-01','$2b$10$VA.mC4j66NKtPT4pv5ldm.xurwKLNsbgkti8nvz7MBH0iz8i3LqQK','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0',NULL),(50,'quan0906-01','$2b$10$Y3JfAzBPpVGkiJQqPgZGKu65cqxMk1vOWuScPQ6EekTW8Filye03O','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4wOTA2LTAxIiwiaWF0IjoxNzE3OTI2MTM4LCJleHAiOjE3MTc5MzY5Mzh9.qQEzdyzMIMPKW8571yL51lTrfFjk_cbpje6cYQdLL_0');
+INSERT INTO `m_account` VALUES (34,'quan','$2b$10$UEfQ4FPp4ObAy4YKWboCWus7gu.b.i.NRkk9GPfMYev8IjDDkxw4m','quan','ducquank52t1@gmail.com','0941672663','Ha Noi','2002-06-22',_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4iLCJpYXQiOjE3MTc5NTczNzMsImV4cCI6MTcxNzk2ODE3M30.1Ne_mXydFwybLt9Vtf8pjUvRQpz2WxrKtzCb20mGV4E'),(39,'quan2205','$2b$10$ryIdarkmHXTfULXESx1lMeInes3HI2B565iKQ1ji0CHoNvN/e342G','NDQ',NULL,NULL,NULL,NULL,_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1IiwiaWF0IjoxNzE3OTI0NzQ1LCJleHAiOjE3MTc5MzU1NDV9.u6dwPoacMogQbXG7jHwlykEZMdybv_M3LdjNCpcg6M8'),(40,'quan2205-01','$2b$10$XBxXhg.XSRGuIocVLAQ8a.UmobSv53OmynzKz7Jbzlt6zQ47vzPdm','Your Name',NULL,'0941672663','Ha Noi',NULL,_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1LTAxIiwiaWF0IjoxNzE2Mzk1MzgwLCJleHAiOjE3MTY0MDYxODB9.RbMN8rSrefUU-WdNhXgbTguzoUAMen2S9O9uMQ6uJLQ'),(43,'quan2205-03','$2b$10$24NHznITG5aeS22.LL70s.YSOg3ASDhPbwUAuUz61IJ9Ox4Av6fgC','quan','ducquank52t1@gmail.com','0941672663','Ha Noi','2002-06-22',_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1LTAzIiwiaWF0IjoxNzE2NDA1NDQ5LCJleHAiOjE3MTY0MTYyNDl9._MwxFtG6FbvYZVWDtkBIMS-pGCvHlm1OblcfvktjRlw'),(44,'quan2205-04','$2b$10$GFgaeNXWeKl1aNIdeKqaC.Dnv74oO4UeQ0mvlMdB59qi6PusGF1bS','Your Name',NULL,NULL,NULL,NULL,_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1LTA0IiwiaWF0IjoxNzE3OTQ4NDIyLCJleHAiOjE3MTc5NTkyMjJ9.nHIqk81c5fcJuJjgVLoVv1rBcX4GwgacdO4FoWwC7Uw'),(45,'quan2205-05','$2b$10$WKZmhUYh8WOKXL/.XciATekYCHH8YM0bLblGpfQ.G1fn2mMwS9WZ2','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1LTA1IiwiaWF0IjoxNzE3OTYwMDczLCJleHAiOjE3MTc5NzA4NzN9.ICpSnc7Qcs_m2v6NTDFbzIn2inZ8Eqrfa8E_ttp1rUw'),(46,'quan2205-06','$2b$10$kaw6DuZOL34RcMMPePmkBeUKoKeonM7jD0ZvllphG0zNC51ECVOAG','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0',NULL),(47,'quan0306-01','$2b$10$sK15a7.5qKEttrI3xRVAG.o/dJVcatFlhOyKnGU5AzrRRvLqiprVq','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4wMzA2LTAxIiwiaWF0IjoxNzE3NzUyMzAzLCJleHAiOjE3MTc3NjMxMDN9.nsxWYHyc2Zj4xAm-YdkW5RSX8CaMqIEcCYVOqSSJyxs'),(48,'ragnie','$2b$10$oe9yYy7S3FTKQm3bfjWYU.hal/7VZuS24OmbAjxPjc2kRP6DXc6xC','R.Sohlman','ragnie2602@gmail.com','0947578718',NULL,'2002-10-03',_binary '\0','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhZ25pZSIsImlhdCI6MTcxNzc1NjI5NCwiZXhwIjoxNzE3NzY3MDk0fQ.yOJVZ56IqYFRVZXZkj4hASDe-1A3MrJnKoBNJp3qF0o'),(49,'quan0806-01','$2b$10$VA.mC4j66NKtPT4pv5ldm.xurwKLNsbgkti8nvz7MBH0iz8i3LqQK','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0',NULL),(50,'quan0906-01','$2b$10$Y3JfAzBPpVGkiJQqPgZGKu65cqxMk1vOWuScPQ6EekTW8Filye03O','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4wOTA2LTAxIiwiaWF0IjoxNzE3OTI2MTM4LCJleHAiOjE3MTc5MzY5Mzh9.qQEzdyzMIMPKW8571yL51lTrfFjk_cbpje6cYQdLL_0');
 /*!40000 ALTER TABLE `m_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,14 +95,18 @@ CREATE TABLE `m_order` (
   `status` int DEFAULT NULL,
   `paymentMethod` int DEFAULT NULL,
   `shoperID` int DEFAULT NULL,
+  `msgToUser` varchar(255) DEFAULT NULL,
+  `msgToShop` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`orderID`),
   KEY `accountID` (`accountID`),
   KEY `productID` (`productID`),
   KEY `voucherID` (`voucherID`),
+  KEY `FK_shoperID` (`shoperID`),
+  CONSTRAINT `FK_shoperID` FOREIGN KEY (`shoperID`) REFERENCES `m_shoper` (`shoperID`),
   CONSTRAINT `M_order_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `m_account` (`accountid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `M_order_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `m_product` (`productID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `M_order_ibfk_3` FOREIGN KEY (`voucherID`) REFERENCES `m_voucher` (`voucherID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +115,7 @@ CREATE TABLE `m_order` (
 
 LOCK TABLES `m_order` WRITE;
 /*!40000 ALTER TABLE `m_order` DISABLE KEYS */;
-INSERT INTO `m_order` VALUES (10,34,34,2,NULL,_binary '\0',256000,'2024-06-09 09:02:43',0,0,6);
+INSERT INTO `m_order` VALUES (10,34,34,2,NULL,_binary '',256000,'2024-06-09 09:02:43',0,0,6,'Hello there',NULL),(11,45,34,2,NULL,_binary '\0',256000,'2024-06-09 17:06:45',2,0,6,NULL,'See you again'),(12,45,34,2,NULL,_binary '\0',256000,'2024-06-09 17:06:53',0,0,6,NULL,NULL),(13,45,34,2,NULL,_binary '\0',256000,'2024-06-09 17:07:45',0,0,6,NULL,'CMNM'),(14,45,34,2,NULL,_binary '\0',256000,'2024-06-09 17:43:46',0,0,6,NULL,'Hello shop');
 /*!40000 ALTER TABLE `m_order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -179,7 +183,7 @@ CREATE TABLE `m_product` (
 
 LOCK TABLES `m_product` WRITE;
 /*!40000 ALTER TABLE `m_product` DISABLE KEYS */;
-INSERT INTO `m_product` VALUES (34,'Set b??? n??? Banamo Fashion set ??o t?? ????i hai l???p d??y ??o b???n chun to 128',299,128000,9,6),(40,'Set b??? n??? Banamo Fashion set ??o t?? ????i hai l???p d??y ??o b???n chun to 129',253,129000,9,12),(41,'Set b??? n??? Banamo Fashion set ??o t?? ????i hai l???p d??y ??o b???n chun to 129',0,129000,9,13),(42,'B??t M??u 12/24/36/48/60 Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,25000,14,13),(43,'B??t M??u 12/24/36/48/60 Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,25000,14,14),(46,'B??t M??u 12/24/36/48/60 Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,25000,14,6),(48,'B??t M??u Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,26000,14,6);
+INSERT INTO `m_product` VALUES (34,'Set b??? n??? Banamo Fashion set ??o t?? ????i hai l???p d??y ??o b???n chun to 128',291,128000,9,6),(40,'Set b??? n??? Banamo Fashion set ??o t?? ????i hai l???p d??y ??o b???n chun to 129',253,129000,9,12),(41,'Set b??? n??? Banamo Fashion set ??o t?? ????i hai l???p d??y ??o b???n chun to 129',0,129000,9,13),(42,'B??t M??u 12/24/36/48/60 Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,25000,14,13),(43,'B??t M??u 12/24/36/48/60 Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,25000,14,14),(46,'B??t M??u 12/24/36/48/60 Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,25000,14,6),(48,'B??t M??u Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,26000,14,6);
 /*!40000 ALTER TABLE `m_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -329,4 +333,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-09 23:18:52
+-- Dump completed on 2024-06-10  2:31:25
