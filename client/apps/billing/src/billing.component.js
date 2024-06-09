@@ -1,8 +1,15 @@
 import visaIcon from "../assets/visa_icon.svg";
 import mastercardIcon from "../assets/mastercard.svg";
-import { useRef, useState, useEffect, useLayoutEffect} from "react";
+import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { getCart, findProduct, getUserInfo } from "@TachMonShop/api";
+import {
+  getCart,
+  findProduct,
+  updateCart,
+  getUserInfo,
+  createOrder,
+} from "@TachMonShop/api";
+import { toast } from "@TachMonShop/notification";
 
 import "./billing.css";
 import { navigateToUrl } from "single-spa";
@@ -31,10 +38,12 @@ function Item(props) {
       <div className="flex flex-row w-1/6 pl-5">x{props.item.quantity}</div>
 
       <div className="w-1/6 text-end">
-        <span>{Intl.NumberFormat("vi", {
-                style: "currency",
-                currency: "VND",
-              }).format(totalPrice)}</span>
+        <span>
+          {Intl.NumberFormat("vi", {
+            style: "currency",
+            currency: "VND",
+          }).format(totalPrice)}
+        </span>
       </div>
     </div>
   );
@@ -56,6 +65,37 @@ async function getFullCart() {
   return result;
 }
 
+async function payForProduct(cart, voucher, shipFee, paymentMethod) {
+  try {
+    for (const product of cart) {
+      await createOrder({
+        productId: product.id,
+        quantity: product.quantity,
+        paymentMethod,
+      });
+      await updateCart({
+        productId: product.id,
+        quantity: 0
+      });
+    }
+    navigateToUrl("/");
+    toast({
+      title: "Đặt hàng thành công!",
+      duration: 1000,
+      isClosable: false,
+      status: "success",
+    });
+  } catch (e) {
+    toast({
+      title: "Lỗi",
+      description: `${e}`,
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+    });
+  }
+}
+
 function BillingDetails() {
   const cartQuery = useQuery(["cart"], getFullCart);
   const userQuery = useQuery(["user"], getUserInfo);
@@ -74,23 +114,26 @@ function BillingDetails() {
   const [message, setMessage] = useState("");
 
   const couponRef = useRef();
+  const billingRef = useRef();
 
   useEffect(() => {
     if (cartQuery.data) {
       setListItem(cartQuery.data);
-    };
+    }
   }, [cartQuery.data]);
 
   useLayoutEffect(() => {
-    const price = listItem.reduce((s, item) => s + item.price * item.quantity, 0) ?? 0;
+    const price =
+      listItem.reduce((s, item) => s + item.price * item.quantity, 0) ?? 0;
     setTotalPrice(price);
-    if (!coupon) setShipFee(Math.max(Math.ceil(0.1*price), 15000));
+    if (!coupon)
+      setShipFee(price < 15000 ? 0 : Math.max(Math.ceil(0.1 * price), 15000));
     else {
       if (coupon === "FREESHIP") {
         setShipFee(0);
       }
     }
-  }, [listItem, coupon])
+  }, [listItem, coupon]);
 
   useEffect(() => {
     if (cartQuery.error)
@@ -105,7 +148,7 @@ function BillingDetails() {
 
   function handleCouponChange(e) {
     e.preventDefault();
-    setCoupon(new FormData(couponRef.current).get('coupon'));
+    setCoupon(new FormData(couponRef.current).get("coupon"));
   }
 
   function handleChange(field) {
@@ -128,9 +171,7 @@ function BillingDetails() {
       {userInfo.isLoading ? (
         "Đang tải"
       ) : (
-        <form
-          className="flex flex-col rounded shadow-lg p-8 account-info-form"
-        >
+        <form className="flex flex-col rounded shadow-lg p-8 account-info-form">
           <div className=" text-gray-500">
             Họ và tên<span className=" text-red-500">*</span>
           </div>
@@ -186,7 +227,7 @@ function BillingDetails() {
         </form>
       )}
 
-      <div className="flex flex-col rounded shadow-lg p-8">
+      <form ref={billingRef} className="flex flex-col rounded shadow-lg p-8">
         {cartQuery.isLoading ? (
           "Đang tải"
         ) : (
@@ -199,35 +240,48 @@ function BillingDetails() {
 
             <div className="flex flex-row justify-between mt-7 mb-3">
               <div>Tạm tính:</div>
-              <div>{Intl.NumberFormat("vi", {
-                style: "currency",
-                currency: "VND",
-              }).format(totalPrice)}</div>
+              <div>
+                {Intl.NumberFormat("vi", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(totalPrice)}
+              </div>
             </div>
             <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 
             <div className="flex flex-row justify-between mt-5 mb-3">
               <div>Vận chuyển:</div>
-              <div>{shipFee > 0 ? Intl.NumberFormat("vi", {
-                style: "currency",
-                currency: "VND",
-              }).format(shipFee) : "Miễn phí"}</div>
+              <div>
+                {shipFee > 0
+                  ? Intl.NumberFormat("vi", {
+                      style: "currency",
+                      currency: "VND",
+                    }).format(shipFee)
+                  : "Miễn phí"}
+              </div>
             </div>
             <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 
             <div className="flex flex-row justify-between mt-5 mb-3">
               <div>Tổng:</div>
-              <div>{Intl.NumberFormat("vi", {
-                style: "currency",
-                currency: "VND",
-              }).format(getTotalBilling())}</div>
+              <div>
+                {Intl.NumberFormat("vi", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(getTotalBilling())}
+              </div>
             </div>
           </>
         )}
 
         <div className="flex flex-row justify-between mb-5">
           <div className="flex flex-row ">
-            <input name="select-method" type="radio" className="mr-3" />
+            <input
+              name="select-method"
+              type="radio"
+              className="mr-3"
+              value={0}
+            />
             <div>Tài khoản</div>
             <img src={visaIcon} alt="visa" className="h-7 w-7 ml-[250px]" />
             <img src={mastercardIcon} alt="mastercard" className="h-7 w-7" />
@@ -238,14 +292,18 @@ function BillingDetails() {
           <input
             name="select-method"
             type="radio"
-            checked="checked"
+            value={1}
+            checked
             className="mr-3"
           />
           <div>Tiền mặt</div>
         </div>
 
         <div className="flex flex-col gap-4">
-          <form ref={couponRef} className="flex flex-row place-self-start gap-2">
+          <form
+            ref={couponRef}
+            className="flex flex-row place-self-start gap-2"
+          >
             <input
               type="text"
               className="border border-black rounded pl-3 placeholder-gray-400"
@@ -264,9 +322,22 @@ function BillingDetails() {
             onChange={(e) => setMessage(e.target.value)}
             name="message"
           />
-          <button className="btn px-10 py-2">Đặt hàng</button>
+          <button
+            className="btn px-10 py-2"
+            onClick={async (e) => {
+              e.preventDefault();
+              await payForProduct(
+                listItem,
+                coupon,
+                shipFee,
+                billingRef.current.elements["select-method"].value ?? 1
+              );
+            }}
+          >
+            Đặt hàng
+          </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
