@@ -110,11 +110,15 @@ export default function statistics(props) {
   return (
     <ChakraProvider>
       <div id="wrapper">
-        <div style={{ "display": "flex", "gap": "10px" }}>
+        <div className="time-machine">
+          <div>
           <div className="range-label">Thống kê từ</div>
           <input type="date" className="range-date" onChange={(e) => setFromDate(e.target.value)} value={fromDate}></input>
+          </div>
+          <div>
           <div className="range-label">Thống kê đến</div>
           <input type="date" className="range-date" max={today} onChange={(e) => setToDate(e.target.value)} value={toDate}></input>
+          </div>
         </div>
         <div id="overall">
           <Summarize label="DOANH THU THÁNG" total={35000000} unit="VND" percent={6.50} icon={icRevenue} iconColor="#00ff66" />

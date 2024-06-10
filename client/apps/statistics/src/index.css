@@ -1,3 +1,16 @@
+.time-machine {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+
+    >div {
+        display: flex;
+        flex-wrap: wrap;
+        flex-shrink: 1;
+        gap: 10px;
+    }
+}
+
 .best-seller {
     align-items: center;
     display: flex;
@@ -12,11 +25,15 @@
     flex-grow: 806;
     max-height: 525px;
     padding: 24px;
+    overflow: hidden;
 }
 
 #detail {
     display: flex;
+    flex-direction: row;
     gap: 20px;
+    flex-wrap: wrap;
+    margin: 10px 0px;
 }
 
 .detail-label {
@@ -65,6 +82,7 @@
     display: flex;
     gap: 20px;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .prop-receipt {
