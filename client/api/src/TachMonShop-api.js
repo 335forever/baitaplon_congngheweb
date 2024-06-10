@@ -28,5 +28,10 @@ export {
     deleteVoucher,
     updateVoucher
 } from "./controllers/voucher.controller";
+export {
+    getIncome,
+    getOrderNumber,
+    getCustomerNumber
+} from "./controllers/statistics.controller"
 
 export { createOrder, getOrders, manageOrders } from "./controllers/order.controller";
