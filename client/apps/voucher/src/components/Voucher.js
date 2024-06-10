@@ -1,4 +1,4 @@
-import { createVoucher } from "../../../../api/src/TachMonShop-api";
+import { createVoucher } from "@TachMonShop/api";
 import icCancel from "../../assets/images/ic_cancel.svg";
 import icEdit from "../../assets/images/ic_edit.svg";
 import icTrash from "../../assets/images/ic_trash.svg";
