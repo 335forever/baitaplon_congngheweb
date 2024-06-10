@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db'); 
-const {authenticate, getImagesByProductId, checkImagesFields} = require('../func');
+const {authenticate} = require('../func');
 
 router.post('/new', authenticate, async (req,res) => {
     const accountId = req.accountId;
@@ -37,6 +37,7 @@ router.post('/new', authenticate, async (req,res) => {
         const orderDate = new Date();
         const status = 0;
         const isPaid = false;
+        const msgToShop = req.body.msgToShop || null;
         var total = productInfo[0].price * quantity;
 
         if (voucherId) {
@@ -72,8 +73,8 @@ router.post('/new', authenticate, async (req,res) => {
         }
 
         await connection.execute(
-            'INSERT INTO m_order (accountID,productID,quantity,voucherID,isPaid,total,orderDate,status,paymentMethod,shoperID) VALUES (?,?,?,?,?,?,?,?,?,?)',
-            [accountId, productId, quantity, voucherId, isPaid, total, orderDate, status, paymentMethod,productInfo[0].shoperID]
+            'INSERT INTO m_order (accountID,productID,quantity,voucherID,isPaid,total,orderDate,status,paymentMethod,shoperID,msgToShop) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+            [accountId, productId, quantity, voucherId, isPaid, total, orderDate, status, paymentMethod,productInfo[0].shoperID,msgToShop]
         );
 
         return res.status(201).json({msg:'success'})
@@ -100,6 +101,55 @@ router.get('/get', authenticate, async (req,res) => {
     }
 });
 
+router.put('/change',authenticate, async (req,res) => {
+    const accountId = req.accountId;
+    const orderId = req.body.orderId;
+    if (!orderId) return res.status(400).json({error:'Missing orderId'})
+    const status = req.body.status;
+    const paymentMethod = req.body.paymentMethod;
+    const msgToShop = req.body.msgToShop;
+    if (status == undefined && paymentMethod == undefined && msgToShop == undefined) return res.status(400).json({error:'No data'});
+    try {
+        const connection = await pool.getConnection();
+        
+        const [order] = await connection.execute(
+            'SELECT * FROM m_order WHERE orderID = ? AND accountID = ?',
+            [orderId,accountId]
+        );
+        if (order.length == 0) {
+            connection.release();
+            return res.status(403).json({error:'You do not have permission to change this order'});
+        }
+        
+        if (status == 2) {
+            await connection.execute(
+                'UPDATE m_order SET status = ? WHERE orderID = ?',
+                [status,orderId]
+            );
+        }
+
+        if (paymentMethod != undefined) {
+            await connection.execute(
+                'UPDATE m_order SET paymentMethod = ? WHERE orderID = ?',
+                [paymentMethod,orderId]
+            );
+        }
+
+        if (msgToShop != undefined) {
+            await connection.execute(
+                'UPDATE m_order SET msgToShop = ? WHERE orderID = ?',
+                [msgToShop,orderId]
+            );
+        }
+
+        connection.release();
+        return res.status(200).json({msg:'success'})
+    } catch (error) {
+        console.error('Approve order fail:', error);
+        return res.status(500).json({error: error.message });
+    }
+});
+
 router.get('/manager', authenticate, async (req,res) => {
     const accountId = req.accountId;
     try {
@@ -113,7 +163,7 @@ router.get('/manager', authenticate, async (req,res) => {
             return res.status(403).json({error:'User is not authorized to manage order'})
         }
         const [orderInfo] = await connection.execute(
-            'SELECT orderID,accountID,productID,quantity,isPaid,total,orderDate,status,paymentMethod FROM m_order WHERE shoperID = ?',
+            'SELECT * FROM m_order WHERE shoperID = ?',
             [shoperInfo[0].shoperID]
         );
 
@@ -121,6 +171,64 @@ router.get('/manager', authenticate, async (req,res) => {
         return res.status(201).json({msg:'success',orderInfo})
     } catch (error) {
         console.error('Manager order fail:', error);
+        return res.status(500).json({error: error.message });
+    }
+});
+
+router.put('/approve',authenticate, async (req,res) => {
+    const accountId = req.accountId;
+    const orderId = req.body.orderId;
+    if (!orderId) return res.status(400).json({error:'Missing orderId'})
+    const isPaid = req.body.isPaid;
+    const status = req.body.status;
+    const msgToUser = req.body.msgToUser;
+    if (isPaid == undefined && status == undefined && msgToUser == undefined) return res.status(400).json({error:'No data'});
+    try {
+        const connection = await pool.getConnection();
+        
+        const [shoper] = await connection.execute(
+            'SELECT * FROM m_shoper WHERE accountID = ?',
+            [accountId]
+        );
+        if (shoper.length == 0) {
+            connection.release();
+            return res.status(403).json({error:'Unauthorized to approve an order'});
+        }
+
+        const [order] = await connection.execute(
+            'SELECT * FROM m_order WHERE orderID = ? AND shoperID = ?',
+            [orderId,shoper[0].shoperID]
+        );
+        if (order.length == 0) {
+            connection.release();
+            return res.status(403).json({error:'You do not have permission to approve this order'});
+        }
+        
+        // Chuẩn bị câu truy vấn
+        let updateQuery = "UPDATE m_order SET ";
+        let updateValues = [];
+        if (isPaid != undefined) {
+            updateQuery += "isPaid = ?, ";
+            updateValues.push(isPaid);
+        }
+        if (status != undefined && status == 0 || status == 1 || status == 2) {
+            updateQuery += "status = ?, ";
+            updateValues.push(status);
+        }
+        if (msgToUser != undefined) {
+            updateQuery += "msgToUser = ?, ";
+            updateValues.push(msgToUser);
+        }
+        updateQuery = updateQuery.slice(0, -2);
+        updateQuery += " WHERE orderID = ?";
+        updateValues.push(orderId);
+
+        await connection.execute(updateQuery, updateValues);
+        
+        connection.release();
+        return res.status(200).json({msg:'success'})
+    } catch (error) {
+        console.error('Approve order fail:', error);
         return res.status(500).json({error: error.message });
     }
 });

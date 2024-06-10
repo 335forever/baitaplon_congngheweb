@@ -1,9 +1,7 @@
 const jwt = require('jsonwebtoken');
-const pool = require('./db');  // Import pool kết nối từ file db.js
+const pool = require('./db');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
-
-// Nếu sử dụng tệp .env để quản lý biến môi trường
 require('dotenv').config();
 
 // Hàm tạo token
