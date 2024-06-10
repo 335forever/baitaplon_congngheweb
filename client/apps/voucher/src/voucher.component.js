@@ -2,11 +2,11 @@ import "./index.css";
 
 import icAdd from "../assets/images/ic_add.svg";
 import Voucher from "./components/Voucher";
-import { createVoucher, deleteVoucher, getUserInfo, getVouchers, updateVoucher } from "../../../api/src/TachMonShop-api";
+import { createVoucher, deleteVoucher, getVouchers, updateVoucher } from "../../../api/src/controllers/voucher.controller";
 
 import React, { useState, useEffect } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
-import { toast } from "@TachMonShop/notification";
+// import { toast } from "@TachMonShop/notification";
 
 export default function VoucherList(props) {
   document.title = "TachMonShop | Vouchers"
@@ -27,12 +27,12 @@ export default function VoucherList(props) {
       if (status) {
         await getData();
       } else {
-        toast({
-          title: "Không lấy được dữ liệu",
-          duration: 1000,
-          isClosable: false,
-          status: "error",
-        });
+        // toast({
+        //   title: "Không lấy được dữ liệu",
+        //   duration: 1000,
+        //   isClosable: false,
+        //   status: "error",
+        // });
       }
     } catch (error) {
       console.log(error);
@@ -46,12 +46,12 @@ export default function VoucherList(props) {
       if (response) {
         await getData();
       } else {
-        toast({
-          title: "Lỗi khi xóa voucher",
-          duration: 1000,
-          isClosable: false,
-          status: "error",
-        });
+        // toast({
+        //   title: "Lỗi khi xóa voucher",
+        //   duration: 1000,
+        //   isClosable: false,
+        //   status: "error",
+        // });
       }
     } catch (error) {
       console.log(error);
@@ -65,12 +65,12 @@ export default function VoucherList(props) {
       if (response) {
         await getData();
       } else {
-        toast({
-          title: "Lỗi khi cập nhật voucher",
-          duration: 1000,
-          isClosable: false,
-          status: "error",
-        });
+        // toast({
+        //   title: "Lỗi khi cập nhật voucher",
+        //   duration: 1000,
+        //   isClosable: false,
+        //   status: "error",
+        // });
       }
     } catch (error) {
       console.log(error);

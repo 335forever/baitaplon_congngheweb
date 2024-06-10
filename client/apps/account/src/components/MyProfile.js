@@ -11,7 +11,7 @@ export default function MyProfile({ avatar, name, email, phone, address, birthda
   const [_email, setEmail] = React.useState(email);
   const [_phone, setPhone] = React.useState(phone);
   const [_address, setAddress] = React.useState(address);
-  const [_dob, setDob] = React.useState(birthday.split("T")[0]);
+  const [_dob, setDob] = React.useState(birthday == null ? '' : birthday.split("T")[0]);
 
   const [image, setImage] = React.useState();
 
@@ -27,7 +27,6 @@ export default function MyProfile({ avatar, name, email, phone, address, birthda
   }
 
   const submit = () => {
-
     if (_email.length > 0 && !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(_email)) {
       setNotify('Email không hợp lệ')
       return;
@@ -42,13 +41,14 @@ export default function MyProfile({ avatar, name, email, phone, address, birthda
 
       uploadImages(
         formData,
-        () => {
+        (res) => {
           /*toast failed to upload imgae*/
+          console.log(res);
           onSubmit({ name: _name, email: _email, phone: _phone, address: _address, birthday: _dob })
         },
         (res) => {
-          console.log(res.data.uploaded_files[0]);
-          onSubmit({ name: _name, email: _email, phone: _phone, address: _address, birthday: _dob, avatar: res.data.uploaded_files[0] })
+          console.log(res.data.images.image1);
+          onSubmit({ name: _name, email: _email, phone: _phone, address: _address, birthday: _dob, avatar: res.data.images.image1 })
         },
       )
     } else {

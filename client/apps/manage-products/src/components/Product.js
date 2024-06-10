@@ -1,16 +1,16 @@
 import icEdit from "../../assets/images/ic_edit.svg";
 import icTrash from "../../assets/images/ic_trash.svg";
 
-export default function Product({ id, image, name, price }) {
+export default function Product({ productID, images, name, price, onEdit, onDelete }) {
   return (
     <div className="product">
       <div className="info">
-        <img src={image} alt=""></img>
+        <img src={images.image1} alt=""></img>
       </div>
       <div className="function">
-        <button><img src={icEdit} alt="" /></button>
+        <button onClick={onEdit}><img src={icEdit} alt="" /></button>
 
-        <button><img src={icTrash} alt="" /></button>
+        <button onClick={onDelete}><img src={icTrash} alt="" /></button>
       </div>
       <div className="name">
         <div>{name}</div>

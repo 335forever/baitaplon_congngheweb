@@ -36,6 +36,7 @@ export default function Account(props) {
 
 
   const updateProfile = (_profile) => {
+    console.log(_profile);
     update(_profile, () => { /* toast*/ }, () => {/* toast*/ });
   }
 

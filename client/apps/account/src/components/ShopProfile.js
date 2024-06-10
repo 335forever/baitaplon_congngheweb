@@ -55,9 +55,8 @@ export default function ShopProfile({ avatar, name, address, phone, email, taxid
         (res) => {/*toast failed to upload image*/
         },
         (res) => {
-
           console.log(res);
-          onSubmit({ name: _name, email: _email, phone: _phone, address: _address, taxid: _taxId, avatar: res.data.uploaded_files[0] })
+          onSubmit({ name: _name, email: _email, phone: _phone, address: _address, taxid: _taxId, avatar: res.data.images.image1 })
         },
       )
     } else {

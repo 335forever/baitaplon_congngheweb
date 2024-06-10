@@ -1,10 +1,11 @@
 import axios from "axios";
 const instance = axios.create({
+  // baseURL: `https://54.255.209.5/auth`,
   baseURL: `${process.env.SERVER_API_ENDPOINT}/auth`,
   timeout: 3000,
 });
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiaWF0IjoxNzE4MDEwNjA4LCJleHAiOjE3MTgwMjE0MDh9.XKFum16PgGUytUcbF0bK-wl8ddskA3zA-XwWQKlBxVo';
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhZ25pZSIsImlhdCI6MTcxODA1NTY2MiwiZXhwIjoxNzE4MDY2NDYyfQ.P84STqCw3D-vvVNoXWAZgF1kFn3u_7asG9Vi4k7cgJM';
 
 export async function signIn(form, onResolve, onReject) {
   try {
@@ -36,6 +37,7 @@ export async function getUserInfo() {
   const res = await instance.get("/user/getinfo", {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // Authorization: `Bearer ${token}`,
     },
   });
   if (res.status === 200) return res.data.userInfo;
@@ -47,6 +49,7 @@ export async function getShopInfo() {
   const res = await instance.get("/shop/getinfo", {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`
+      // Authorization: `Bearer ${token}`
     }
   })
 
