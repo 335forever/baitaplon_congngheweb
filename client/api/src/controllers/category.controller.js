@@ -83,7 +83,7 @@ export async function removeProduct(productId, onReject, onResolve) {
 export async function uploadImages(images, onReject, onResolve) {
   try {
     const res = await axios.post(
-      `${process.env.MEDIA_API_ENDPOINT}/add`,
+      `${process.env.MEDIA_API_ENDPOINT}/uploadimages.php`,
       images,
       {
         headers: {

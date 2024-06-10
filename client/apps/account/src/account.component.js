@@ -7,20 +7,27 @@ import { ChakraProvider } from "@chakra-ui/react";
 import MyProfile from './components/MyProfile';
 import ChangePassword from './components/ChangePassword';
 import ShopProfile from './components/ShopProfile';
-import UnregisterShop from './components/UnregsiterShop';
-import { getUserInfo } from '../../../api/src/controllers/account.controller';
+import { changePassword, getShopInfo, getUserInfo, upToShop, update, updateShop } from '../../../api/src/controllers/account.controller';
 
 export default function Account(props) {
   document.title = "TachMonShop | Tài khoản"
 
   const [menu, setMenu] = React.useState(0);
-
-  var profile = {};
+  const [profile, setProfile] = React.useState();
+  const [shop, setShop] = React.useState({});
 
   async function getProfile() {
-    profile = await getUserInfo();
+    var response = await getUserInfo();
 
-    console.log(profile)
+    setProfile(response);
+
+    if (response.isShoper) {
+      var res = await getShopInfo();
+
+      setShop(res);
+
+      console.log(res);
+    }
   }
 
   useEffect(() => {
@@ -28,17 +35,26 @@ export default function Account(props) {
   }, []);
 
 
-  const updateProfile = (profile) => {
-
+  const updateProfile = (_profile) => {
+    update(_profile, () => { /* toast*/ }, () => {/* toast*/ });
   }
 
-  const changePassword = (passwordSet) => {
-
+  const chgPassword = (passwordSet) => {
+    changePassword(passwordSet,
+      () => {/*toast success*/ },
+      (err) => {
+        if (err.statuscode == 401) {
+          // Toast warnign wrong old password
+        }
+      })
   }
 
-  const updateShop = (profile) => {
-
+  const updShop = (_profile) => {
+    if (profile.isShoper) updateShop(_profile, () => {/* toast success*/ }, () => {/*toast error*/ });
+    else
+      upToShop(_profile, () => {/* toast success*/ }, () => {/*toast error*/ });
   }
+
 
   return (
     <ChakraProvider>
@@ -50,30 +66,32 @@ export default function Account(props) {
             <a> My Account</a>
           </div>
           <div>Welcome!</div>
-          <div style={{ "color": "#DB4444" }}>Sâm</div>
+          <div style={{ "color": "#DB4444" }}>{profile ? profile.name : ''}</div>
         </div>
-        <div id="body">
-          <div className="menu">
-            <div className="menu-title">Manage My Account</div>
-            <div className="menu-option">
-              <a onClick={() => setMenu(0)} style={{ "color": menu == 0 ? "#db4444" : "rgba(0,0,0,0.5)" }}>My Profile</a>
-              <a onClick={() => setMenu(1)} style={{ "color": menu == 1 ? "#db4444" : "rgba(0,0,0,0.5)" }}>Change password</a>
+        <>
+          {profile && <div id="body">
+            <div className="menu">
+              <div className="menu-title">Manage My Account</div>
+              <div className="menu-option">
+                <a onClick={() => setMenu(0)} style={{ "color": menu == 0 ? "#db4444" : "rgba(0,0,0,0.5)" }}>My Profile</a>
+                <a onClick={() => setMenu(1)} style={{ "color": menu == 1 ? "#db4444" : "rgba(0,0,0,0.5)" }}>Change password</a>
+              </div>
+              <div className="menu-title">My Shop</div>
+              <div className="menu-option">
+                <a onClick={() => setMenu(2)} style={{ "color": menu == 2 ? "#db4444" : "rgba(0,0,0,0.5)" }}>Shop profile</a>
+                {/* {profile.isShoper ? <a onClick={() => setMenu(3)} style={{ "color": menu == 3 ? "#db4444" : "rgba(0,0,0,0.5)" }}>Unregister shop</a> : <></>} */}
+              </div>
             </div>
-            <div className="menu-title">My Shop</div>
-            <div className="menu-option">
-              <a onClick={() => setMenu(2)} style={{ "color": menu == 2 ? "#db4444" : "rgba(0,0,0,0.5)" }}>Shop profile</a>
-              {profile.isShoper ? <a onClick={() => setMenu(3)} style={{ "color": menu == 3 ? "#db4444" : "rgba(0,0,0,0.5)" }}>Unregister shop</a> : <></>}
+            <div id="manage">
+              {menu == 0 ? profile && <MyProfile {...profile} onSubmit={(e) => updateProfile(e)} />
+                : menu == 1 ? < ChangePassword {...shop} onSubmit={(e) => chgPassword(e)} />
+                  : menu == 2 ? <ShopProfile {...shop} onSubmit={(e) => updShop(e)} />
+                    : <></>
+              }
             </div>
-          </div>
-          <div id="manage">
-            {menu == 0 ? <MyProfile onSubmit={(e) => updateProfile(e)} />
-              : menu == 1 ? < ChangePassword onSubmit={(e) => changePassword(e)} />
-                : menu == 2 ? <ShopProfile onSubmit={(e) => updateShop(e)} />
-                  : profile.isShoper ? <UnregisterShop /> : <></>
-            }
-          </div>
-        </div>
+          </div>}
+        </>
       </div>
-    </ChakraProvider>
+    </ChakraProvider >
   );
 }
