@@ -16,3 +16,7 @@ apps/billing,10008
 apps/about,10009
 apps/contact,10010
 apps/search,10011
+apps/manage-products,10012
+apps/orderlist,10013
+apps/statistics,10014
+apps/voucher,10015
