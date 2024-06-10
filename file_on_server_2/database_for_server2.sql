@@ -45,7 +45,6 @@ CREATE TABLE `m_account` (
 
 LOCK TABLES `m_account` WRITE;
 /*!40000 ALTER TABLE `m_account` DISABLE KEYS */;
-INSERT INTO `m_account` VALUES (34,'quan','$2b$10$UEfQ4FPp4ObAy4YKWboCWus7gu.b.i.NRkk9GPfMYev8IjDDkxw4m','quan','ducquank52t1@gmail.com','0941672663','Ha Noi','2002-06-22',_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4iLCJpYXQiOjE3MTc5NTczNzMsImV4cCI6MTcxNzk2ODE3M30.1Ne_mXydFwybLt9Vtf8pjUvRQpz2WxrKtzCb20mGV4E',NULL),(39,'quan2205','$2b$10$ryIdarkmHXTfULXESx1lMeInes3HI2B565iKQ1ji0CHoNvN/e342G','NDQ',NULL,NULL,NULL,NULL,_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1IiwiaWF0IjoxNzE3OTI0NzQ1LCJleHAiOjE3MTc5MzU1NDV9.u6dwPoacMogQbXG7jHwlykEZMdybv_M3LdjNCpcg6M8',NULL),(40,'quan2205-01','$2b$10$XBxXhg.XSRGuIocVLAQ8a.UmobSv53OmynzKz7Jbzlt6zQ47vzPdm','Your Name',NULL,'0941672663','Ha Noi',NULL,_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1LTAxIiwiaWF0IjoxNzE2Mzk1MzgwLCJleHAiOjE3MTY0MDYxODB9.RbMN8rSrefUU-WdNhXgbTguzoUAMen2S9O9uMQ6uJLQ',NULL),(43,'quan2205-03','$2b$10$24NHznITG5aeS22.LL70s.YSOg3ASDhPbwUAuUz61IJ9Ox4Av6fgC','quan','ducquank52t1@gmail.com','0941672663','Ha Noi','2002-06-22',_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1LTAzIiwiaWF0IjoxNzE2NDA1NDQ5LCJleHAiOjE3MTY0MTYyNDl9._MwxFtG6FbvYZVWDtkBIMS-pGCvHlm1OblcfvktjRlw',NULL),(44,'quan2205-04','$2b$10$GFgaeNXWeKl1aNIdeKqaC.Dnv74oO4UeQ0mvlMdB59qi6PusGF1bS','Your Name',NULL,NULL,NULL,NULL,_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1LTA0IiwiaWF0IjoxNzE3OTQ4NDIyLCJleHAiOjE3MTc5NTkyMjJ9.nHIqk81c5fcJuJjgVLoVv1rBcX4GwgacdO4FoWwC7Uw',NULL),(45,'quan2205-05','$2b$10$WKZmhUYh8WOKXL/.XciATekYCHH8YM0bLblGpfQ.G1fn2mMwS9WZ2','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4yMjA1LTA1IiwiaWF0IjoxNzE3OTYwMDczLCJleHAiOjE3MTc5NzA4NzN9.ICpSnc7Qcs_m2v6NTDFbzIn2inZ8Eqrfa8E_ttp1rUw',NULL),(46,'quan2205-06','$2b$10$kaw6DuZOL34RcMMPePmkBeUKoKeonM7jD0ZvllphG0zNC51ECVOAG','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0',NULL,NULL),(47,'quan0306-01','$2b$10$sK15a7.5qKEttrI3xRVAG.o/dJVcatFlhOyKnGU5AzrRRvLqiprVq','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4wMzA2LTAxIiwiaWF0IjoxNzE3NzUyMzAzLCJleHAiOjE3MTc3NjMxMDN9.nsxWYHyc2Zj4xAm-YdkW5RSX8CaMqIEcCYVOqSSJyxs',NULL),(48,'ragnie','$2b$10$oe9yYy7S3FTKQm3bfjWYU.hal/7VZuS24OmbAjxPjc2kRP6DXc6xC','R.Sohlman','ragnie2602@gmail.com','0947578718',NULL,'2002-10-03',_binary '\0','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhZ25pZSIsImlhdCI6MTcxNzc1NjI5NCwiZXhwIjoxNzE3NzY3MDk0fQ.yOJVZ56IqYFRVZXZkj4hASDe-1A3MrJnKoBNJp3qF0o',NULL),(49,'quan0806-01','$2b$10$VA.mC4j66NKtPT4pv5ldm.xurwKLNsbgkti8nvz7MBH0iz8i3LqQK','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0',NULL,NULL),(50,'quan0906-01','$2b$10$Y3JfAzBPpVGkiJQqPgZGKu65cqxMk1vOWuScPQ6EekTW8Filye03O','NDQ',NULL,'0941672663',NULL,NULL,_binary '\0','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4wOTA2LTAxIiwiaWF0IjoxNzE3OTI2MTM4LCJleHAiOjE3MTc5MzY5Mzh9.qQEzdyzMIMPKW8571yL51lTrfFjk_cbpje6cYQdLL_0',NULL),(51,'quan1006-01','$2b$10$s0/Z5ZtjiYjwdtNvtBm1W.WUv4x20FVkm2jVkGykzMw90Gfb//CtW','quan','ducquank52t1@gmail.com','0941672663','Ha Noi','2002-06-22',_binary '','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InF1YW4xMDA2LTAxIiwiaWF0IjoxNzE4MDA1OTk1LCJleHAiOjE3MTgwMTY3OTV9.o44BhKLGfAczu6ptJU0GKng3eSo1mpgzCJFZ11F8lrQ','new_link');
 /*!40000 ALTER TABLE `m_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +72,6 @@ CREATE TABLE `m_cart` (
 
 LOCK TABLES `m_cart` WRITE;
 /*!40000 ALTER TABLE `m_cart` DISABLE KEYS */;
-INSERT INTO `m_cart` VALUES (43,40,2);
 /*!40000 ALTER TABLE `m_cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +114,6 @@ CREATE TABLE `m_order` (
 
 LOCK TABLES `m_order` WRITE;
 /*!40000 ALTER TABLE `m_order` DISABLE KEYS */;
-INSERT INTO `m_order` VALUES (10,34,34,2,NULL,_binary '',256000,'2024-06-09 09:02:43',0,0,6,'Hello there',NULL),(11,45,34,2,NULL,_binary '\0',256000,'2024-06-09 17:06:45',2,0,6,NULL,'See you again'),(12,45,34,2,NULL,_binary '\0',256000,'2024-06-09 17:06:53',0,0,6,NULL,NULL),(13,45,34,2,NULL,_binary '\0',256000,'2024-06-09 17:07:45',0,0,6,NULL,'CMNM'),(14,45,34,2,NULL,_binary '\0',256000,'2024-06-09 17:43:46',0,0,6,NULL,'Hello shop');
 /*!40000 ALTER TABLE `m_order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -184,7 +181,6 @@ CREATE TABLE `m_product` (
 
 LOCK TABLES `m_product` WRITE;
 /*!40000 ALTER TABLE `m_product` DISABLE KEYS */;
-INSERT INTO `m_product` VALUES (34,'Set b??? n??? Banamo Fashion set ??o t?? ????i hai l???p d??y ??o b???n chun to 128',291,128000,9,6),(40,'Set b??? n??? Banamo Fashion set ??o t?? ????i hai l???p d??y ??o b???n chun to 129',253,129000,9,12),(41,'Set b??? n??? Banamo Fashion set ??o t?? ????i hai l???p d??y ??o b???n chun to 129',0,129000,9,13),(42,'B??t M??u 12/24/36/48/60 Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,25000,14,13),(43,'B??t M??u 12/24/36/48/60 Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,25000,14,14),(46,'B??t M??u 12/24/36/48/60 Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,25000,14,6),(48,'B??t M??u Acrylic Marker V??? Tr??n M???i Ch???t Li???u C?? Th??? V??? Ch???ng M??u, M??u S???c T????i S??ng D??? S??? D???ng',2548,26000,14,6);
 /*!40000 ALTER TABLE `m_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,7 +235,6 @@ CREATE TABLE `m_productimage` (
 
 LOCK TABLES `m_productimage` WRITE;
 /*!40000 ALTER TABLE `m_productimage` DISABLE KEYS */;
-INSERT INTO `m_productimage` VALUES (34,'link1','link2','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a43bda400.61248453.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a43e85354.95577783.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a445db9e3.97880641.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a44bd5f72.56707453.jpg'),(40,'https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a42835e02.63616726.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a42ec41c5.98337769.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a43bda400.61248453.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a43e85354.95577783.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a445db9e3.97880641.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a44bd5f72.56707453.jpg'),(41,'https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a42835e02.63616726.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a42ec41c5.98337769.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a43bda400.61248453.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a43e85354.95577783.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a445db9e3.97880641.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e0a44bd5f72.56707453.jpg'),(42,'https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9828e03.36831353.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9c91ad7.41283981.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9ec3e25.74683923.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17fa175ad8.28980001.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17fa9076b9.84355020.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17faa7e042.46316948.jpg'),(43,'https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9828e03.36831353.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9c91ad7.41283981.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9ec3e25.74683923.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17fa175ad8.28980001.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17fa9076b9.84355020.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17faa7e042.46316948.jpg'),(46,'https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9828e03.36831353.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9c91ad7.41283981.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9ec3e25.74683923.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17fa175ad8.28980001.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17fa9076b9.84355020.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17faa7e042.46316948.jpg'),(48,'https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9828e03.36831353.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9c91ad7.41283981.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17f9ec3e25.74683923.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17fa175ad8.28980001.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17fa9076b9.84355020.jpg','https://ducquan.id.vn/congngheweb/santhuongmai/uploads/img_664e17faa7e042.46316948.jpg');
 /*!40000 ALTER TABLE `m_productimage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,7 +266,6 @@ CREATE TABLE `m_shoper` (
 
 LOCK TABLES `m_shoper` WRITE;
 /*!40000 ALTER TABLE `m_shoper` DISABLE KEYS */;
-INSERT INTO `m_shoper` VALUES (6,NULL,NULL,NULL,NULL,NULL,NULL,34),(12,NULL,NULL,NULL,NULL,NULL,NULL,39),(13,NULL,NULL,NULL,NULL,NULL,NULL,40),(14,NULL,NULL,NULL,NULL,NULL,NULL,43),(20,'Shop của Quân','0974282109','Ha Noi','ducquank52t1@gmail.com','link_avatar',2206,44),(21,'Shop thu 2 cua Quan','0974282109','Ha Noi','ducquank52t1@gmail.com','link avatar of shop',1009,51);
 /*!40000 ALTER TABLE `m_shoper` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -321,7 +315,6 @@ CREATE TABLE `m_voucher` (
 
 LOCK TABLES `m_voucher` WRITE;
 /*!40000 ALTER TABLE `m_voucher` DISABLE KEYS */;
-INSERT INTO `m_voucher` VALUES (5,12,5,'2024-05-30',-1,-1,200),(6,6,15,'2024-05-31',-1,-1,2206),(7,6,10,'2024-05-31',-1,20000,998),(8,6,10,'2024-05-31',300000,20000,1000);
 /*!40000 ALTER TABLE `m_voucher` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -334,4 +327,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-10 15:43:46
+-- Dump completed on 2024-06-10 16:58:26
