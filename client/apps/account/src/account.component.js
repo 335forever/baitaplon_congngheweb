@@ -8,11 +8,25 @@ import MyProfile from './components/MyProfile';
 import ChangePassword from './components/ChangePassword';
 import ShopProfile from './components/ShopProfile';
 import UnregisterShop from './components/UnregsiterShop';
+import { getUserInfo } from '../../../api/src/controllers/account.controller';
 
 export default function Account(props) {
   document.title = "TachMonShop | Tài khoản"
 
   const [menu, setMenu] = React.useState(0);
+
+  var profile = {};
+
+  async function getProfile() {
+    profile = await getUserInfo();
+
+    console.log(profile)
+  }
+
+  useEffect(() => {
+    getProfile()
+  }, []);
+
 
   const updateProfile = (profile) => {
 
@@ -48,14 +62,14 @@ export default function Account(props) {
             <div className="menu-title">My Shop</div>
             <div className="menu-option">
               <a onClick={() => setMenu(2)} style={{ "color": menu == 2 ? "#db4444" : "rgba(0,0,0,0.5)" }}>Shop profile</a>
-              <a onClick={() => setMenu(3)} style={{ "color": menu == 3 ? "#db4444" : "rgba(0,0,0,0.5)" }}>Unregister shop</a>
+              {profile.isShoper ? <a onClick={() => setMenu(3)} style={{ "color": menu == 3 ? "#db4444" : "rgba(0,0,0,0.5)" }}>Unregister shop</a> : <></>}
             </div>
           </div>
           <div id="manage">
             {menu == 0 ? <MyProfile onSubmit={(e) => updateProfile(e)} />
               : menu == 1 ? < ChangePassword onSubmit={(e) => changePassword(e)} />
                 : menu == 2 ? <ShopProfile onSubmit={(e) => updateShop(e)} />
-                  : <UnregisterShop />
+                  : profile.isShoper ? <UnregisterShop /> : <></>
             }
           </div>
         </div>
