@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
         const hashed_password_saved = rows[0].password;
         if (!bcrypt.compareSync(password, hashed_password_saved)) {
             connection.release();
-            return res.status(401).json({ status: 'error', message: 'Invalid password' }); // Thông báo lỗi mật khẩu không hợp lệ
+            return res.status(401).json({ error: 'Invalid password' }); // Thông báo lỗi mật khẩu không hợp lệ
         }
         
         // Đăng nhập thành công, tiếp tục sinh token
@@ -78,12 +78,13 @@ router.post('/signup', async (req, res) => {
         const dob     = req.body.dob     || null;
         const phone   = req.body.phone   || null;
         const address = req.body.address || null;
+        const avatar  = req.body.avatar  || null;
 
         // Tạo user mới
         const hashedPassword = hashPassword(password); 
         await connection.execute(
-            `INSERT INTO m_account (username, password, name, email, phone, address, birthday) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [username, hashedPassword, name, email, phone, address, dob]
+            `INSERT INTO m_account (username, password, name, email, phone, address, birthday, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+            [username, hashedPassword, name, email, phone, address, dob, avatar]
         );
         
         connection.release();
@@ -95,26 +96,51 @@ router.post('/signup', async (req, res) => {
     
 });
 
+// Đổi mật khẩu
+router.put('/changepassword', authenticate, async (req, res) => {
+    const accountId = req.accountId;
+    const oldPass = req.body.oldPass;
+    const newPass = req.body.newPass;
+    if (oldPass == undefined || newPass == undefined) return res.status(400).json({error:'Require oldPass and newPass'});
+    try {
+        const connection = await pool.getConnection();
+        const [userInfo] = await connection.execute(
+            'SELECT password FROM m_account WHERE accountid = ?',
+            [accountId]
+        );
+        const hashed_password_saved = userInfo[0].password;
+        if (!bcrypt.compareSync(oldPass, hashed_password_saved)) {
+            connection.release();
+            return res.status(401).json({ error: 'Invalid old password' }); // Thông báo lỗi mật khẩu không hợp lệ
+        }
+        const hashedNewPass = hashPassword(newPass);
+        await connection.execute(
+            'UPDATE m_account SET password = ? WHERE accountid = ?',
+            [hashedNewPass,accountId]
+        );
+        connection.release();
+        return res.status(200).json({ msg: 'success'})
+    } catch (error) {
+        console.error('Change pass fail:', error);
+        return res.status(500).json({ error: error.message });
+    }
+});
+
 // Cập nhật thông tin người dùng
-router.put('/update', authenticate, async (req, res) => {
+router.put('/user/update', authenticate, async (req, res) => {
+    const accountId = req.accountId;
     
     // Kiểm tra xem thử có dữ liệu đính kèm không
     const newData = req.body;
     if (Object.keys(newData).length === 0) return res.status(400).json({ error: 'None infor' });
     
     try {
-        
         // Chuẩn bị câu truy vấn
-        const accountId = req.accountId;
         let updateQuery = 'UPDATE m_account SET';
         const updateValues = [];
         const unUsed = [];
         Object.keys(newData).forEach(key => {
-            if (key === 'password') {
-                updateQuery += ` ${key} = ?,`;
-                updateValues.push(hashPassword(newData[key]));
-            } 
-            else if (key === 'name' || key === 'email' || key === 'phone' || key === 'address' || key === 'birthday'){
+        if (key === 'name' || key === 'email' || key === 'phone' || key === 'address' || key === 'birthday' || key === 'avatar'){
                 updateQuery += ` ${key} = ?,`;
                 updateValues.push(newData[key]);
             } 
@@ -140,7 +166,7 @@ router.put('/update', authenticate, async (req, res) => {
 });
 
 // Up lên thành shop
-router.put('/uptoshop', authenticate, async (req, res) => {
+router.put('/user/uptoshop', authenticate, async (req, res) => {
     const accountId = req.accountId;
     try {
         const connection = await pool.getConnection();
@@ -179,13 +205,13 @@ router.put('/uptoshop', authenticate, async (req, res) => {
 });
 
 // Lấy thông tin người dùng
-router.get('/getuserinfo', authenticate, async (req, res) => {
+router.get('/user/getinfo', authenticate, async (req, res) => {
     const accountId = req.accountId;
     try {
         const connection = await pool.getConnection();
 
         const [rows] = await connection.execute(
-            "SELECT name, email, phone, address, birthday, isShoper FROM m_account WHERE accountId = ?",
+            "SELECT accountid, name, email, phone, address, birthday, isShoper,avatar FROM m_account WHERE accountId = ?",
             [accountId]
         );
 
@@ -200,6 +226,76 @@ router.get('/getuserinfo', authenticate, async (req, res) => {
     }
 });
 
+// Lấy thông tin shop
+router.get('/shop/getinfo', authenticate, async (req, res) => {
+    const accountId = req.accountId;
+    try {
+        const connection = await pool.getConnection();
+        const [shopInfo] = await connection.execute(
+            'SELECT * FROM m_shoper WHERE accountID = ?',
+            [accountId]
+        );
+        if (shopInfo.length == 0) {
+            connection.release();
+            return res.status(403).json({error:'You are not a shop'});
+        }
+        
+        connection.release();
+        return res.status(200).json({msg:'success',shopInfo});
+    } catch (error) {
+        console.error('Get infor fail:', error);
+        return res.status(500).json({ error: error.message });
+    }
+});
+
+// Cập nhật thông tin shop
+router.put('/shop/update', authenticate, async (req, res) => {
+    const accountId = req.accountId;
+    
+    // Kiểm tra xem thử có dữ liệu đính kèm không
+    const newData = req.body;
+    if (Object.keys(newData).length === 0) return res.status(400).json({ error: 'None infor' });
+    
+    try {
+        const connection = await pool.getConnection();
+        const [shopInfo] = await connection.execute(
+            'SELECT * FROM m_shoper WHERE accountID = ?',
+            [accountId]
+        );
+        if (shopInfo.length == 0) {
+            connection.release();
+            return res.status(403).json({error:'You are not a shop'});
+        }
+
+        // Chuẩn bị câu truy vấn
+        let updateQuery = 'UPDATE m_shoper SET';
+        const updateValues = [];
+        const unUsed = [];
+        Object.keys(newData).forEach(key => {
+        if (key === 'name' || key === 'phone' || key === 'address' || key === 'email' || key === 'avatar' || key === 'taxid'){
+                updateQuery += ` ${key} = ?,`;
+                updateValues.push(newData[key]);
+            } 
+            else unUsed.push(key);
+        });
+        updateQuery = updateQuery.slice(0, -1) + ' WHERE accountId = ?';
+        updateValues.push(accountId);
+
+        // Thực hiện truy vấn
+        await connection.execute(
+            updateQuery,
+            updateValues
+        );
+        
+        connection.release();
+        if (unUsed.length ===0) return res.status(200).json({ msg: 'success' });
+        return res.status(200).json({ msg: 'success' , notUseToUpdate : unUsed})
+    } catch (error) {
+        console.error('Updated fail:', error);
+        return res.status(500).json({ error: error.message });
+    }
+});
+
 // Tìm người dùng
 router.get('/finduser', async (req, res) => {
     const accountId = req.query.accountId;
@@ -208,7 +304,7 @@ router.get('/finduser', async (req, res) => {
         const connection = await pool.getConnection();
 
         const [user] = await connection.execute(
-            "SELECT name, email, phone, address FROM m_account WHERE accountId = ?",
+            "SELECT name, email, phone, address, avatar FROM m_account WHERE accountId = ?",
             [accountId]
         );
         connection.release();
@@ -219,6 +315,25 @@ router.get('/finduser', async (req, res) => {
     }
 });
 
+// Tìm shop
+router.get('/findshop', async (req, res) => {
+    const shopId = req.query.shopId;
+    if (!shopId) return res.status(400).json({error:'Missing shopId'});
+    try {
+        const connection = await pool.getConnection();
+
+        const [user] = await connection.execute(
+            "SELECT name,phone,address,email,avatar,taxid FROM m_shoper WHERE shoperID = ?",
+            [shopId]
+        );
+
+        connection.release();
+        return res.status(200).json({msg:'success',user});
+    } catch (error) {
+        console.error('Get infor fail:', error);
+        return res.status(500).json({ error: error.message });
+    }
+});
 
 // Quên mật khẩu (step 1)
 router.post('/forgotpassword/otp',async (req, res) => {
