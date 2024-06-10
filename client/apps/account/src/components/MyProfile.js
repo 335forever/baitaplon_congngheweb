@@ -3,7 +3,7 @@ import icAvatar from "../../assets/images/ic_avatar.svg"
 import React, { useState } from "react";
 import { Button } from "@chakra-ui/react";
 
-import { uploadImages } from "../../../../api/src/controllers/account.controller";
+import { uploadImages } from "@TachMonShop/api";
 
 export default function MyProfile({ avatar, name, email, phone, address, birthday, onSubmit }) {
   const [_avatar, setAvatar] = React.useState(avatar);

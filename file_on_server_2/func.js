@@ -95,6 +95,7 @@ const getImagesByProductId = async (productId) => {
 };
 
 function checkImagesFields(images, numberOfFields) {
+    if (images == undefined) return false;
     for (let i = 1; i <= numberOfFields; i++) {
         const fieldName = `image${i}`;
         if (images.hasOwnProperty(fieldName)) {
@@ -139,4 +140,10 @@ const genOTP = () => {
     return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-module.exports = { generateToken, authenticate, getImagesByProductId, checkImagesFields, sendEmail, hashPassword, genOTP};
+function isYYYYMMDD(input) {
+    // Biểu thức chính quy để kiểm tra định dạng YYYY-MM-DD
+    var regex = /^\d{4}-\d{2}-\d{2}$/;
+    return regex.test(input);
+}
+
+module.exports = { generateToken, authenticate, getImagesByProductId, checkImagesFields, sendEmail, hashPassword, genOTP, isYYYYMMDD};

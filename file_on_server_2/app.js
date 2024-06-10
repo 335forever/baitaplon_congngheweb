@@ -6,6 +6,7 @@ const productRouter = require('./routes/product');
 const cartRouter = require('./routes/cart');
 const orderRouter = require('./routes/order');
 const voucherRouter = require('./routes/voucher');
+const statisticRouter = require('./routes/statistic');
 const cors = require('cors');
 
 require('dotenv').config();
@@ -28,6 +29,8 @@ app.use('/cart', cartRouter);
 app.use('/order', orderRouter);
 
 app.use('/voucher', voucherRouter);
+
+app.use('/statistic', statisticRouter);
 
 
 global.otpList = [];

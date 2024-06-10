@@ -2,14 +2,22 @@ import "./index.css";
 
 import icAdd from "../assets/images/ic_add.svg";
 import Voucher from "./components/Voucher";
-import { createVoucher, deleteVoucher, getVouchers, updateVoucher } from "../../../api/src/controllers/voucher.controller";
+import {
+  createVoucher,
+  deleteVoucher,
+  getUserInfo,
+  getVouchers,
+  updateVoucher,
+} from "@TachMonShop/api";
 
 import React, { useState, useEffect } from "react";
+import Parcel from "single-spa-react/parcel";
 import { ChakraProvider } from "@chakra-ui/react";
-// import { toast } from "@TachMonShop/notification";
+import { toast } from "@TachMonShop/notification";
+import { NavRoute } from "@TachMonShop/styleguide";
 
 export default function VoucherList(props) {
-  document.title = "TachMonShop | Vouchers"
+  document.title = "TachMonShop | Vouchers";
 
   const [vouchers, setVouchers] = React.useState([]);
 
@@ -22,7 +30,7 @@ export default function VoucherList(props) {
 
   async function crVoucher(voucher) {
     try {
-      const status = await createVoucher({ ...voucher })
+      const status = await createVoucher({ ...voucher });
 
       if (status) {
         await getData();
@@ -85,20 +93,39 @@ export default function VoucherList(props) {
   return (
     <ChakraProvider>
       <div id="wrapper">
-        <div id="route">
-          <a style={{ color: 'rgba(0, 0, 0, 0.5)' }}>Tài khoản </a>
-          /
-          <a> Vouchers</a>
-        </div>
+        <Parcel
+          config={NavRoute}
+          names={["Trang chủ", "Tài khoản", "Mã giảm giá"]}
+        />
         <div id="body">
           {vouchers.map((e, index) => (
-            <Voucher key={index} {...e} onCreate={(voucher) => crVoucher(voucher)} onDelete={(voucherId) => delVoucher(voucherId)} onUpdate={(voucher) => updVoucher(voucher)} />
+            <Voucher
+              key={index}
+              {...e}
+              onCreate={(voucher) => crVoucher(voucher)}
+              onDelete={(voucherId) => delVoucher(voucherId)}
+              onUpdate={(voucher) => updVoucher(voucher)}
+            />
           ))}
-          <button id="add" onClick={() => setVouchers([...vouchers, { discountPercent: 0, expired: (new Date()).toISOString(), minprice: 0, maxdiscount: 0, quantity: 0 }])}>
+          <button
+            id="add"
+            onClick={() =>
+              setVouchers([
+                ...vouchers,
+                {
+                  discountPercent: 0,
+                  expired: new Date().toISOString(),
+                  minprice: 0,
+                  maxdiscount: 0,
+                  quantity: 0,
+                },
+              ])
+            }
+          >
             <img src={icAdd} alt="Add"></img>
           </button>
         </div>
-      </div >
+      </div>
     </ChakraProvider>
   );
 }

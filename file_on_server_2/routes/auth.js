@@ -322,13 +322,13 @@ router.get('/findshop', async (req, res) => {
     try {
         const connection = await pool.getConnection();
 
-        const [user] = await connection.execute(
+        const [shop] = await connection.execute(
             "SELECT name,phone,address,email,avatar,taxid FROM m_shoper WHERE shoperID = ?",
             [shopId]
         );
 
         connection.release();
-        return res.status(200).json({msg:'success',user});
+        return res.status(200).json({msg:'success',shop});
     } catch (error) {
         console.error('Get infor fail:', error);
         return res.status(500).json({ error: error.message });
