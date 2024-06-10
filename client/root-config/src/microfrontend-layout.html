@@ -48,9 +48,6 @@
     <route path="wishlist">
       <application name="@TachMonShop/wishlist"></application>
     </route>
-    <route path="orderlist">
-      <application name="@TachMonShop/orderlist"></application>
-    </route>
     <route path="statistics">
       <application name="@TachMonShop/statistics"></application>
     </route>
@@ -69,8 +66,11 @@
     <route path="contacts">
       <application name="@TachMonShop/contact"></application>
     </route>
-    <route path="account">
+    <route path="account" exact>
       <application name="@TachMonShop/account"></application>
+    </route>
+    <route path="account/order">
+      <application name="@TachMonShop/orderlist"></application>
     </route>
   </main>
   <footer>

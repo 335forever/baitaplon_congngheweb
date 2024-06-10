@@ -9,7 +9,6 @@ a:hover {
 .body {
     display: flex;
     gap: 7.78%;
-    height: 100px;
     margin-top: 43px;
 }
 
@@ -27,7 +26,7 @@ input {
     border-radius: 4px;
 }
 
-.list {
+.order-list {
     width: 100%;
 }
 
@@ -44,7 +43,7 @@ input {
     display: flex;
     flex-direction: column;
     gap: 8px;
-}
+    min-width: 60px;}
 
 .navigator {
     font-size: 14px;
