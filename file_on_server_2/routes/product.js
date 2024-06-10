@@ -49,7 +49,6 @@ router.get('/find', async (req, res) => {
             // Tìm thấy sản phẩm, tiếp tục lấy ảnh của mỗi sản phẩm đã tìm thấy
             for (let product of products) {
                 const images = await getImagesByProductId(product.productID);
-                console.log(images);
                 product.images = images.images;
             }
             
@@ -75,7 +74,6 @@ router.get('/find', async (req, res) => {
             // Tìm thấy sản phẩm, tiếp tục lấy ảnh của mỗi sản phẩm đã tìm thấy
             for (let product of products) {
                 const images = await getImagesByProductId(product.productID);
-                console.log(images);
                 product.images = images.images;
             }
             
@@ -101,7 +99,6 @@ router.get('/find', async (req, res) => {
             // Tìm thấy sản phẩm, tiếp tục lấy ảnh của mỗi sản phẩm đã tìm thấy
             for (let product of products) {
                 const images = await getImagesByProductId(product.productID);
-                console.log(images);
                 product.images = images.images;
             }
             
@@ -161,6 +158,7 @@ router.post('/add', authenticate, async (req, res) => {
         const price       = productData.price;
         const categoryId  = productData.categoryId || 3;
         const images      = productData.images;
+        const description = productData.description;
 
         if (!name) {
             connection.release();
@@ -191,8 +189,8 @@ router.post('/add', authenticate, async (req, res) => {
         
         // Đủ điều kiện để thêm sản phẩm
         const [result] = await connection.execute(
-            `INSERT INTO m_product (name, quantity, price, categoryId, shoperId) VALUES (?, ?, ?, ?, ?)`,
-            [name, quantity, price, categoryId, shoperId]
+            `INSERT INTO m_product (name, quantity, price, categoryId, shoperId,description) VALUES (?, ?, ?, ?, ?, ?)`,
+            [name, quantity, price, categoryId, shoperId, description]
         );
         
         // Tiếp tục thực hiện INSERT images sau khi hành động INSERT product thành công
@@ -238,6 +236,7 @@ router.put('/update', authenticate, async (req, res) => {
         const price       = productData.price;
         const categoryId  = productData.categoryId;
         const images      = productData.images;
+        const description = productData.description;
 
         // Kiểm tra productId có được đính kèm không
         if (!productId) {
@@ -246,7 +245,7 @@ router.put('/update', authenticate, async (req, res) => {
         }
 
         // Kiểm tra có data để cập nhật không
-        if (!name && !quantity && !price && !categoryId && !checkImagesFields(images,6)) {
+        if (!name && !quantity && !price && !categoryId && !checkImagesFields(images,6) && !description) {
             connection.release();
             return res.status(400).json({error: 'No data to update'})
         }
@@ -262,7 +261,7 @@ router.put('/update', authenticate, async (req, res) => {
         }
 
         // Cập nhật product nếu có dữ liệu
-        if (name || quantity || price || categoryId) {
+        if (name || quantity || price || categoryId || description) {
             // Chuẩn bị câu truy vấn
             let updateQuery = "UPDATE m_product SET ";
             let updateValues = [];
@@ -281,6 +280,10 @@ router.put('/update', authenticate, async (req, res) => {
             if (categoryId) {
                 updateQuery += "categoryId = ?, ";
                 updateValues.push(categoryId);
+            }
+            if (description) {
+                updateQuery += "description = ?, ";
+                updateValues.push(description);
             }
             updateQuery = updateQuery.slice(0, -2);
             updateQuery += " WHERE productId = ?";
