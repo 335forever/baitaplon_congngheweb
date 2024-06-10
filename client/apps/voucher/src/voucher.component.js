@@ -9,6 +9,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { toast } from "@TachMonShop/notification";
 
 export default function VoucherList(props) {
+  document.title = "TachMonShop | Vouchers"
+
   const [vouchers, setVouchers] = React.useState([]);
 
   const shopId = 21; // Chỗ này anh giúp em lấy shopID với, em không biết anh và anh Quân trao đổi lấy shopID chỗ nào rồi

@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import Root from "./root.component";
+import Root from "./account.component";
 
 describe("Root component", () => {
   it("should be in the document", () => {
