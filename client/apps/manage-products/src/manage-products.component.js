@@ -65,7 +65,7 @@ export default function ManageProducts(props) {
         </div>
       </div>
       <div id="list">
-        <button style={{ "backgroundColor": "#f5f5f5", "borderRadius": "8px" }}><img src={icAdd} alt="" /></button>
+        <button style={{ "backgroundColor": "#f5f5f5", "borderRadius": "8px", minWidth: "200px"}}><img style={{margin: 'auto'}} src={icAdd} alt="" /></button>
         {products.map((e) => <Product key={e.id} {...e}></Product>)}
       </div>
     </div>

@@ -3,7 +3,7 @@ import icTrash from "../../assets/images/ic_trash.svg";
 
 export default function Product({ id, image, name, price }) {
   return (
-    <div className="product">
+    <div className="product-in-manager">
       <div className="info">
         <img src={image} alt=""></img>
       </div>
