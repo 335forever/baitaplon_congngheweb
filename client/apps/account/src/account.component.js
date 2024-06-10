@@ -2,6 +2,7 @@ import './index.css';
 
 import React, { useState, useEffect } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
+// import { toast } from '@TachMonShop/notification';
 
 import MyProfile from './components/MyProfile';
 import ChangePassword from './components/ChangePassword';
