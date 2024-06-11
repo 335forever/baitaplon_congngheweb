@@ -5,8 +5,12 @@ export {
     isSignedIn,
     logout,
     getUserInfo,
+    getShopInfo,
+    updateShop,
+    changePassword,
     update as updateUser,
-    upToShop
+    upToShop,
+    findShop
 } from "./controllers/account.controller";
 export { getSearchSuggestions } from "./controllers/search.controller";
 export {
@@ -32,7 +36,10 @@ export {
     getIncome,
     getOrderNumber,
     getCustomerNumber
-} from "./controllers/statistics.controller"
+} from "./controllers/statistics.controller";
+export {
+    getAllCategory
+} from "./controllers/manage_products.controller";
 
 export {
     createOrder,

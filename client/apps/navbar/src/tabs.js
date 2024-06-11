@@ -29,9 +29,5 @@ export const accountTabs = [
     {
         name: 'Về chúng tôi',
         to: '/about'
-    }, 
-    {
-        name: 'Tài khoản',
-        to: '/account'
     }
 ]
