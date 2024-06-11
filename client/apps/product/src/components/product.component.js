@@ -13,7 +13,7 @@ import { navigateToUrl } from "single-spa";
 import { useDispatch, useSelector } from "react-redux";
 import { productActions } from "../controllers/product.slice";
 
-import { findProduct, addProductToCart, findShop } from "@TachMonShop/api";
+import { findProduct, addProductToCart, findShopInfo } from "@TachMonShop/api";
 
 import "../root.css";
 import { useQuery } from "react-query";
@@ -25,7 +25,7 @@ async function getProduct() {
     product: await findProduct({
       productId,
     }), shopId,
-    shop: await findShop({
+    shop: await findShopInfo({
       shopId
     })
   };

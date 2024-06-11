@@ -188,7 +188,7 @@ export async function uploadImages(images, onReject, onResolve) {
   }
 }
 
-export async function findShop({ shopId }) {
+export async function findShopInfo({ shopId }) {
   const res = await instance.get("/findshop", {
       params: {
         shopId
