@@ -24,6 +24,7 @@ export default function Account(props) {
 
   useEffect(() => {
     if (!isSignedIn()) navigateToUrl('/');
+    getProfile();
   }, []);
 
   const [menu, setMenu] = React.useState(0);
@@ -35,19 +36,10 @@ export default function Account(props) {
 
     setProfile(response);
 
-    if (response.isShoper) {
-      var res = await getShopInfo();
+    var res = await getShopInfo();
+    if (res) setShop(res);
 
-      setShop(res);
-
-      console.log(res);
-    }
   }
-
-  useEffect(() => {
-    getProfile();
-  }, []);
-
   const updateProfile = (_profile) => {
     updateUser(
       _profile,
@@ -150,7 +142,7 @@ export default function Account(props) {
         }
       );
   };
-
+  console.log(shop)
   return (
     <ChakraProvider>
       <div id="wrapper">
