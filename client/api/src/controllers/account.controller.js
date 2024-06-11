@@ -55,15 +55,18 @@ export async function getUserInfo() {
 }
 
 export async function getShopInfo(onReject) {
-  const res = await instance.get("/shop/getinfo", {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`
-      // Authorization: `Bearer ${token}`
-    }
-  })
+  try {
+    const res = await instance.get("/shop/getinfo", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+        // Authorization: `Bearer ${token}`
+      }
+    })
 
-  if (res.status === 200) return res.data.shopInfo[0];
-  else if (res.status === 403) onReject()
+    if (res.status === 200) return res.data.shopInfo[0];
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export async function update(form, onResolve, onReject) {
@@ -190,9 +193,9 @@ export async function uploadImages(images, onReject, onResolve) {
 
 export async function findShopInfo({ shopId }) {
   const res = await instance.get("/findshop", {
-      params: {
-        shopId
-      },
+    params: {
+      shopId
+    },
   });
   if (res.status == 200) {
     return res.data.shop[0];

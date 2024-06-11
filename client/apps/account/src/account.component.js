@@ -36,7 +36,7 @@ export default function Account(props) {
 
     setProfile(response);
 
-    var res = await getShopInfo();
+    var res = await getShopInfo((res) => { });
     if (res) setShop(res);
 
   }
