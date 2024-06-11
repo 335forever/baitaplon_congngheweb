@@ -104,7 +104,7 @@ export default function ShopProfile({ avatar, name, address, phone, email, taxid
       <div className="notify">{notify}</div>
     </div>
     <div className="function">
-      <Button colorScheme="red" onClick={submit}>Xác nhận</Button>
+      <Button id="confirmButton" colorScheme="red" onClick={submit}>Xác nhận</Button>
     </div>
   </div>)
 }
