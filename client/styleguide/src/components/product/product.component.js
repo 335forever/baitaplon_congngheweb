@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import { Icons } from "../../TachMonShop-icons";
 import "./product.css";
 import { isSignedIn, addProductToCart } from "@TachMonShop/api";
+import { toast } from "@TachMonShop/notification";
 
 function _Product({product}) {
   function handleNavigate() {
@@ -12,12 +13,38 @@ function _Product({product}) {
   }
 
   async function addToCart() {
-    if (!isSignedIn()) navigateToUrl('/signIn');
+    if (!isSignedIn()) {
+      navigateToUrl('/signIn');
+      toast({
+        title: "Cảnh báo",
+        description: `Bạn cần đăng nhập để tiếp tục`,
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
     else {
-      await addProductToCart({
-        productId: product.productID,
-        quantity: 1
-      })
+      try {
+        await addProductToCart({
+          productId: product.productID,
+          quantity: 1
+        });
+        toast({
+          title: "Thêm vào giỏ thành công!",
+          duration: 1000,
+          isClosable: false,
+          status: "success",
+        });
+      } catch (e) {
+        toast({
+          title: "Lỗi",
+          description: `Vui lòng thử lại`,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+
     }
   }
   return (

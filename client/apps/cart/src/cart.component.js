@@ -1,7 +1,7 @@
 import { useState, useEffect, useLayoutEffect, useRef} from "react";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { navigateToUrl } from "single-spa";
-import { getCart, findProduct, updateCart } from "@TachMonShop/api";
+import { getCart, findProduct, updateCart, isSignedIn} from "@TachMonShop/api";
 import "./cart.css";
 
 import { toast } from "@TachMonShop/notification"
@@ -261,6 +261,10 @@ export default function Cart(props) {
       },
     },
   });
+
+  useEffect(() => {
+    if (!isSignedIn()) navigateToUrl('/');
+  }, []);
 
   return (
     <QueryClientProvider client={client}>
