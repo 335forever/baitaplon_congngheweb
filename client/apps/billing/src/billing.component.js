@@ -8,6 +8,7 @@ import {
   updateCart,
   getUserInfo,
   createOrder,
+  isSignedIn
 } from "@TachMonShop/api";
 import { toast } from "@TachMonShop/notification";
 
@@ -145,6 +146,10 @@ function BillingDetails() {
   useEffect(() => {
     if (userQuery.data) setUserInfo(userQuery.data);
   }, [userQuery.data]);
+
+  useEffect(() => {
+    if (!isSignedIn()) navigateToUrl('/');
+  }, []);
 
   function handleCouponChange(e) {
     e.preventDefault();

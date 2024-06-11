@@ -19,6 +19,10 @@ import {
 export default function Account(props) {
   document.title = "TachMonShop | Tài khoản";
 
+  useEffect(() => {
+    if (!isSignedIn()) navigateToUrl('/');
+  }, []);
+
   const [menu, setMenu] = React.useState(0);
   const [profile, setProfile] = React.useState();
   const [shop, setShop] = React.useState({});
