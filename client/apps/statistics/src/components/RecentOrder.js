@@ -5,7 +5,7 @@ import icDelivered from "../../assets/images/ic_delivered.svg";
 import icProcessing from "../../assets/images/ic_processing.svg";
 import { StatLabel } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import { findUser } from "../../../../api/src/controllers/account.controller";
+import { findUser } from "@TachMonShop/api";
 
 export default function RecentOrder({ orderID, accountID, total, status, orderDate }) {
   var statusBackground, statusForeground, statusIcon, statusLabel;
@@ -36,7 +36,8 @@ export default function RecentOrder({ orderID, accountID, total, status, orderDa
   const [diffTime, setDiffTime] = React.useState(0);
 
   async function getUser() {
-    const res = await findUser({ accountId: accountID })
+    let res;
+    await findUser({ accountId: accountID }, (data) => { res = data }, () => { })
     setUser(res)
   }
 

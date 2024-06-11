@@ -1,6 +1,6 @@
 import { Progress } from "@chakra-ui/react"
 import React, { useEffect } from "react"
-import { findProduct } from "../../../../api/src/controllers/category.controller";
+import { findProduct } from "@TachMonShop/api";
 
 export default function BestSeller({ productId, quantity, total }) {
   const [product, setProduct] = React.useState();

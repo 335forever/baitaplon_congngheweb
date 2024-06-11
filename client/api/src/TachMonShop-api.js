@@ -10,7 +10,8 @@ export {
     changePassword,
     update as updateUser,
     upToShop,
-    findShop
+    findShop,
+    findUser
 } from "./controllers/account.controller";
 export { getSearchSuggestions } from "./controllers/search.controller";
 export {

@@ -6,11 +6,11 @@ import { Button, ChakraProvider } from "@chakra-ui/react";
 import Order from "./components/order";
 import item1 from "../assets/images/item1.svg"
 import item2 from "../assets/images/item2.svg"
-// import { NavRoute } from "@TachMonShop/styleguide"
-import { approveOrders, getOrders, manageOrders } from "../../../api/src/controllers/order.controller";
-import { getShopInfo, getUserInfo } from "../../../api/src/controllers/account.controller";
+import { NavRoute } from "@TachMonShop/styleguide"
+import { approveOrders, getOrders, manageOrders } from "@TachMonShop/api";
+import { getShopInfo, getUserInfo } from "@TachMonShop/api";
 
-const menus = ['Tất cả', 'Đã hủy', 'Chờ xác nhận', 'Đã xác nhận']
+const menus = ['Tất cả', 'Chờ xác nhận', 'Đã hủy', 'Đã xác nhận']
 
 export default function orderlist() {
   const [mode, setMode] = useState(0);
@@ -52,10 +52,10 @@ export default function orderlist() {
   return (
     <ChakraProvider>
       <div className="wrapper">
-        {/* <Parcel
+        <Parcel
           config={NavRoute}
           names={["Trang chủ", "Tài khoản", "Đơn hàng đã đặt"]}
-        /> */}
+        />
         <div className="body">
           <div className="mode">
             {menus.map((e, index) =>

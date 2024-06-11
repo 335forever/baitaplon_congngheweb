@@ -12,8 +12,8 @@ import React, { useState, useEffect } from "react";
 import { ChakraProvider, Progress } from "@chakra-ui/react";
 import RecentOrder from "./components/RecentOrder.js";
 import BestSeller from "./components/BestSeller.js";
-import { getCustomerNumber, getIncome, getOrderNumber } from "../../../api/src/controllers/statistics.controller.js";
-import { manageOrders } from "../../../api/src/controllers/order.controller.js";
+import { getCustomerNumber, getIncome, getOrderNumber } from "@TachMonShop/api";
+import { manageOrders } from "@TachMonShop/api";
 
 const relateOrders = [
   {
@@ -156,10 +156,10 @@ export default function statistics(props) {
   }
 
   useEffect(() => {
-    // _getIncome()
-    // _getCustomerNumber()
-    // _getOrderNumber()
-    // _manageOrders()
+    _getIncome()
+    _getCustomerNumber()
+    _getOrderNumber()
+    _manageOrders()
   }, []);
 
   return (
@@ -193,8 +193,7 @@ export default function statistics(props) {
               <div style={{ "flex": "1 0 19.14%" }}>Trạng thái</div>
             </div>
             <div style={{ "maxHeight": "285px", "overflowY": "auto" }}>
-              {orders.filter(cus => cus.name.toLowerCase().includes(cusKeyword.toLowerCase()))
-                .map((order, index) => <RecentOrder key={order.orderID} {...order} />)}
+              {orders.map((order, index) => <RecentOrder key={order.orderID} {...order} />)}
             </div>
           </div>
           <div id="best-sellers">
@@ -213,7 +212,7 @@ export default function statistics(props) {
             </div>
             {/* <Progress isIndeterminate /> */}
             <div style={{ "maxHeight": "414px", "overflowX": "hidden", "overflowY": "auto" }}>
-              {prodList && prodList.keys.map((e) => <BestSeller key={e} productId={e} {...prodList[e]}></BestSeller>)}
+              {prodList && Object.keys(prodList).map((e) => <BestSeller key={e} productId={e} {...prodList[e]}></BestSeller>)}
             </div>
           </div>
         </div>
