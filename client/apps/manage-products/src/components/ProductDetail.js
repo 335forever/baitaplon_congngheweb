@@ -4,7 +4,7 @@ import icMinus from "../../assets/images/ic_minus.svg";
 import icPlus from "../../assets/images/ic_plus.svg";
 import React, { useEffect, useState } from "react";
 import DropdownGrid from "./DropdownGrid";
-import { uploadImages } from "../../../../api/src/controllers/category.controller";
+import { uploadImages } from "@TachMonShop/api";
 
 export default function ProductDetail({ category, categoryID, name, description, images, price, productID, quantity, shoperID, onCancel, onUpdate }) {
   const [imagePaths, setImagePaths] = React.useState([]);

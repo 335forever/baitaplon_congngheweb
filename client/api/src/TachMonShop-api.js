@@ -6,7 +6,9 @@ export {
     logout,
     getUserInfo,
     update as updateUser,
-    upToShop
+    upToShop,
+    findShop,
+    findUser
 } from "./controllers/account.controller";
 export { getSearchSuggestions } from "./controllers/search.controller";
 export {

@@ -6,8 +6,8 @@ import Product from "./components/Product";
 import icAdd from "../assets/images/ic_add.svg";
 import icClose from "../assets/images/ic_close.svg";
 import DropdownGrid from "./components/DropdownGrid";
-import { getCategories, findProduct, removeProduct, updateProduct } from "../../../api/src/controllers/category.controller";
-import { getShopInfo } from "../../../api/src/controllers/account.controller";
+import { getCategories, findProduct, removeProduct, updateProduct } from "@TachMonShop/api";
+import { getShopInfo } from "@TachMonShop/api";
 import ProductDetail from "./components/ProductDetail";
 import ProductDetailAdd from "./components/ProductDetailAdd";
 

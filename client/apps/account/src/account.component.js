@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { toast } from "@TachMonShop/notification";
 
+import { navigateToUrl } from "single-spa"
+
 import MyProfile from "./components/MyProfile";
 import ChangePassword from "./components/ChangePassword";
 import ShopProfile from "./components/ShopProfile";
@@ -14,6 +16,7 @@ import {
   upToShop,
   updateUser,
   updateShop,
+  isSignedIn
 } from "@TachMonShop/api";
 
 export default function Account(props) {
@@ -169,13 +172,13 @@ export default function Account(props) {
                     onClick={() => setMenu(0)}
                     style={{ color: menu == 0 ? "#db4444" : "rgba(0,0,0,0.5)" }}
                   >
-                    My Profile
+                    Tài khoản
                   </a>
                   <a
                     onClick={() => setMenu(1)}
                     style={{ color: menu == 1 ? "#db4444" : "rgba(0,0,0,0.5)" }}
                   >
-                    Change password
+                    Đổi mật khẩu
                   </a>
                 </div>
                 <div className="menu-title">My Shop</div>
@@ -184,9 +187,26 @@ export default function Account(props) {
                     onClick={() => setMenu(2)}
                     style={{ color: menu == 2 ? "#db4444" : "rgba(0,0,0,0.5)" }}
                   >
-                    Shop profile
+                    Shop của bạn
                   </a>
-                  {/* {profile.isShoper ? <a onClick={() => setMenu(3)} style={{ "color": menu == 3 ? "#db4444" : "rgba(0,0,0,0.5)" }}>Unregister shop</a> : <></>} */}
+                  <a
+                    onClick={() => { navigateToUrl('/statistics') }}
+                    style={{ color: "rgba(0,0,0,0.5)" }}
+                  >
+                    Thống kê
+                  </a>
+                  <a
+                    onClick={() => { navigateToUrl('/manage-products') }}
+                    style={{ color: "rgba(0,0,0,0.5)" }}
+                  >
+                    Quản lý sản phẩm
+                  </a>
+                  <a
+                    onClick={() => {/* LINK*/ }}
+                    style={{ color: "rgba(0,0,0,0.5)" }}
+                  >
+                    Đơn hàng
+                  </a>
                 </div>
               </div>
               <div id="manage">
