@@ -28,7 +28,7 @@ export default function Account(props) {
 
   const [menu, setMenu] = React.useState(0);
   const [profile, setProfile] = React.useState();
-  const [shop, setShop] = React.useState({});
+  const [shop, setShop] = React.useState();
 
   async function getProfile() {
     var response = await getUserInfo();
@@ -186,27 +186,25 @@ export default function Account(props) {
                   <a
                     onClick={() => setMenu(2)}
                     style={{ color: menu == 2 ? "#db4444" : "rgba(0,0,0,0.5)" }}
-                  >
-                    Shop của bạn
-                  </a>
-                  <a
+                  >Shop của bạn</a>
+                  {shop && <a
                     onClick={() => { navigateToUrl('/statistics') }}
                     style={{ color: "rgba(0,0,0,0.5)" }}
                   >
                     Thống kê
-                  </a>
-                  <a
+                  </a>}
+                  {shop && <a
                     onClick={() => { navigateToUrl('/manage-products') }}
                     style={{ color: "rgba(0,0,0,0.5)" }}
                   >
                     Quản lý sản phẩm
-                  </a>
-                  <a
+                  </a>}
+                  {shop && <a
                     onClick={() => { navigateToUrl('/account/order') }}
                     style={{ color: "rgba(0,0,0,0.5)" }}
                   >
                     Đơn hàng
-                  </a>
+                  </a>}
                 </div>
               </div>
               <div id="manage">
