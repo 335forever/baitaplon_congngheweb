@@ -7,55 +7,46 @@ import Order from "./components/order";
 import item1 from "../assets/images/item1.svg"
 import item2 from "../assets/images/item2.svg"
 // import { NavRoute } from "@TachMonShop/styleguide"
-import { getOrders, manageOrders } from "../../../api/src/controllers/order.controller";
+import { approveOrders, getOrders, manageOrders } from "../../../api/src/controllers/order.controller";
+import { getShopInfo, getUserInfo } from "../../../api/src/controllers/account.controller";
 
 const menus = ['Tất cả', 'Đã hủy', 'Chờ xác nhận', 'Đã xác nhận']
 
-const orders = [
-  {
-    name: 'Shop ABC',
-    status: 2,
-    products: [
-      {
-        image: { item1 },
-        name: 'H1 Gamepad',
-        quantity: 2,
-        price: 650000
-      },
-      {
-        image: { item2 },
-        name: 'LCD Monitor',
-        quantity: 1,
-        price: 1100000
-      }
-    ]
-  },
-  {
-    name: 'Honkai Impact 3 Retail',
-    status: 1,
-    products: [
-      {
-        image: { item1 },
-        name: 'H1 Gamepad',
-        quantity: 2,
-        price: 650000
-      }
-    ]
-  }
-]
-
 export default function orderlist() {
   const [mode, setMode] = useState(0);
-  var seller = false;
+  const [orders, setOrders] = React.useState();
+  const [seller, setSeller] = React.useState(false);
 
   async function getRole() {
-    const res = await getUserInfo();
+    const res = await getShopInfo(() => { setSeller(false) });
 
-    if (seller = res.isShoper) manageOrders();
-    else getOrders();
+    if (res) { setSeller(true); mngOrders(); }
+    else getorders();
+  }
+
+  const getorders = async () => {
+    const res = await getOrders();
+    if (res) setOrders(res)
+  }
+
+  const mngOrders = async () => {
+    const res = await manageOrders();
+    if (res) setOrders(res);
+  }
+
+  async function onCancel({ orderId, msgToUser }) {
+    const res = await approveOrders({ orderId, msgToUser, status: 1 });
+    if (res) getorders();
+  }
+
+  async function onConfirm({ orderId, msgToUser }) {
+    console.log({ orderId, msgToUser, status: 2 })
+    const res = await approveOrders({ orderId, msgToUser, status: 2 });
+    if (res) getorders();
   }
 
   useEffect(() => {
+    getRole();
   }, [])
 
   return (
@@ -72,7 +63,10 @@ export default function orderlist() {
             }
           </div>
           <div className="order-list">
-            {orders.map((e, index) => (e.status == mode - 1 || mode == 0 ? <Order key={index} seller={true} {...e} /> : <div></div>))}
+            {orders ?
+              orders.map((e, index) => (e.status == mode - 1 || mode == 0 ?
+                <Order key={e.orderID} seller={seller} {...e} onCancel={(m) => onCancel({ msgToUser: m, orderId: e.orderID })} onConfirm={(m) => onConfirm({ msgToUser: m, orderId: e.orderID })} />
+                : <div></div>)) : <></>}
           </div>
         </div>
       </div>

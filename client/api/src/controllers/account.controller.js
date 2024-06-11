@@ -1,11 +1,11 @@
 import axios from "axios";
 const instance = axios.create({
-  baseURL: `https://54.255.209.5/auth`,
-  // baseURL: `${process.env.SERVER_API_ENDPOINT}/auth`,
+  // baseURL: `https://54.255.209.5/auth`,
+  baseURL: `${process.env.SERVER_API_ENDPOINT}/auth`,
   timeout: 3000,
 });
 
-// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhZ25pZSIsImlhdCI6MTcxODA1NTY2MiwiZXhwIjoxNzE4MDY2NDYyfQ.P84STqCw3D-vvVNoXWAZgF1kFn3u_7asG9Vi4k7cgJM';
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhZ25pZSIsImlhdCI6MTcxODA3MzExNCwiZXhwIjoxNzE4MDgzOTE0fQ.iUZygtZiTIR4_R3joTntN9CpXS8JxD6nRl_bUbNVa4s';
 
 export async function signIn(form, onResolve, onReject) {
   try {
@@ -36,8 +36,8 @@ export async function signUp(form, onResolve, onReject) {
 export async function getUserInfo() {
   const res = await instance.get("/user/getinfo", {
     headers: {
-      // Authorization: `Bearer ${localStorage.getItem("token")}`,
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // Authorization: `Bearer ${token}`,
     },
   });
   if (res.status === 200) return res.data.userInfo;
@@ -45,16 +45,16 @@ export async function getUserInfo() {
 
 }
 
-export async function getShopInfo() {
+export async function getShopInfo(onReject) {
   const res = await instance.get("/shop/getinfo", {
     headers: {
-      // Authorization: `Bearer ${localStorage.getItem("token")}`
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+      // Authorization: `Bearer ${token}`
     }
   })
 
   if (res.status === 200) return res.data.shopInfo[0];
-  else throw res;
+  else if (res.status === 403) onReject()
 }
 
 export async function update(form, onResolve, onReject) {
@@ -111,12 +111,45 @@ export async function updateShop(form, onResolve, onReject) {
     onReject(err);
   }
 }
+
 export async function changePassword(form, onResolve, onReject) {
   try {
     const res = await instance.put("/changepassword", form, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+
+    if (res.status == 200) onResolve(res);
+    else onReject(res);
+  } catch (error) {
+    onReject(error);
+  }
+}
+
+export async function findShop(form, onResolve, onReject) {
+  try {
+    const res = await instance.get("/findshop", {
+      params: form
+    }, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+
+    if (res.status == 200) onResolve(res.data.shop);
+    else onReject(res);
+  } catch (error) {
+    onReject(error);
+  }
+}
+
+export async function findUser(form, onResolve, onReject) {
+  try {
+    const res = await instance.get("/finduser", form, {
+      headers: {
+        "Content-Type": "application/json",
       },
     })
 

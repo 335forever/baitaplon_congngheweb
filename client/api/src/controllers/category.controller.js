@@ -6,7 +6,7 @@ const instance = axios.create({
   timeout: 3000,
 });
 
-// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhZ25pZSIsImlhdCI6MTcxODA1NTY2MiwiZXhwIjoxNzE4MDY2NDYyfQ.P84STqCw3D-vvVNoXWAZgF1kFn3u_7asG9Vi4k7cgJM';
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhZ25pZSIsImlhdCI6MTcxODA3MzExNCwiZXhwIjoxNzE4MDgzOTE0fQ.iUZygtZiTIR4_R3joTntN9CpXS8JxD6nRl_bUbNVa4s';
 
 export async function getCategories() {
   const response = await instance.get("/get/categories");

@@ -1,16 +1,19 @@
 import icCancelled from "../../assets/images/ic_cancelled.svg"
 import icDelivered from "../../assets/images/ic_delivered.svg"
-import icDelivering from "../../assets/images/ic_delivering.svg"
 import icProcessing from "../../assets/images/ic_processing.svg"
 import icShop from "../../assets/images/ic_shop.svg"
 import icUser from "../../assets/images/ic_user.svg";
 
 import { Button, Popover, PopoverTrigger, PopoverContent } from "@chakra-ui/react"
+import React, { useState, useEffect } from "react"
 
-export default function Order({ name, status, products, seller }) {
+import { findShop, findUser } from "../../../../api/src/controllers/account.controller"
+import { findProduct } from "../../../../api/src/controllers/category.controller"
+
+export default function Order({ orderID, status, quantity, orderDate, total, productID, shoperID, msgToShop, msgToUser, seller, onCancel, onConfirm }) {
     const statusLabel = (status) => {
         switch (status) {
-            case 0:
+            case 1:
                 return (
                     <div className="status" >
                         <div className="status-inner" style={{ backgroundColor: '#FFE5EC', color: '#FF316A' }}>
@@ -19,7 +22,7 @@ export default function Order({ name, status, products, seller }) {
                         </div >
                     </div >
                 )
-            case 1:
+            case 0:
                 return (
                     <div className="status" >
                         <div className="status-inner" style={{ backgroundColor: '#FFF2DA', color: '#FFAA04' }}>
@@ -42,63 +45,76 @@ export default function Order({ name, status, products, seller }) {
         }
     }
 
-    var s = 0
+    const [shop, setShop] = React.useState()
+    const [product, setProduct] = React.useState();
+    const [message, setMessage] = React.useState('');
 
-    console.log(name + '-' + status)
+    async function getShop() {
+        await findShop({ shopId: shoperID }, (res) => setShop(res), (res) => { });
+    }
+    async function getProduct() {
+        const res = await findProduct({ productId: productID });
+        if (res) setProduct(res)
+    }
+
+    useEffect(() => {
+        getShop();
+        getProduct();
+    }, [])
+
+    console.log(shop)
 
     return (
         <div className="order">
             <div className="title">
                 <div className="lefttitle" style={{ display: 'flex', width: '50%' }}>
                     <img src={seller ? icUser : icShop} />
-                    <div className="shopName">{name}</div>
+                    <div className="shopName">{shop ? shop[0].name : ''}</div>
                 </div>
                 {statusLabel(status)}
             </div >
             <div className="products" style={{ marginLeft: '40px', marginTop: '32px' }}>
-                {products.map((e, index) => {
-                    s += e.quantity * e.price;
-                    return (<div key={index} style={{ display: 'flex', height: '90px' }}>
-                        <div style={{ display: 'flex', fontSize: '24px', gap: '16px', width: '50%' }}>
-                            <img src={e.image} alt="Can't load"></img>
-                            <div>{e.name}</div>
-                        </div>
-                        <div style={{ display: 'flex', fontSize: '20px', gap: '32px', justifyContent: 'flex-end', width: '50%' }}>
-                            <div>{e.quantity}x</div>
-                            <div style={{ fontWeight: '600' }}>{e.price} VND</div>
-                        </div>
-                    </div>)
-                })}
+                <div style={{ display: 'flex', height: '90px' }}>
+                    <div style={{ display: 'flex', fontSize: '24px', gap: '16px', width: '50%' }}>
+                        <img src={product ? product.images.image1 : ''} alt=""></img>
+                        <div>{product ? product.name : ''}</div>
+                    </div>
+                    <div style={{ display: 'flex', fontSize: '20px', gap: '32px', justifyContent: 'flex-end', width: '50%' }}>
+                        <div>{quantity}x</div>
+                        <div style={{ fontWeight: '600' }}>{total / quantity} VND</div>
+                    </div>
+                </div>
             </div>
             <div className="total">
                 <div style={{ borderTop: "1px solid rgba(0,0,0,0.5)", display: 'flex', fontSize: '20px', fontWeight: '600', justifyContent: 'flex-end', width: '30%' }}>
-                    {s} VND
+                    {total} VND
                 </div>
             </div>
+            <div>Lời gửi từ {seller ? ` người mua: ${msgToShop ? msgToShop : ''}` : ` người bán: ${msgToUser ? msgToUser : ''}`}</div>
             <div className="function">
-                {!seller ? (<Button colorScheme="red" style={{ fontWeight: '400', padding: '32px 48px' }}>Mua lại</Button>)
-                    : status == 1 ? (
+                {!seller ? (<></>)
+                    : status == 0 ? (
                         <>
                             <Popover closeOnBlur={true}>
                                 <PopoverTrigger>
-                                    <Button colorScheme="red" style={{ fontWeight: '400', padding: '32px 48px' }}>Xác nhận</Button>
+                                    <Button onClick={() => setMessage('')} colorScheme="red" style={{ fontWeight: '400', padding: '32px 48px' }}>Xác nhận</Button>
                                 </PopoverTrigger>
                                 <PopoverContent>
                                     <div className="message">
-                                        <input placeholder="Đôi lời nhắn gửi" style={{ "flexGrow": "1" }}></input>
-                                        <Button colorScheme="red">Gửi</Button>
+                                        <input placeholder="Đôi lời nhắn gửi" style={{ "flexGrow": "1" }} value={message} onChange={(e) => setMessage(e.target.value)}></input>
+                                        <Button colorScheme="red" onClick={() => onConfirm(message)} >Gửi</Button>
                                     </div>
                                 </PopoverContent>
                             </Popover>
 
                             <Popover closeOnBlur={true}>
                                 <PopoverTrigger>
-                                    <Button variant='outline' style={{ padding: '32px 48px' }}>Huỷ</Button>
+                                    <Button onClick={() => setMessage('')} variant='outline' style={{ padding: '32px 48px' }}>Huỷ</Button>
                                 </PopoverTrigger>
                                 <PopoverContent>
                                     <div className="message">
-                                        <input placeholder="Đôi lời nhắn gửi" style={{ "flexGrow": "1" }}></input>
-                                        <Button colorScheme="red">Gửi</Button>
+                                        <input placeholder="Đôi lời nhắn gửi" style={{ "flexGrow": "1" }} value={message} onChange={(e) => setMessage(e.target.value)}></input>
+                                        <Button colorScheme="red" onClick={() => onCancel(message)}>Gửi</Button>
                                     </div>
                                 </PopoverContent>
                             </Popover>
