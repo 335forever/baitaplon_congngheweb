@@ -29,7 +29,7 @@ async function getProduct() {
       shopId
     })
   };
-  document.title = `TachMonShop | ${result.product.name}`;
+  document.title = `TamoShop | ${result.product.name}`;
   return result;
 }
 export function ProductPage() {

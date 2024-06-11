@@ -50,7 +50,7 @@ export default function NavBar() {
                 className="text-2xl quicksand-bold inline-block"
                 to="/"
               >
-                TachMonShop
+                TamoShop
               </Link>
               <Tabbar activePath={activePath} />
               <div className="action-bar flex flex-row gap-6 justify-between items-center h-full">

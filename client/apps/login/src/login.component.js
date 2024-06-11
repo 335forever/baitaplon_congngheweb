@@ -11,7 +11,7 @@ import { toast } from "@TachMonShop/notification";
 import "./index.css";
 
 export function Login(props) {
-  document.title = "TachMonShop | Đăng nhập"
+  document.title = "TamoShop | Đăng nhập"
   const [form, setForm] = React.useState({
     action: "signin",
     username: null,
