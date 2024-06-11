@@ -191,7 +191,7 @@ export default function Account(props) {
                   >
                     Quản lý sản phẩm
                   </a>}
-                  {shop && <a
+                  {<a
                     onClick={() => { navigateToUrl('/account/order') }}
                     style={{ color: "rgba(0,0,0,0.5)" }}
                   >
