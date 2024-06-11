@@ -252,7 +252,7 @@ function CartContent() {
 }
 
 export default function Cart(props) {
-  document.title = "TachMonShop | Giỏ hàng";
+  document.title = "TamoShop | Giỏ hàng";
   const client = new QueryClient({
     defaultOptions: {
       queries: {

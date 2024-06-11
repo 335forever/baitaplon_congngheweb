@@ -20,7 +20,7 @@ import {
 } from "@TachMonShop/api";
 
 export default function Account(props) {
-  document.title = "TachMonShop | Tài khoản";
+  document.title = "TamoShop | Tài khoản";
 
   useEffect(() => {
     if (!isSignedIn()) navigateToUrl('/');

@@ -17,7 +17,7 @@ import { toast } from "@TachMonShop/notification";
 import { NavRoute } from "@TachMonShop/styleguide";
 
 export default function VoucherList(props) {
-  document.title = "TachMonShop | Vouchers";
+  document.title = "TamoShop | Vouchers";
 
   const [vouchers, setVouchers] = React.useState([]);
 

@@ -27,7 +27,7 @@ export default function Footer(props) {
           <BrowserRouter>
             <div className="flex flex-col grow gap-1">
               <div className="flex flex-col gap-2.5">
-                <h1>TachMonShop</h1>
+                <h1>TamoShop</h1>
                 <h2>Đăng ký</h2>
                 <p>Giảm 10% cho đơn đầu tiên</p>
               </div>
@@ -117,7 +117,7 @@ export default function Footer(props) {
           </BrowserRouter>
         </div>
         <p className="quicksand-light" id="credit">
-          &copy;Copyright TachMonShop 2024. All right reserved
+          &copy;Copyright TamoShop 2024. All right reserved
         </p>
       </div>
     </div>

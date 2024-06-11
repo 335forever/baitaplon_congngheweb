@@ -5,7 +5,7 @@ import { productStore } from "./controllers/product.store";
 import { ProductPage } from "./components/product.component";
 // :shopId/:productId
 export default function Root(props) {
-  document.title = "TachMonShop | Sản phẩm"
+  document.title = "TamoShop | Sản phẩm"
   // const product = {
   //   name: "PlayStation PS5 Hàng chính hãng Trung Quốc nội địa",
   //   description:

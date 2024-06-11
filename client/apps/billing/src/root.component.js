@@ -1,4 +1,4 @@
 export default function Root(props) {
-  document.title = "TachMonShop | Thanh toán";
+  document.title = "TamoShop | Thanh toán";
   return <section>{props.name} is mounted!</section>;
 }

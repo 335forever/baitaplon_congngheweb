@@ -102,7 +102,7 @@ function Content({query}) {
 }
 
 export default function Root() {
-  document.title = "TachMonShop | Tìm kiếm";
+  document.title = "TamoShop | Tìm kiếm";
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {

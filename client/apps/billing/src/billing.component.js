@@ -354,7 +354,7 @@ function BillingDetails() {
 }
 
 export default function Billing(props) {
-  document.title = "TachMonShop | Thanh toán";
+  document.title = "TamoShop | Thanh toán";
   const client = new QueryClient({
     defaultOptions: {
       queries: {
