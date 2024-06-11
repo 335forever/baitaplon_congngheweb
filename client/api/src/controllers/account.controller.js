@@ -195,7 +195,7 @@ export async function findShopInfo({ shopId }) {
       },
   });
   if (res.status == 200) {
-    return res.data.shop;
+    return res.data.shop[0];
   }
   else throw res;
 }
