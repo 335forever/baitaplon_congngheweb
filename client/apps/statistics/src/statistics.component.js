@@ -108,17 +108,59 @@ export default function statistics(props) {
   mm = String(today.getMonth() + 1).padStart(2, '0');
   const [toDate, setToDate] = React.useState(yyyy + '-' + mm + '-' + dd);
 
-  var income, customerCount, orderCount;
-
   const [cusKeyword, setCusKeyword] = React.useState('');
   const [productKeyword, setProductKeyword] = React.useState('');
+  const [income, setIncome] = React.useState(0);
+  const [customerNumber, setCustomerNumber] = React.useState(0);
+  const [orderNumber, setOrderNumber] = React.useState(0);
+  const [orders, setOrders] = React.useState([]);
+
+  const [prodList, setProdList] = React.useState();
+
+  async function _getIncome() {
+    const res = await getIncome({ 'from': fromDate, 'to': toDate })
+    setIncome(res)
+  }
+
+  async function _getCustomerNumber() {
+    const res = await getCustomerNumber({ 'from': fromDate, 'to': toDate })
+    setCustomerNumber(res)
+  }
+
+  async function _getOrderNumber() {
+    const res = await getOrderNumber({ 'from': fromDate, 'to': toDate })
+    setOrderNumber(res)
+  }
+
+  async function _manageOrders() {
+    const res = await manageOrders();
+
+    const productMap = res.reduce((acc, order) => {
+      // Nếu productID đã tồn tại trong accumulator, cập nhật quantity và total
+      if (acc[order.productID]) {
+        acc[order.productID].quantity += order.status != 1 ? order.quantity : 0;
+        acc[order.productID].total += order.status != 1 ? order.total : 0;
+      } else if (order.status != 1) {
+        // Nếu chưa tồn tại, tạo mới với quantity và total từ order hiện tại
+        acc[order.productID] = {
+          quantity: order.quantity,
+          total: order.total
+        };
+      }
+      return acc;
+    }, {});
+
+    setProdList(productMap)
+
+    setOrders(res);
+  }
 
   useEffect(() => {
-    // income = getIncome({ 'from': fromDate, 'to': toDate })
-    // customerCount = getCustomerNumber({ 'from': fromDate, 'to': toDate })
-    // orderCount = getOrderNumber({ 'from': fromDate, 'to': toDate })
-    // manageOrders()
-  }, [])
+    // _getIncome()
+    // _getCustomerNumber()
+    // _getOrderNumber()
+    // _manageOrders()
+  }, []);
 
   return (
     <ChakraProvider>
@@ -134,10 +176,9 @@ export default function statistics(props) {
           </div>
         </div>
         <div id="overall">
-          <Summarize label="DOANH THU THÁNG" total={35000000} unit="VND" percent={6.50} icon={icRevenue} iconColor="#00ff66" />
-          <Summarize label="TỔNG GIÁ TRỊ VOUCHER" total={2000000} unit="VND" percent={6.50} icon={icDiscount} iconColor="#000000"></Summarize>
-          <Summarize label="SỐ KHÁCH HÀNG" total={34} percent={-2.86} icon={icCustomer} iconColor="#ff59ee"></Summarize>
-          <Summarize label="SỐ ĐƠN HÀNG" total={68} percent={-2.86} icon={icOrders} iconColor="#489dec"></Summarize>
+          <Summarize label="DOANH THU THÁNG" total={income} unit="VND" percent={6.50} icon={icRevenue} iconColor="#00ff66" />
+          <Summarize label="SỐ KHÁCH HÀNG" total={customerNumber} percent={-2.86} icon={icCustomer} iconColor="#ff59ee"></Summarize>
+          <Summarize label="SỐ ĐƠN HÀNG" total={orderNumber} percent={-2.86} icon={icOrders} iconColor="#489dec"></Summarize>
         </div>
         <div id="detail">
           <div id="recent-order">
@@ -152,7 +193,8 @@ export default function statistics(props) {
               <div style={{ "flex": "1 0 19.14%" }}>Trạng thái</div>
             </div>
             <div style={{ "maxHeight": "285px", "overflowY": "auto" }}>
-              {relateOrders.filter(cus => cus.name.toLowerCase().includes(cusKeyword.toLowerCase())).map((order, index) => <RecentOrder key={index} {...order} />)}
+              {orders.filter(cus => cus.name.toLowerCase().includes(cusKeyword.toLowerCase()))
+                .map((order, index) => <RecentOrder key={order.orderID} {...order} />)}
             </div>
           </div>
           <div id="best-sellers">
@@ -171,7 +213,7 @@ export default function statistics(props) {
             </div>
             {/* <Progress isIndeterminate /> */}
             <div style={{ "maxHeight": "414px", "overflowX": "hidden", "overflowY": "auto" }}>
-              {bestSellers.filter(prod => prod.name.toLowerCase().includes(productKeyword.toLowerCase())).map((e, index) => <BestSeller key={index} {...e}></BestSeller>)}
+              {prodList && prodList.keys.map((e) => <BestSeller key={e} productId={e} {...prodList[e]}></BestSeller>)}
             </div>
           </div>
         </div>
