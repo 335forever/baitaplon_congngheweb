@@ -15,7 +15,6 @@ import { toast } from "@TachMonShop/notification";
 
 import "./billing.css";
 import { navigateToUrl } from "single-spa";
-import { getVouchers } from "../../../api/src/TachMonShop-api";
 function Item(props) {
   const totalPrice = props.item.price * props.item.quantity;
   return (
