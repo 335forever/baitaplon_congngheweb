@@ -20,7 +20,7 @@ export async function signIn(form, onResolve, onReject) {
         if (info.isShoper) localStorage.setItem('isShoper', 't');
       }
       finally {
-        
+
       }
     }
     else onReject(res);
@@ -186,16 +186,4 @@ export async function uploadImages(images, onReject, onResolve) {
   } catch (err) {
     onReject(err);
   }
-}
-
-export async function findShop({ shopId }) {
-  const res = await instance.get("/findshop", {
-      params: {
-        shopId
-      },
-  });
-  if (res.status == 200) {
-    return res.data.shop;
-  }
-  else throw res;
 }
