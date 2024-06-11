@@ -20,7 +20,7 @@ export async function signIn(form, onResolve, onReject) {
         if (info.isShoper) localStorage.setItem('isShoper', 't');
       }
       finally {
-        
+
       }
     }
     else onReject(res);

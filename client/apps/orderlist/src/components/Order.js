@@ -7,8 +7,8 @@ import icUser from "../../assets/images/ic_user.svg";
 import { Button, Popover, PopoverTrigger, PopoverContent } from "@chakra-ui/react"
 import React, { useState, useEffect } from "react"
 
-import { findShop, findUser } from "../../../../api/src/controllers/account.controller"
-import { findProduct } from "../../../../api/src/controllers/category.controller"
+import { findShop, findUser } from "@TachMonShop/api"
+import { findProduct } from "@TachMonShop/api"
 
 export default function Order({ orderID, status, quantity, orderDate, total, productID, shoperID, msgToShop, msgToUser, seller, onCancel, onConfirm }) {
     const statusLabel = (status) => {
