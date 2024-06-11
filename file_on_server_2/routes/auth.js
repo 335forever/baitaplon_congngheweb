@@ -186,7 +186,7 @@ router.put('/user/uptoshop', authenticate, async (req, res) => {
         const avatar = req.body.avatar;
         const taxid = req.body.taxid;
 
-        if (!name || !phone || !address || !email || !avatar || !taxid) {
+        if (!name || !phone || !address || !email || !taxid) {
             connection.release();
             return res.status(400).json({error:'Require full information about (name, phone, address, email, avatar, taxid)'});
         }
