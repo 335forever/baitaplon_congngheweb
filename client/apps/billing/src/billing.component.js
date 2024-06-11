@@ -8,12 +8,14 @@ import {
   updateCart,
   getUserInfo,
   createOrder,
-  isSignedIn
+  isSignedIn,
+  getVouchers
 } from "@TachMonShop/api";
 import { toast } from "@TachMonShop/notification";
 
 import "./billing.css";
 import { navigateToUrl } from "single-spa";
+import { getVouchers } from "../../../api/src/TachMonShop-api";
 function Item(props) {
   const totalPrice = props.item.price * props.item.quantity;
   return (
@@ -50,7 +52,10 @@ function Item(props) {
   );
 }
 
+let voucherAvailable = [];
+
 async function getFullCart() {
+  voucherAvailable.clear();
   const cart = await getCart();
   const result = [];
   for (const product of cart) {
@@ -62,6 +67,8 @@ async function getFullCart() {
       image: productInfo.images.image1,
       quantity: product.quantity,
     });
+    const vouchers = await getVouchers(productInfo.shoperID);
+    voucherAvailable.push(...vouchers);
   }
   return result;
 }
@@ -100,7 +107,7 @@ async function payForProduct(cart, voucher, shipFee, paymentMethod) {
 function BillingDetails() {
   const cartQuery = useQuery(["cart"], getFullCart);
   const userQuery = useQuery(["user"], getUserInfo);
-
+  
   const [listItem, setListItem] = useState([]);
   const [coupon, setCoupon] = useState("");
   const [userInfo, setUserInfo] = useState({

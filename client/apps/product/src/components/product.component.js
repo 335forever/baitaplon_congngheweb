@@ -13,7 +13,7 @@ import { navigateToUrl } from "single-spa";
 import { useDispatch, useSelector } from "react-redux";
 import { productActions } from "../controllers/product.slice";
 
-import { findProduct, addProductToCart } from "@TachMonShop/api";
+import { findProduct, addProductToCart, findShop } from "@TachMonShop/api";
 
 import "../root.css";
 import { useQuery } from "react-query";
@@ -24,7 +24,10 @@ async function getProduct() {
   const result = {
     product: await findProduct({
       productId,
-    }), shopId
+    }), shopId,
+    shop: await findShop({
+      shopId
+    })
   };
   document.title = `TachMonShop | ${result.product.name}`;
   return result;
@@ -82,14 +85,14 @@ export function ProductPage() {
 
   if (isLoading) return <article>Đang tải</article>;
   if (error) return <article>Vui lòng tải lại</article>;
-  let { product, shopId } = data;
+  let { product, shop } = data;
   let images = Array.from(Object.values(product.images));
   images.push(...images);
   return (
     <article className="flex flex-col gap-10 my-10">
       <Parcel
         config={NavRoute}
-        names={["Trang chủ", `Shop ${shopId}`, product.name]}
+        names={["Trang chủ", shop.name, product.name]}
       />
       <section id="product-main-content">
         {images.slice(index + 1, index + 5).map((src) => (

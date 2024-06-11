@@ -13,7 +13,16 @@ export async function signIn(form, onResolve, onReject) {
       ...form,
       action: "signin",
     });
-    if (res.status === 200) onResolve(res);
+    if (res.status === 200) {
+      onResolve(res);
+      try {
+        const info = await getUserInfo();
+        if (info.isShoper) localStorage.setItem('isShoper', 't');
+      }
+      finally {
+        
+      }
+    }
     else onReject(res);
   } catch (err) {
     onReject(err);
@@ -79,6 +88,7 @@ export function isSignedIn() {
 
 export function logout() {
   localStorage.removeItem("token");
+  localStorage.removeItem("isShoper");
 }
 
 export async function upToShop(form, onResolve, onReject) {
@@ -176,4 +186,16 @@ export async function uploadImages(images, onReject, onResolve) {
   } catch (err) {
     onReject(err);
   }
+}
+
+export async function findShop({ shopId }) {
+  const res = await instance.get("/findshop", {
+      params: {
+        shopId
+      },
+  });
+  if (res.status == 200) {
+    return res.data.shop;
+  }
+  else throw res;
 }

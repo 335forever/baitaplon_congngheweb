@@ -5,6 +5,9 @@ export {
     isSignedIn,
     logout,
     getUserInfo,
+    getShopInfo,
+    updateShop,
+    changePassword,
     update as updateUser,
     upToShop,
     findShop,
@@ -34,7 +37,10 @@ export {
     getIncome,
     getOrderNumber,
     getCustomerNumber
-} from "./controllers/statistics.controller"
+} from "./controllers/statistics.controller";
+export {
+    getAllCategory
+} from "./controllers/manage_products.controller";
 
 export {
     createOrder,
