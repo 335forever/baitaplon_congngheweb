@@ -172,10 +172,7 @@ router.post('/add', authenticate, async (req, res) => {
             connection.release();
             return res.status(400).json({ error: 'Missing price of new product' });
         }                        
-        if (Object.keys(images).length === 0) {
-            connection.release();
-            return res.status(400).json({ error: 'Missing images of new product' });
-        }
+        
     
         // Kiểm tra sản phẩm này đã có ở trên shop của user này chưa
         const [findProductOfThisShop] = await connection.execute(
@@ -194,15 +191,18 @@ router.post('/add', authenticate, async (req, res) => {
         );
         
         // Tiếp tục thực hiện INSERT images sau khi hành động INSERT product thành công
-        const productId = result.insertId; 
-        let imageValues = [];
-        for (let i = 1; i <= 6; i++) {
-            const imageURL = images[`image${i}`];
-            imageValues.push(imageURL || null); // Nếu không có giá trị imageURL, đưa vào null
+        if (Object.keys(images).length != 0) {
+            const productId = result.insertId; 
+            let imageValues = [];
+            for (let i = 1; i <= 6; i++) {
+                const imageURL = images[`image${i}`];
+                imageValues.push(imageURL || null); // Nếu không có giá trị imageURL, đưa vào null
+            }
+            const sql = `INSERT INTO m_productimage (productID, image1, image2, image3, image4, image5, image6) VALUES (?,?,?,?,?,?,?)`;
+            const insertValues = [productId, ...imageValues];
+            await connection.execute(sql, insertValues);
         }
-        const sql = `INSERT INTO m_productimage (productID, image1, image2, image3, image4, image5, image6) VALUES (?,?,?,?,?,?,?)`;
-        const insertValues = [productId, ...imageValues];
-        await connection.execute(sql, insertValues);
+        
         connection.release();
         return res.status(201).json({ msg: 'success', productId: productId });
     } catch (error) {
