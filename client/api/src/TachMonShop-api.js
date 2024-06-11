@@ -11,6 +11,7 @@ export {
     update as updateUser,
     upToShop,
     findShop,
+    findShopInfo,
     findUser
 } from "./controllers/account.controller";
 export { getSearchSuggestions } from "./controllers/search.controller";

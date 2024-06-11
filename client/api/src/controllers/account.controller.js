@@ -187,3 +187,15 @@ export async function uploadImages(images, onReject, onResolve) {
     onReject(err);
   }
 }
+
+export async function findShopInfo({ shopId }) {
+  const res = await instance.get("/findshop", {
+      params: {
+        shopId
+      },
+  });
+  if (res.status == 200) {
+    return res.data.shop[0];
+  }
+  else throw res;
+}
