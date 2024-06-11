@@ -13,6 +13,7 @@ import { ChakraProvider, Progress } from "@chakra-ui/react";
 import RecentOrder from "./components/RecentOrder.js";
 import BestSeller from "./components/BestSeller.js";
 import { getCustomerNumber, getIncome, getOrderNumber } from "../../../api/src/controllers/statistics.controller.js";
+import { manageOrders } from "../../../api/src/controllers/order.controller.js";
 
 const relateOrders = [
   {
@@ -116,6 +117,7 @@ export default function statistics(props) {
     // income = getIncome({ 'from': fromDate, 'to': toDate })
     // customerCount = getCustomerNumber({ 'from': fromDate, 'to': toDate })
     // orderCount = getOrderNumber({ 'from': fromDate, 'to': toDate })
+    // manageOrders()
   }, [])
 
   return (

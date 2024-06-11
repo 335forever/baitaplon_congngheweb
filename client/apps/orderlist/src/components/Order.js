@@ -10,7 +10,7 @@ import { Button, Popover, PopoverTrigger, PopoverContent } from "@chakra-ui/reac
 export default function Order({ name, status, products, seller }) {
     const statusLabel = (status) => {
         switch (status) {
-            case 4:
+            case 0:
                 return (
                     <div className="status" >
                         <div className="status-inner" style={{ backgroundColor: '#FFE5EC', color: '#FF316A' }}>
@@ -19,7 +19,7 @@ export default function Order({ name, status, products, seller }) {
                         </div >
                     </div >
                 )
-            case 3:
+            case 1:
                 return (
                     <div className="status" >
                         <div className="status-inner" style={{ backgroundColor: '#FFF2DA', color: '#FFAA04' }}>
@@ -29,15 +29,6 @@ export default function Order({ name, status, products, seller }) {
                     </div>
                 )
             case 2:
-                return (
-                    <div className="status">
-                        <div className="status-inner" style={{ backgroundColor: '#CAF6F9', color: '#129199' }}>
-                            <img src={icDelivering} alt="err" />
-                            Đang giao
-                        </div>
-                    </div >
-                )
-            case 1:
                 return (
                     <div className="status" >
                         <div className="status-inner" style={{ backgroundColor: '#CAFBEC', color: '#0DA678' }}>
@@ -49,10 +40,11 @@ export default function Order({ name, status, products, seller }) {
             default:
                 break;
         }
-
     }
 
     var s = 0
+
+    console.log(name + '-' + status)
 
     return (
         <div className="order">
@@ -84,60 +76,34 @@ export default function Order({ name, status, products, seller }) {
                 </div>
             </div>
             <div className="function">
-                {!seller ? (
-                    <>
-                        <Button colorScheme="red" style={{ fontWeight: '400', padding: '32px 48px' }}>Mua lại</Button>
-                        {status == 4 && <Popover closeOnBlur={true}>
-                            <PopoverTrigger>
-                                <Button variant='outline' style={{ padding: '32px 48px' }}>Đánh giá</Button>
-                            </PopoverTrigger>
-                            <PopoverContent>
-                                <div className="message">
-                                    <div className="star-rating" style={{ "flexGrow": "1" }}>
-                                        <input type="radio" id="5-stars" name="rating" value="5" />
-                                        <label for="5-stars" class="star">★</label>
-                                        <input type="radio" id="4-stars" name="rating" value="4" />
-                                        <label for="4-stars" class="star">★</label>
-                                        <input type="radio" id="3-stars" name="rating" value="3" />
-                                        <label for="3-stars" class="star">★</label>
-                                        <input type="radio" id="2-stars" name="rating" value="2" />
-                                        <label for="2-stars" class="star">★</label>
-                                        <input type="radio" id="1-star" name="rating" value="1" />
-                                        <label for="1-star" class="star">★</label>
+                {!seller ? (<Button colorScheme="red" style={{ fontWeight: '400', padding: '32px 48px' }}>Mua lại</Button>)
+                    : status == 1 ? (
+                        <>
+                            <Popover closeOnBlur={true}>
+                                <PopoverTrigger>
+                                    <Button colorScheme="red" style={{ fontWeight: '400', padding: '32px 48px' }}>Xác nhận</Button>
+                                </PopoverTrigger>
+                                <PopoverContent>
+                                    <div className="message">
+                                        <input placeholder="Đôi lời nhắn gửi" style={{ "flexGrow": "1" }}></input>
+                                        <Button colorScheme="red">Gửi</Button>
                                     </div>
+                                </PopoverContent>
+                            </Popover>
 
-                                    <Button colorScheme="red">Gửi</Button>
-                                </div>
-                            </PopoverContent>
-                        </Popover>}
-                    </>
-                ) : status == 3 ? (
-                    <>
-                        <Popover closeOnBlur={true}>
-                            <PopoverTrigger>
-                                <Button colorScheme="red" style={{ fontWeight: '400', padding: '32px 48px' }}>Xác nhận</Button>
-                            </PopoverTrigger>
-                            <PopoverContent>
-                                <div className="message">
-                                    <input placeholder="Đôi lời nhắn gửi" style={{ "flexGrow": "1" }}></input>
-                                    <Button colorScheme="red">Gửi</Button>
-                                </div>
-                            </PopoverContent>
-                        </Popover>
-
-                        <Popover closeOnBlur={true}>
-                            <PopoverTrigger>
-                                <Button variant='outline' style={{ padding: '32px 48px' }}>Huỷ</Button>
-                            </PopoverTrigger>
-                            <PopoverContent>
-                                <div className="message">
-                                    <input placeholder="Đôi lời nhắn gửi" style={{ "flexGrow": "1" }}></input>
-                                    <Button colorScheme="red">Gửi</Button>
-                                </div>
-                            </PopoverContent>
-                        </Popover>
-                    </>
-                ) : <></>}
+                            <Popover closeOnBlur={true}>
+                                <PopoverTrigger>
+                                    <Button variant='outline' style={{ padding: '32px 48px' }}>Huỷ</Button>
+                                </PopoverTrigger>
+                                <PopoverContent>
+                                    <div className="message">
+                                        <input placeholder="Đôi lời nhắn gửi" style={{ "flexGrow": "1" }}></input>
+                                        <Button colorScheme="red">Gửi</Button>
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
+                        </>
+                    ) : <></>}
             </div>
         </div >
     )

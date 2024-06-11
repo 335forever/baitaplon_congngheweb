@@ -1,7 +1,7 @@
 import axios from "axios";
 const instance = axios.create({
-  // baseURL: `https://54.255.209.5/auth`,
-  baseURL: `${process.env.SERVER_API_ENDPOINT}/auth`,
+  baseURL: `https://54.255.209.5/auth`,
+  // baseURL: `${process.env.SERVER_API_ENDPOINT}/auth`,
   timeout: 3000,
 });
 

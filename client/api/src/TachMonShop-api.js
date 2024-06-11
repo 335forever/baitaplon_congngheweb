@@ -34,4 +34,9 @@ export {
     getCustomerNumber
 } from "./controllers/statistics.controller"
 
-export { createOrder, getOrders, manageOrders } from "./controllers/order.controller";
+export {
+    createOrder,
+    getOrders,
+    manageOrders,
+    approveOrders
+} from "./controllers/order.controller";
