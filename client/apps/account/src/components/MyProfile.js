@@ -94,7 +94,7 @@ export default function MyProfile({ avatar, name, email, phone, address, birthda
       <div className="notify">{notify}</div>
     </div>
     <div className="function">
-      <Button colorScheme="red" onClick={submit}>Xác nhận</Button>
+      <Button id="confirmButton" colorScheme="red" onClick={submit}>Xác nhận</Button>
     </div>
   </div >)
 }

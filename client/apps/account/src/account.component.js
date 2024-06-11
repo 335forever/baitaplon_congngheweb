@@ -202,7 +202,7 @@ export default function Account(props) {
                     Quản lý sản phẩm
                   </a>
                   <a
-                    onClick={() => { navigateToUrl('/orderlist') }}
+                    onClick={() => { navigateToUrl('/account/order') }}
                     style={{ color: "rgba(0,0,0,0.5)" }}
                   >
                     Đơn hàng
