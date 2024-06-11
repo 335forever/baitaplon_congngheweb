@@ -1,5 +1,5 @@
 import "./index.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Parcel from "single-spa-react/parcel";
 
 import { Button, ChakraProvider } from "@chakra-ui/react";
@@ -51,9 +51,12 @@ export default function orderlist() {
   async function getRole() {
     const res = await getUserInfo();
 
-    if (res.isShoper) manageOrders();
+    if (seller = res.isShoper) manageOrders();
     else getOrders();
   }
+
+  useEffect(() => {
+  }, [])
 
   return (
     <ChakraProvider>

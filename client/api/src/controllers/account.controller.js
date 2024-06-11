@@ -36,8 +36,8 @@ export async function signUp(form, onResolve, onReject) {
 export async function getUserInfo() {
   const res = await instance.get("/user/getinfo", {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      // Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   if (res.status === 200) return res.data.userInfo;
@@ -48,8 +48,8 @@ export async function getUserInfo() {
 export async function getShopInfo() {
   const res = await instance.get("/shop/getinfo", {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`
-      // Authorization: `Bearer ${token}`
+      // Authorization: `Bearer ${localStorage.getItem("token")}`
+      Authorization: `Bearer ${token}`
     }
   })
 
